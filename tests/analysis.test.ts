@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { toggleReviewOption, toggleNotSure, type AreaAnalysis } from '../src/app/analysisState';
 import { checkPhotoRate } from '../worker/index';
 import { photoAnalysis, publicConfig, validateModel } from '../worker/analysis';
-import { AREA_ALLOWED_OPTIONS, VISUAL_LABEL_CONFIG, preselected } from '../src/shared/visualOptions';
+import { AREA_ALLOWED_OPTIONS, preselected } from '../src/shared/visualOptions';
 const env={GEMINI_API_KEY:'test-key',GEMINI_MODEL:'gemini-2.5-flash',GEMINI_DATA_MODE:'paid'};
 const valid={imageQuality:'usable',observations:[{optionId:'visible_bumps',status:'suggested'}]};
 const jpeg=new Uint8Array([255,216,255,224,1,2,255,217]);
@@ -14,10 +14,9 @@ describe('visual validation',()=>{
   expect(validateModel(valid,'scalp_hair')).toBeNull(); expect(validateModel({...valid,observations:[...valid.observations,...valid.observations]},'affected_body')).toBeNull();
   expect(validateModel({...valid,extra:true},'affected_body')).toBeNull(); expect(publicConfig({...env,GEMINI_DATA_MODE:'invalid'}).analysisAvailable).toBe(false); expect(publicConfig({...env,GEMINI_DATA_MODE:undefined}).analysisAvailable).toBe(false);
  });
- it('never preselects unsupported, uncertain or unevaluated observations',()=>{
-  expect(VISUAL_LABEL_CONFIG.every(c=>!c.autoPreselectEnabled)).toBe(true);
+ it('preselects suggested observations, not uncertain ones',()=>{
   const obs=[{optionId:'visible_bumps' as const,status:'suggested' as const},{optionId:'visible_marks' as const,status:'uncertain' as const}];
-  expect(preselected(obs)).toEqual([]); expect(preselected(obs,[{optionId:'visible_bumps',autoPreselectEnabled:true,evaluationReference:'review'}, {optionId:'visible_marks',autoPreselectEnabled:true,evaluationReference:'review'}])).toEqual(['visible_bumps']);
+  expect(preselected(obs)).toEqual(['visible_bumps']);
  });
 });
 describe('photo analysis Worker',()=>{

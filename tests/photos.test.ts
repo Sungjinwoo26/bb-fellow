@@ -17,7 +17,7 @@ describe('photo areas', () => {
 describe('photo navigation and persistence', () => {
  it('bypasses photos for body odour and returns to preparation after skipping all', () => {
   const odour = {...base, selectedConcerns:['body_odour'] as AssessmentSession['selectedConcerns']}; expect(assessmentReducer(odour,{type:'continue'}).currentStep).toEqual({name:'question',questionId:'odour_timing'});
-  let s=assessmentReducer(base,{type:'continue'}); expect(s.currentStep.name).toBe('photo_preparation'); s=assessmentReducer(s,{type:'withoutPhotos'}); expect(s.photoStatuses.underarms).toBe('skipped'); s=assessmentReducer(s,{type:'back'}); expect(s.currentStep.name).toBe('photo_preparation');
+  let s=assessmentReducer(base,{type:'continue'}); expect(s.currentStep.name).toBe('photo_area'); s=assessmentReducer(s,{type:'withoutPhotos'}); expect(s.photoStatuses.underarms).toBe('skipped'); s=assessmentReducer(s,{type:'back'}); expect(s.currentStep.name).toBe('photo_area');
  });
  it('moves through areas and restores statuses after refresh without serializing images', () => {
   let s=assessmentReducer(base,{type:'continue'}); s=assessmentReducer(s,{type:'photoStart'}); s=assessmentReducer(s,{type:'photoStatus',areaId:'affected_body',status:'added'}); s=assessmentReducer(s,{type:'continue'}); s=assessmentReducer(s,{type:'skip'});

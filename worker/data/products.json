@@ -1,5 +1,5 @@
 {
-  "version": "demo-2026-11-01",
+  "version": "demo-2026-11-04",
   "currency": "INR",
   "products": [
     {
@@ -133,6 +133,20 @@
       "name": "Keratin Conditioner",
       "variant": "Sample variant",
       "pricePaise": 44900,
+      "currency": "INR",
+      "imagePath": "/products/placeholder.svg",
+      "active": true,
+      "discountEligible": true,
+      "preMadeKit": false,
+      "dataStatus": "unverified_demo",
+      "ingredientSummary": null,
+      "usageGuidance": null
+    },
+    {
+      "id": "demo_face_cleanser",
+      "name": "Gentle Face Cleanser",
+      "variant": "Sample variant",
+      "pricePaise": 39900,
       "currency": "INR",
       "imagePath": "/products/placeholder.svg",
       "active": true,

@@ -22,6 +22,7 @@ describe('recommendation engine',()=>{
   expect(sun(['face'])).toEqual(['demo_face_sunscreen']);expect(sun(['arms'])).toEqual(['demo_body_sunscreen']);expect(sun(['face','arms'])).toEqual(['demo_body_sunscreen']);expect(sun(null)).toEqual(['demo_body_sunscreen']);expect(sun(['face'],null)).toEqual([]);
  });
  it('leaves painful bumps and dry body care unmatched without reviewed mappings',()=>{expect(generate({...base,selectedConcerns:['strawberry_bumpy_skin'],answers:{bumpy_goal:'rough_texture',bumpy_pain_itch:'yes'}}).items).toEqual([]);expect(generate({...base,selectedConcerns:['general_body_care'],answers:{body_care_goal:['hydration'],body_care_skin_feel:'dry'}}).items).toEqual([]);});
+ it('includes a face-specific sample for selected acne or bumps',()=>{const r=generate({...base,selectedConcerns:['general_body_care','face'],answers:{body_care_goal:['hydration'],face_goal:['acne_or_bumps']}});expect(r.items.map(x=>x.product.id)).toEqual(['demo_urea_body_lotion','demo_face_cleanser']);expect(r.unmatchedConcernIds).toEqual([]);});
  it('excludes inactive products and pre-made kits',()=>{for(const change of [{active:false},{preMadeKit:true}]){const catalogue={...data.catalogue,products:data.catalogue.products.map(p=>p.id==='demo_underarm_roll_on'?{...p,...change}:p)};const r=generateRecommendations(base,catalogue,data.rules);expect(r.items).toEqual([]);expect(r.unmatchedConcernIds).toHaveLength(2);}});
 });
 describe('recommendation API validation',()=>{
@@ -38,6 +39,6 @@ describe('recommendation API validation',()=>{
   expect((await recommendationsRoute(post('{'))).status).toBe(400);expect((await recommendationsRoute(post('x'.repeat(32769)))).status).toBe(413);
   expect((await recommendationsRoute(post({...base,answers:{bad:'x'}}))).status).toBe(422);
   const r=await recommendationsRoute(post({...base,selectedConcerns:['hair'],answers:{hair_goal:['hairline_concerns']}}));expect(r.status).toBe(200);expect(await r.json()).toMatchObject({items:[],unmatchedConcernIds:['hair']});
-  const c=await catalogueRoute().json() as {products:Record<string,unknown>[]}; expect(c.products).toHaveLength(10);expect(c.products[0]).not.toHaveProperty('active');
+  const c=await catalogueRoute().json() as {products:Record<string,unknown>[]}; expect(c.products).toHaveLength(11);expect(c.products[0]).not.toHaveProperty('active');
  });
 });

@@ -23,7 +23,7 @@ After the user proceeds with selected photos, the app sends one processed JPEG a
 
 To test live, use a properly configured account and an image whose use complies with the applicable provider terms. Start the app, select a concern, add the image, read the provider disclosure, proceed, and inspect the review flow. Do not use personal or sensitive images on unpaid services. A local request to Gemini 3.6 Flash with a synthetic, non-personal image succeeded and returned `unusable_image`; no personal photo or visual accuracy was tested.
 
-The model may return `visible_bumps`, `visible_marks`, `uneven_looking_tone`, or `visible_flakes`, restricted by photo area. All automatic preselection flags are disabled because no evaluation evidence has been supplied. Before enabling a label, use a consented, diverse test set and qualified reviewers, agree on acceptance thresholds, document false positives, false negatives and unusable-image results, and record an evidence reference. Re-evaluate after meaningful changes. Review selections and raw observations remain in memory only; refresh clears them along with photos. Concern selections and question answers remain in current-tab `sessionStorage`.
+The model may return `visible_bumps`, `visible_marks`, `uneven_looking_tone`, or `visible_flakes`, restricted by photo area. Suggested visual observations are preselected for user review; accuracy has not been evaluated and users can remove or add selections. Before relying on this feature, evaluate labels on a diverse consented test set with qualified reviewers, document false positives, false negatives and unusable-image results, and set acceptance thresholds. Re-evaluate after meaningful changes. Review selections and raw observations remain in memory only; refresh clears them along with photos. Concern selections and question answers remain in current-tab `sessionStorage`.
 
 ## Deployment protection
 
@@ -31,7 +31,7 @@ The Worker configuration declares approximate Cloudflare Rate Limiting bindings 
 
 Deployment and cost details, exact commands, rollback instructions and release blockers are in [docs/deployment.md](docs/deployment.md). The deployed public address passed its HTTPS and health checks.
 
-Photos remain in browser memory until sent with consent or cleared by refresh, tab close, replacement, or reset. JPEG, PNG and WebP files up to 10 MB are processed as JPEG, at most 1600px on the longest side and at most 2 MB. Camera capture uses a native file input and behavior depends on the device. HEIC, an orientation-tagged phone photo, and an actual iOS or Android camera were not verified. Browser emulation does not establish phone camera behavior. Full assistive-technology and 200% zoom audits remain outstanding.
+Photos remain in browser memory until sent for analysis or cleared by refresh, tab close, replacement, or reset. JPEG, PNG and WebP files up to 10 MB are processed as JPEG, at most 1600px on the longest side and at most 2 MB. Camera capture uses a native file input and behavior depends on the device. HEIC, an orientation-tagged phone photo, and an actual iOS or Android camera were not verified. Browser emulation does not establish phone camera behavior. Full assistive-technology and 200% zoom audits remain outstanding.
 
 No licensed font files were supplied. Neue Haas Grotesk Display Pro and FreightBig Pro use documented fallbacks when unavailable. The supplied black logo is used, and the hair core colour remains unconfirmed.
 
@@ -66,4 +66,4 @@ Run `npm run test:e2e` for the Playwright suite; it starts an isolated local Wor
 
 ## Local update (4 November 2026)
 
-The updated private-prototype flow removes the separate consent checkbox, starts photo analysis after the user proceeds, and provides a scrollable report. These local changes have not been deployed to the existing public Worker URL. Reference products and prices are held separately in `docs/reference-products.json` with `unverified_reference` status; they are not a verified live catalogue. Hair combinations and the missing source-question wording are documented in `docs/hair-reference.md`. The updated Worker was tested locally against Gemini with a synthetic image only.
+The updated private-prototype flow removes the separate consent checkbox, starts photo analysis after the user proceeds, and provides a scrollable report. The current version is deployed to the public Worker URL. Reference products and prices are held separately in `docs/reference-products.json` with `unverified_reference` status; they are not a verified live catalogue. Hair combinations and the missing source-question wording are documented in `docs/hair-reference.md`. The updated Worker was tested locally against Gemini with a synthetic image only.

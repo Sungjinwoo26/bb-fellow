@@ -1,5 +1,5 @@
 {
-  "version": "demo-rules-2026-11-04",
+  "version": "demo-rules-2026-11-04a",
   "rules": [
     {
       "id": "body_acne_answer_bumps",
@@ -345,6 +345,27 @@
         ]
       },
       "reason": "A sample conditioner associated with your general hair-care preference."
+    },
+    {
+      "id": "face_acne_concern",
+      "enabled": true,
+      "reviewStatus": "demo_only",
+      "concernId": "face",
+      "productId": "demo_face_cleanser",
+      "priority": 110,
+      "condition": {
+        "all": [
+          {
+            "type": "answer_contains_any",
+            "questionId": "face_goal",
+            "optionIds": [
+              "acne_or_bumps",
+              "oiliness"
+            ]
+          }
+        ]
+      },
+      "reason": "A sample face cleanser associated with the face-care concern you selected."
     }
   ]
 }

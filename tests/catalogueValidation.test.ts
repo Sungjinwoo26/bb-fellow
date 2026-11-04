@@ -4,7 +4,7 @@ import products from '../worker/data/products.json';
 import rules from '../worker/data/rules.json';
 import { validateData } from '../worker/recommendations';
 describe('catalogue and rules',()=>{
- it('validates all demo records, mappings, and local assets',()=>{const data=validateData(products,rules);expect(data).not.toBeNull();expect(data!.catalogue.products).toHaveLength(10);for(const p of data!.catalogue.products)expect(existsSync(`public${p.imagePath}`)).toBe(true);});
+ it('validates all demo records, mappings, and local assets',()=>{const data=validateData(products,rules);expect(data).not.toBeNull();expect(data!.catalogue.products).toHaveLength(11);for(const p of data!.catalogue.products)expect(existsSync(`public${p.imagePath}`)).toBe(true);});
  it('rejects duplicate IDs, missing products, invalid references and unsafe enabled products',()=>{
   expect(validateData({...products,products:[...products.products,products.products[0]]},rules)).toBeNull();
   expect(validateData(products,{...rules,rules:[...rules.rules,rules.rules[0]]})).toBeNull();

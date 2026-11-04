@@ -10,4 +10,4 @@ export const PHOTO_AREAS = [
 export type PhotoAreaId = typeof PHOTO_AREAS[number]['id'];
 export type PhotoAreaDefinition = typeof PHOTO_AREAS[number];
 export const PHOTO_AREA_ORDER: PhotoAreaId[] = PHOTO_AREAS.map(area => area.id);
-export const CONCERN_PHOTO_AREA: Partial<Record<ConcernId, PhotoAreaId>> = { body_acne_marks:'affected_body', strawberry_bumpy_skin:'affected_body', body_pigmentation:'elbows_knees_neck', underarm_pigmentation:'underarms', tanning_sun_damage:'sun_exposed_area', general_body_care:'affected_body', face:'face', hair:'scalp_hair' };
+export const CONCERN_PHOTO_AREA: Partial<Record<ConcernId, PhotoAreaId>> = { body_acne_marks:'affected_body', strawberry_bumpy_skin:'affected_body', body_pigmentation:'elbows_knees_neck', underarm_pigmentation:'underarms', tanning_sun_damage:'sun_exposed_area', face:'face', hair:'scalp_hair' };

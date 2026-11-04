@@ -49,7 +49,7 @@ export function normalizeSession(value: unknown, afterRefresh = false): Assessme
     const step = s.currentStep as Record<string, unknown>;
     if (step.name === 'photo_preparation' && areas.length) currentStep = { name: 'photo_preparation' };
     if (step.name === 'photo_area' && typeof step.areaId === 'string') { const area = areas.find(a => a.id === step.areaId); currentStep = area ? { name: 'photo_area', areaId: area.id } : areas.length ? { name: 'photo_preparation' } : { name: 'concerns' }; }
-    if (step.name === 'photo_analysis' && areas.length) currentStep = afterRefresh ? {name:'photo_preparation'} : {name:'photo_analysis'};
+    if (step.name === 'photo_analysis' && areas.length) currentStep = afterRefresh ? {name:'photo_area',areaId:areas[0].id} : {name:'photo_analysis'};
     if (step.name === 'question' && typeof step.questionId === 'string') currentStep = active.some(q => q.id === step.questionId) ? { name: 'question', questionId: step.questionId } : active.length ? { name: 'question', questionId: active[0].id } : { name: 'concerns' };
     if (step.name === 'next_step_placeholder' && active.length) currentStep = { name: 'next_step_placeholder' };
   }

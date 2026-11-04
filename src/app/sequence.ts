@@ -2,8 +2,8 @@ import { concerns, canonicalConcerns, type ConcernId } from '../data/concerns';
 import { questions } from '../data/questions';
 import type { AnswerValue } from './session';
 
-export function getActiveQuestions(selected: ConcernId[]) { const active = canonicalConcerns(selected); return active.flatMap(id => questions.filter(q => q.concernId === id)); }
-export function getActiveAnswers(selected: ConcernId[], answers: Record<string, AnswerValue>) { return Object.fromEntries(getActiveQuestions(selected).filter(q => Object.hasOwn(answers, q.id)).map(q => [q.id, answers[q.id]])); }
+export function getActiveQuestions(selected: ConcernId[]) { const active = canonicalConcerns(selected); return active.flatMap(id => questions.filter(q => q.concernId === id && !(q.id === 'face_skin_type' && active.includes('general_body_care') && active.includes('face')))); }
+export function getActiveAnswers(selected: ConcernId[], answers: Record<string, AnswerValue>) { return Object.fromEntries(questions.filter(q => selected.includes(q.concernId) && Object.hasOwn(answers, q.id)).map(q => [q.id, answers[q.id]])); }
 export function questionIndex(selected: ConcernId[], id: string) { return getActiveQuestions(selected).findIndex(q => q.id === id); }
 export function previousQuestion(selected: ConcernId[], id: string) { return getActiveQuestions(selected)[questionIndex(selected, id) - 1]; }
 export function nextQuestion(selected: ConcernId[], id: string) { return getActiveQuestions(selected)[questionIndex(selected, id) + 1]; }

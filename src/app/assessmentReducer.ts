@@ -41,11 +41,11 @@ export function assessmentReducer(s: AssessmentSession, action: AssessmentAction
     if (step.name === 'next_step_placeholder') { const last = getActiveQuestions(s.selectedConcerns).at(-1); return { ...s, currentStep: last ? { name: 'question', questionId: last.id } : { name: 'concerns' } }; }
     if (step.name === 'photo_analysis') { const last = areas.at(-1); return { ...s, currentStep:last ? {name:'photo_area',areaId:last.id} : {name:'concerns'} }; }
     if (step.name === 'photo_preparation') return { ...s, currentStep:{name:'concerns'} };
-    if (step.name === 'photo_area') { const index = areas.findIndex(a => a.id === step.areaId); return { ...s, currentStep: index > 0 ? {name:'photo_area',areaId:areas[index-1].id} : {name:'photo_preparation'} }; }
-    if (step.name === 'question') { const prev = previousQuestion(s.selectedConcerns, step.questionId); const lastArea = areas.at(-1); return { ...s, currentStep: prev ? { name: 'question', questionId: prev.id } : lastArea ? (s.photoReviewed ? {name:'photo_analysis'} : s.photosBypassed ? {name:'photo_preparation'} : {name:'photo_area',areaId:lastArea.id}) : { name: 'concerns' } }; }
+    if (step.name === 'photo_area') { const index = areas.findIndex(a => a.id === step.areaId); return { ...s, currentStep: index > 0 ? {name:'photo_area',areaId:areas[index-1].id} : {name:'concerns'} }; }
+    if (step.name === 'question') { const prev = previousQuestion(s.selectedConcerns, step.questionId); const lastArea = areas.at(-1); return { ...s, currentStep: prev ? { name: 'question', questionId: prev.id } : lastArea ? (s.photoReviewed ? {name:'photo_analysis'} : s.photosBypassed ? {name:'photo_area',areaId:areas[0].id} : {name:'photo_area',areaId:lastArea.id}) : { name: 'concerns' } }; }
     return s;
   }
-  if (step.name === 'concerns' && action.type === 'continue') return firstQuestion ? { ...s, photosBypassed:false, currentStep:areas.length ? {name:'photo_preparation'} : questionStep } : s;
+  if (step.name === 'concerns' && action.type === 'continue') return firstQuestion ? { ...s, photosBypassed:false, currentStep:areas.length ? {name:'photo_area',areaId:areas[0].id} : questionStep } : s;
   if (step.name === 'photo_area' && (action.type === 'continue' || action.type === 'skip')) {
     if (action.type === 'continue' && s.photoStatuses[step.areaId] !== 'added') return s;
     const index = areas.findIndex(a => a.id === step.areaId); if (index < 0) return s;

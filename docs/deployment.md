@@ -5,20 +5,20 @@ Status on 4 November 2026: Worker `find-my-routine` was deployed to the authenti
 ## Verification
 
 - `npm test`: 58 tests passed. `npm run build`, including catalogue validation, and `npm run lint` passed. The isolated Playwright suite has 11 browser tests; see the latest run for its result.
-- Browser tests cover the no-photo simulated checkout, mocked consent-gated photo flow, state recovery, unmatched concerns, changing answers, quote and checkout errors, discount tiers, and several viewport sizes. A previous manual local check waited the actual 30 seconds; automated timer tests simulate time.
+- Browser tests cover the no-photo simulated checkout, mocked photo flow, state recovery, unmatched concerns, changing answers, quote and checkout errors, discount tiers, and several viewport sizes. A previous manual local check waited the actual 30 seconds; automated timer tests simulate time.
 - Real local and deployed Worker requests to Gemini 3.6 Flash using synthetic non-personal images returned HTTP 200 and `unusable_image`. It verifies connectivity and the expected rejection of that image, not accuracy on a human photo. No personal photo was tested. Browser tests mock Gemini and run in an isolated configuration without the local `.dev.vars`.
 - Welcome-screen widths from 320 to 1280 CSS pixels and several narrow-screen flows were checked. A limited 200% CSS zoom and keyboard check passed; no physical phone, native camera, full browser-zoom or assistive-technology audit was performed.
 - Deployment output included both rate-limit bindings and three hidden secret values; secret names and types were subsequently confirmed. Public HTTPS, health, and synthetic-image provider connectivity passed. The full deployed checkout remains unverified. Sixteen invalid photo requests returned 400 rather than 429, so live rate-limit enforcement remains unverified.
 
 ## Configuration and safeguards
 
-The user confirmed the Gemini project is free tier. The deployed model is `gemini-3.6-flash` and data mode is `free`. Google's [Gemini terms](https://ai.google.dev/gemini-api/terms) say not to submit personal or sensitive information to unpaid services. **Do not use real personal photos with this free-tier configuration.** The consent notice describes the data mode; consent does not change provider terms. Review applicable privacy, age and region restrictions before real-user use. The app does not enforce all such restrictions.
+The user confirmed the Gemini project is free tier. The deployed model is `gemini-3.6-flash` and data mode is `free`. Google's [Gemini terms](https://ai.google.dev/gemini-api/terms) say not to submit personal or sensitive information to unpaid services. **Do not use real personal photos with this free-tier configuration.** The photo screen describes the data mode. Review applicable privacy, age and region restrictions before real-user use. The app does not enforce all such restrictions.
 
-The Worker sends a processed image only after explicit consent, and does not intentionally persist images or log request bodies. Photo-linked review and kit state clear on refresh. Google data-use and retention terms still apply. All visual-label automatic preselection is disabled pending appropriate evaluation.
+The Worker sends a processed image after the user proceeds with a photo, and does not intentionally persist images or log request bodies. Photo-linked review and kit state clear on refresh. Google data-use and retention terms still apply. Suggested visual labels are preselected for user review; their accuracy has not been evaluated.
 
 Two approximate Cloudflare bindings limit photo requests: 12 per 60 seconds per connecting IP and 60 per 60 seconds per Cloudflare location. Missing bindings fail closed. These are not a strict global spending cap; shared mobile IPs may be affected. Namespaces are `73420301` and `73420302`; verify uniqueness and live enforcement. See [Cloudflare Rate Limiting](https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/).
 
-The catalogue and rules versions are `demo-2026-11-01` and `demo-rules-2026-11-01`. Products, prices, mappings and discount are unverified sample data; checkout is simulated and creates no order or payment. Product images are placeholders. Licensed Neue Haas Grotesk Display Pro and FreightBig Pro files were not supplied, so fallbacks apply; the hair core colour is unconfirmed.
+The catalogue and rules versions are `demo-2026-11-04` and `demo-rules-2026-11-04a`. Products, prices, mappings and discount are unverified sample data; checkout is simulated and creates no order or payment. Product images are placeholders. Licensed Neue Haas Grotesk Display Pro and FreightBig Pro files were not supplied, so fallbacks apply; the hair core colour is unconfirmed.
 
 ## Costs
 
