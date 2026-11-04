@@ -1,0 +1,98 @@
+[
+  {
+    "concern": "body_acne",
+    "answer": "Active Body Acne",
+    "product": "1% Salicylic Acid Body Wash, 250 mL",
+    "referencePriceRupees": 329,
+    "referenceMrpRupees": 349,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_acne",
+    "answer": "Acne Marks",
+    "product": "10% Niacinamide Body Lotion",
+    "referencePriceRupees": 399,
+    "referenceMrpRupees": 499,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_acne",
+    "answer": "Both",
+    "product": "Body Acne Pack: 1% Salicylic Acid Body Wash 250 mL + 10% Niacinamide Body Lotion 200 mL",
+    "referencePriceRupees": 719,
+    "referenceMrpRupees": 848,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "bumpy_skin",
+    "answer": "Yes or No",
+    "product": "Strawberry Skin Pack: 1% Salicylic Acid Body Wash 250 mL + 10% AHA Body Scrub 200 g + 5% Lactic Acid Body Lotion 200 mL",
+    "referencePriceRupees": 999,
+    "referenceMrpRupees": 1197,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_pigmentation",
+    "answer": "Dark Spots or Dark Patches",
+    "product": "Pigmentation Repair Cream",
+    "referencePriceRupees": 599,
+    "referenceMrpRupees": null,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "underarm",
+    "answer": "Mild",
+    "product": "4% AHA BHA Underarm Roll-On, 50 mL, Flora",
+    "referencePriceRupees": 329,
+    "referenceMrpRupees": 349,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "underarm",
+    "answer": "More noticeable",
+    "product": "Underarm Pigmentation Kit, No Fragrance: roll-on 50 mL + Pigmentation Repair Cream",
+    "referencePriceRupees": 799,
+    "referenceMrpRupees": 948,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_odour",
+    "answer": "Any of four substantive answers",
+    "product": "4% AHA BHA Underarm Roll-On, 50 mL, Flora",
+    "referencePriceRupees": 329,
+    "referenceMrpRupees": 349,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "sun_damage",
+    "answer": "In patches or All over body",
+    "product": "Body Sunscreen Spray SPF 50",
+    "referencePriceRupees": 399,
+    "referenceMrpRupees": 499,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_care",
+    "answer": "Dry (source result blank)",
+    "product": "Hyaluronic Acid Body Wash",
+    "referencePriceRupees": 199,
+    "referenceMrpRupees": 399,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_care",
+    "answer": "Normal",
+    "product": "5% Niacinamide Body Wash",
+    "referencePriceRupees": 329,
+    "referenceMrpRupees": 399,
+    "dataStatus": "unverified_reference"
+  },
+  {
+    "concern": "body_care",
+    "answer": "Oily",
+    "product": "1% Salicylic Acid Body Wash, 250 mL",
+    "referencePriceRupees": 329,
+    "referenceMrpRupees": 349,
+    "dataStatus": "unverified_reference"
+  }
+]

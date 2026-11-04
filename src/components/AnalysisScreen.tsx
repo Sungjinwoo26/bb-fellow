@@ -1,0 +1,32 @@
+import { useEffect, useRef, useState, type RefObject } from 'react';
+import type { PhotoAreaDefinition, PhotoAreaId } from '../data/photoAreas';
+import { AREA_ALLOWED_OPTIONS, VISUAL_OPTIONS, preselected, type AnalysisResponse } from '../shared/visualOptions';
+import type { PhotoStore } from '../app/photoStore';
+import { toggleReviewOption, toggleNotSure, type AreaAnalysis, type Analyses, type ConfirmedPhotoSelection } from '../app/analysisState';
+type Props={areas:PhotoAreaDefinition[];store:PhotoStore;analyses:Analyses;setAnalyses:React.Dispatch<React.SetStateAction<Analyses>>;headingRef:RefObject<HTMLHeadingElement|null>;onBack:()=>void;onReplace:(id:PhotoAreaId)=>void;onFinish:(confirmed:ConfirmedPhotoSelection[])=>void;onWithout:()=>void;reviewed:boolean};
+export function AnalysisScreen({areas,store,analyses,setAnalyses,headingRef,onBack,onReplace,onFinish,onWithout,reviewed}:Props) {
+ const available = areas.filter(a=>store.getPhoto(a.id));
+ const [stage,setStage]=useState<'progress'|'review'>(reviewed && available.some(a=>analyses[a.id]) ? 'review':'progress');
+ const [current,setCurrent]=useState(0);
+ const controller=useRef<AbortController|null>(null); const run=useRef(0); const reviewHeading=useRef<HTMLHeadingElement>(null);
+ useEffect(()=>{if(stage==='review') reviewHeading.current?.focus();},[stage]);
+ async function analyse(targets:PhotoAreaDefinition[]) {
+  const thisRun=++run.current; const abort=new AbortController(); controller.current=abort; setCurrent(1); setStage('progress');
+  for(const area of targets) { const photo=store.getPhoto(area.id); if(!photo) continue; const revision=photo.revision;
+   setCurrent(available.findIndex(a=>a.id===area.id)+1);
+   setAnalyses(prev=>({...prev,[area.id]:{revision,status:'analysing',observations:[],selectedOptionIds:[],notSure:false,confirmed:false}}));
+   try { const data=new FormData(); data.append('area',area.id); data.append('image',photo.blob,'photo.jpg'); const response=await fetch('/api/photo-analysis',{method:'POST',body:data,signal:abort.signal}); if(!response.ok) throw new Error('analysis failed');
+    const result=await response.json() as AnalysisResponse;
+    if(thisRun!==run.current || store.getPhoto(area.id)?.revision!==revision) continue;
+    if(result.area!==area.id || !['complete','unusable_image'].includes(result.status) || !Array.isArray(result.observations)) throw new Error('invalid response');
+    setAnalyses(prev=>({...prev,[area.id]:{revision,status:result.status,observations:result.observations,selectedOptionIds:preselected(result.observations),notSure:false,confirmed:false}}));
+   } catch { if(thisRun!==run.current || abort.signal.aborted) return; if(store.getPhoto(area.id)?.revision===revision) setAnalyses(prev=>({...prev,[area.id]:{revision,status:'failed',observations:[],selectedOptionIds:[],notSure:false,confirmed:false}})); }
+  }
+  if(thisRun===run.current) {setStage('review');}
+ }
+ useEffect(()=>{const runRef=run;const controllerRef=controller;const timer=window.setTimeout(()=>{if(!reviewed) void analyse(available);},0);return()=>{clearTimeout(timer);runRef.current++;controllerRef.current?.abort();};},[]);
+ function update(id:PhotoAreaId, fn:(item:AreaAnalysis)=>AreaAnalysis){setAnalyses(prev=>{const item=prev[id];return item?{...prev,[id]:fn(item)}:prev;});}
+ function finish(){const confirmed:ConfirmedPhotoSelection[] = available.flatMap(a=>{const item=analyses[a.id];return item ? [{areaId:a.id,selectedOptionIds:item.selectedOptionIds,notSure:item.notSure,source:'user_confirmed_photo_review' as const}] : [];});setAnalyses(prev=>{const next={...prev};for(const a of available){const item=next[a.id];if(item)next[a.id]={...item,confirmed:true};}return next;});onFinish(confirmed);}
+ if(stage==='progress') return <section className="assessment photo-screen"><p className="assessment-kicker">Photo analysis</p><h1 ref={headingRef} tabIndex={-1}>Analysing photo {current} of {available.length}</h1><p className="photo-copy" role="status" aria-live="polite">This may take a few moments.</p><ul className="analysis-status-list">{available.map(a=><li key={a.id}>{a.label}: {analyses[a.id]?.status === 'complete' ? 'Ready to review' : analyses[a.id]?.status === 'unusable_image' ? 'Couldn’t analyse' : analyses[a.id]?.status === 'failed' ? 'Couldn’t analyse' : analyses[a.id]?.status === 'analysing' ? 'Analysing' : 'Waiting'}</li>)}</ul></section>;
+ return <section className="assessment photo-screen"><p className="assessment-kicker">Photo review</p><h1 ref={reviewHeading} tabIndex={-1}>Review photo suggestions</h1><p className="photo-copy">Suggested from your photo — please check what applies. These observations are experimental and are not a diagnosis.</p>{available.map(a=>{const photo=store.getPhoto(a.id)!; const item=analyses[a.id]; if(!item || item.revision!==photo.revision) return null; return <section className="review-area" key={a.id}><h2>{a.label}</h2><div className="photo-preview"><img src={photo.previewUrl} alt={`Preview of the selected photo for ${a.label.toLowerCase()}`}/></div>{item.status!=='complete' && <p className="helper">We couldn’t analyse this photo. You can retry, replace it, or choose what applies yourself.</p>}<fieldset className="choice-fieldset"><legend>What applies to this area?</legend><div className="option-list">{AREA_ALLOWED_OPTIONS[a.id].map(id=><label key={id} className={`option-card ${item.selectedOptionIds.includes(id)?'selected':''}`}><input type="checkbox" checked={item.selectedOptionIds.includes(id)} onChange={()=>update(a.id,x=>toggleReviewOption(x,id))}/><span>{VISUAL_OPTIONS[id]}{item.observations.some(o=>o.optionId===id && o.status==='suggested') && <small>Suggested from your photo</small>}</span></label>)}<label className={`option-card ${item.notSure?'selected':''}`}><input type="checkbox" checked={item.notSure} onChange={()=>update(a.id,toggleNotSure)}/><span>Not sure</span></label></div></fieldset>{item.status!=='complete' && <div className="photo-controls"><button className="button secondary" onClick={()=>analyse([a])}>Retry</button><button className="button secondary" onClick={()=>onReplace(a.id)}>Replace photo</button></div>}</section>;})}<div className="photo-controls"><button className="button primary" onClick={finish}>Continue</button><button className="button secondary" onClick={onWithout}>Continue without analysis</button><button className="button secondary" onClick={onBack}>Back</button></div></section>;
+}

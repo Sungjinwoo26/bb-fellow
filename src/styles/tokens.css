@@ -1,0 +1,10 @@
+:root {
+ --bb-blue:#0098ff; --bb-light-blue:#80d2ff; --bb-pastel-blue:#d7f5ff; --bb-dark-blue:#0063bc; --bb-navy:#002c54; --bb-white:#fff; --bb-black:#000;
+ --bb-sleep-pastel:#ffdcec; --bb-sleep-light:#f980b2; --bb-sleep-core:#f90c66; --bb-sleep-dark:#b7064e; --bb-sleep-deep:#60002c;
+ --bb-hair-pastel:#e7d7ff; --bb-hair-light:#ae69ff; /* Hair core hex is unconfirmed in the supplied guide. */ --bb-hair-dark:#5c00c6; --bb-hair-deep:#3d0084;
+ --bb-nutrition-pastel:#d9fff8; --bb-nutrition-light:#75dbc7; --bb-nutrition-core:#1bccaa; --bb-nutrition-dark:#1aa086; --bb-nutrition-deep:#0c4c41;
+ --font-primary:"Neue Haas Grotesk Display Pro",Arial,sans-serif; --font-secondary:"FreightBig Pro",Georgia,serif;
+ --text-primary:var(--bb-navy); --surface-primary:var(--bb-white); --surface-subtle:var(--bb-pastel-blue); --focus-ring:var(--bb-dark-blue);
+ --radius-card:16px; --radius-control:12px; --radius-pill:999px;
+ --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px; --space-7:48px;
+}
