@@ -67,3 +67,6 @@ Run `npm run test:e2e` for the Playwright suite; it starts an isolated local Wor
 ## Local update (4 November 2026)
 
 The updated private-prototype flow removes the separate consent checkbox, starts photo analysis after the user proceeds, and provides a scrollable report. The current version is deployed to the public Worker URL. Reference products and prices are held separately in `docs/reference-products.json` with `unverified_reference` status; they are not a verified live catalogue. Hair combinations and the missing source-question wording are documented in `docs/hair-reference.md`. The updated Worker was tested locally against Gemini with a synthetic image only.
+## Storefront landing page
+
+The entry page is a mobile-first storefront prototype based on the supplied screenshots. The toolbar opens the existing self-assessment. The menu, featured banners, category tabs, search and a browser-local demo cart are interactive; the cart does not create an order or accept payment. Product names, prices, offers and screenshots are reference examples rather than a live catalogue. Original screenshot crops are stored in `public/storefront`. The exact licensed fonts were not supplied; the existing brand font fallbacks apply.
