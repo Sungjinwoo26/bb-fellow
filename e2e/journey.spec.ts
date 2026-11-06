@@ -87,3 +87,7 @@ test('all storefront categories show their own product images and details on mob
   await noOverflow(page);
  }
 });
+
+test('the Be Bodywise logo returns from the assessment to the storefront',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.goto('/');await page.getByRole('button',{name:'Take a self-assessment'}).first().click();await page.getByRole('button',{name:'Find my routine',exact:true}).click();await expect(page.getByRole('heading',{name:'What would you like help with?'})).toBeVisible();await page.getByRole('button',{name:'Be Bodywise home'}).click();await expect(page.getByRole('heading',{name:'Every Body Works Wonders'})).toBeVisible();
+});

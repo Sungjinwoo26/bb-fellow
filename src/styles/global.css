@@ -5,3 +5,4 @@
 
 /* Supporting editorial emphasis uses the secondary brand family. */
 .welcome .eyebrow{font-family:var(--font-secondary);font-size:15px;font-weight:400;letter-spacing:0}
+.assessment-brand-link{display:flex;align-items:center;min-height:44px;padding:0;border:0;background:transparent}

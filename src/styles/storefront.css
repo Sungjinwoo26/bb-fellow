@@ -8,3 +8,5 @@
 .product-detail-trigger{border:0;padding:0;cursor:pointer;width:100%;text-align:left}.product-name-link{color:inherit;background:none;border:0;padding:0;text-align:left;font-weight:700;font-size:inherit;line-height:inherit}.product-name-link:hover{text-decoration:underline}.product-detail-panel{background:white;width:min(100%,480px);padding:24px;overflow:auto}.product-detail-panel>img{width:100%;max-height:380px;object-fit:contain;background:#e6eef4;border-radius:8px;margin-top:20px}.product-detail-panel h2{font-size:24px;line-height:1.2}.detail-price strong{font-size:25px}.detail-price del,.detail-disclaimer{color:#69757e}.detail-price span{float:right}.detail-disclaimer{font-size:13px}.original-product-link{display:block;text-align:center;margin:20px 0;color:#00528e}.store-empty{min-height:140px}
 
 .store-product>button:disabled,.store-cart-action:disabled{background:#b7c1c8;cursor:not-allowed}
+
+.footer-home-link{display:block;margin:0 auto 42px;border:0;background:transparent;min-height:44px;padding:0}.store-footer .footer-home-link .footer-logo{margin:0}
