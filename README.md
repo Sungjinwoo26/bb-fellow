@@ -70,3 +70,5 @@ The updated private-prototype flow removes the separate consent checkbox, starts
 ## Storefront landing page
 
 The entry page is a mobile-first storefront prototype based on the supplied screenshots. The toolbar opens the existing self-assessment. The menu, featured banners, category tabs, search and a browser-local demo cart are interactive; the cart does not create an order or accept payment. Product names, prices, offers and screenshots are reference examples rather than a live catalogue. Original screenshot crops are stored in `public/storefront`. The exact licensed fonts were not supplied; the existing brand font fallbacks apply.
+
+The storefront product cards use a snapshot of publicly listed Be Bodywise products and images retrieved on 7 November 2026. Prices, availability and ratings may change, and the prototype does not place real orders. Product detail panels link to the source product page. These listings are separate from the assessment's unverified sample recommendation catalogue.

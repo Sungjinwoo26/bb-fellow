@@ -1,0 +1,1231 @@
+[
+  {
+    "id": "hair-care-hair-health-gummies",
+    "category": "Hair Care",
+    "concern": "Stage 1 Hair Loss",
+    "name": "Biotin Hair Gummies (30)",
+    "tags": [
+      "30 pcs",
+      "biotin"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-health-gummies.jpg",
+    "source": "https://bebodywise.com/product/hair-health-gummies"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-roll-on",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Advanced Hair Growth Serum",
+    "tags": [
+      "25 ml",
+      "rosemary"
+    ],
+    "price": "₹569",
+    "mrp": "₹599",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-roll-on.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-roll-on"
+  },
+  {
+    "id": "hair-care-hair-growth-pack-rosemary-roll-on-xp-2",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Pack with Roll On 25ml",
+    "tags": [
+      "kit of 2",
+      "rosemary"
+    ],
+    "price": "₹899",
+    "mrp": "₹1148",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-pack-rosemary-roll-on-xp-2.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-pack-rosemary-roll-on-xp-2"
+  },
+  {
+    "id": "hair-care-anti-frizz-serum",
+    "category": "Hair Care",
+    "concern": "Frizzy, unruly hair",
+    "name": "Frizz Control and Damage Repair Hair Serum",
+    "tags": [
+      "100 ML",
+      "Biphasic"
+    ],
+    "price": "₹599",
+    "mrp": "",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/anti-frizz-serum.jpg",
+    "source": "https://bebodywise.com/product/anti-frizz-serum"
+  },
+  {
+    "id": "hair-care-hair-fall-control-shampoo",
+    "category": "Hair Care",
+    "concern": "Dry & Frizzy Hair",
+    "name": "Keratin Shampoo for Hair Fall",
+    "tags": [
+      "200 ml",
+      "keratin"
+    ],
+    "price": "₹449",
+    "mrp": "₹499",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-fall-control-shampoo.jpg",
+    "source": "https://bebodywise.com/product/hair-fall-control-shampoo"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-spray",
+    "category": "Hair Care",
+    "concern": "Mess-free application",
+    "name": "Hair Growth Serum Spray (30 ml)",
+    "tags": [
+      "30 ml",
+      "rosemary"
+    ],
+    "price": "₹699",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-spray.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-spray"
+  },
+  {
+    "id": "hair-care-folli-advanced-plus-hair-growth-serum",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Folli Advanced+ Hair Growth Serum Roll On - 3% Redensyl, 3% Rosemary (25 ml)",
+    "tags": [
+      "25 ml",
+      "Microneedle"
+    ],
+    "price": "₹849",
+    "mrp": "",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/folli-advanced-plus-hair-growth-serum.jpg",
+    "source": "https://bebodywise.com/product/folli-advanced-plus-hair-growth-serum"
+  },
+  {
+    "id": "hair-care-1-ketoconazole-dandruff-shampoo-250ml",
+    "category": "Hair Care",
+    "concern": "Dandruff Control",
+    "name": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+    "tags": [
+      "250 ml",
+      "ketoconazole"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-250ml.jpg",
+    "source": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-250ml"
+  },
+  {
+    "id": "hair-care-deep-moisturizing-conditioner",
+    "category": "Hair Care",
+    "concern": "Dry & Frizzy hair",
+    "name": "Keratin Conditioner",
+    "tags": [
+      "200 ml",
+      "biotin"
+    ],
+    "price": "₹399",
+    "mrp": "₹499",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/deep-moisturizing-conditioner.jpg",
+    "source": "https://bebodywise.com/product/deep-moisturizing-conditioner"
+  },
+  {
+    "id": "hair-care-advanced-hair-growth-serum",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Serum",
+    "tags": [
+      "50 ml",
+      "rosemary"
+    ],
+    "price": "₹849",
+    "mrp": "₹899",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-hair-growth-serum.jpg",
+    "source": "https://bebodywise.com/product/advanced-hair-growth-serum"
+  },
+  {
+    "id": "hair-care-anti-dandruff-serum",
+    "category": "Hair Care",
+    "concern": "Dandruff & Inflammation",
+    "name": "Anti-Dandruff Serum",
+    "tags": [
+      "50 ml",
+      "Tea Tree Oil"
+    ],
+    "price": "₹349",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/anti-dandruff-serum.jpg",
+    "source": "https://bebodywise.com/product/anti-dandruff-serum"
+  },
+  {
+    "id": "hair-care-biotin-hair-gummies-breastfeeding-moms-30n-xp",
+    "category": "Hair Care",
+    "concern": "Post-Pregnancy Hair Fall",
+    "name": "Hair Gummies for Post-Pregnancy Hair Fall (30N)",
+    "tags": [
+      "30 pcs",
+      "biotin"
+    ],
+    "price": "₹599",
+    "mrp": "",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/biotin-hair-gummies-breastfeeding-moms-30n-xp.jpg",
+    "source": "https://bebodywise.com/product/biotin-hair-gummies-breastfeeding-moms-30n-xp"
+  },
+  {
+    "id": "hair-care-scalp-massager",
+    "category": "Hair Care",
+    "concern": "Hair Growth",
+    "name": "Scalp Massager",
+    "tags": [
+      "1 pc",
+      "massager"
+    ],
+    "price": "₹199",
+    "mrp": "₹499",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/scalp-massager.jpg",
+    "source": "https://bebodywise.com/product/scalp-massager"
+  },
+  {
+    "id": "hair-care-hair-strengthening-serum",
+    "category": "Hair Care",
+    "concern": "Frizzy, unruly hair",
+    "name": "Hair Strengthening Serum (100mL)",
+    "tags": [
+      "100 ml",
+      "Argan Oil"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-strengthening-serum.jpg",
+    "source": "https://bebodywise.com/product/hair-strengthening-serum"
+  },
+  {
+    "id": "hair-care-1-zpto-anti-dandruff-shampoo",
+    "category": "Hair Care",
+    "concern": "Dandruff & Dryness",
+    "name": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+    "tags": [
+      "200 ml",
+      "zpto"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-zpto-anti-dandruff-shampoo.jpg",
+    "source": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+  },
+  {
+    "id": "body-care-salicylic-ceramide-bodywash",
+    "category": "Body Care",
+    "concern": "Exfoliation & barrier care",
+    "name": "1% Salicylic Ceramide Body Wash",
+    "tags": [
+      "250 ml",
+      "salicylic"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+    "source": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+  },
+  {
+    "id": "body-care-5-aha-bha-bodywash-700ml",
+    "category": "Body Care",
+    "concern": "Exfoliation and detan",
+    "name": "5% AHA BHA Exfoliating Body Wash (700ml)",
+    "tags": [
+      "700 ML",
+      "AHA BHA"
+    ],
+    "price": "₹699",
+    "mrp": "₹799",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-aha-bha-bodywash-700ml.jpg",
+    "source": "https://bebodywise.com/product/5-aha-bha-bodywash-700ml"
+  },
+  {
+    "id": "body-care-advanced-underarm-pigmentation-kit",
+    "category": "Body Care",
+    "concern": "Underarm Odour, Pigmentation",
+    "name": "Advanced Underarm Pigmentation Kit",
+    "tags": [
+      "kit of 2",
+      "6% aha bha"
+    ],
+    "price": "₹859",
+    "mrp": "₹998",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg",
+    "source": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-flora-75ml",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+    "tags": [
+      "75 ML",
+      "6% AHA BHA"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+  },
+  {
+    "id": "body-care-20-urea-roll-on-75ml",
+    "category": "Body Care",
+    "concern": "Cracked & Rough Heels",
+    "name": "20% Urea Foot Roll On - 75 ml",
+    "tags": [
+      "75 ml",
+      "urea"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/20-urea-roll-on-75ml.jpg",
+    "source": "https://bebodywise.com/product/20-urea-roll-on-75ml"
+  },
+  {
+    "id": "body-care-10-urea-lotion-300ml",
+    "category": "Body Care",
+    "concern": "Mild to Moderate Dry Skin",
+    "name": "10% Urea Body Lotion - 300 ml",
+    "tags": [
+      "300 ml",
+      "urea"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-urea-lotion-300ml.jpg",
+    "source": "https://bebodywise.com/product/10-urea-lotion-300ml"
+  },
+  {
+    "id": "body-care-sun-care-duo-head-to-toe",
+    "category": "Body Care",
+    "concern": "Detan and Sun Protection",
+    "name": "Sun Care Duo for Face and Body",
+    "tags": [
+      "KIT OF 2",
+      "SPF"
+    ],
+    "price": "₹949",
+    "mrp": "₹1098",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/sun-care-duo-head-to-toe.jpg",
+    "source": "https://bebodywise.com/product/sun-care-duo-head-to-toe"
+  },
+  {
+    "id": "body-care-1-salicylic-acid-body-wash-350ml",
+    "category": "Body Care",
+    "concern": "Controlling Body Acne & Bumps",
+    "name": "1% Salicylic Acid Body Wash - 375 mL",
+    "tags": [
+      "375 ml",
+      "salicylic acid"
+    ],
+    "price": "₹399",
+    "mrp": "₹489",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+    "source": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+  },
+  {
+    "id": "body-care-body-sunscreen-lotion-with-spf-50",
+    "category": "Body Care",
+    "concern": "Detan and Sun Protection",
+    "name": "De-Tan SPF 50+ Body Sunscreen Lotion",
+    "tags": [
+      "175 ML",
+      "SPF"
+    ],
+    "price": "₹549",
+    "mrp": "₹599",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-sunscreen-lotion-with-spf-50.jpg",
+    "source": "https://bebodywise.com/product/body-sunscreen-lotion-with-spf-50"
+  },
+  {
+    "id": "body-care-body-de-tan-kit",
+    "category": "Body Care",
+    "concern": "Detan and Sun Protection",
+    "name": "De-Tan Kit",
+    "tags": [],
+    "price": "₹1178",
+    "mrp": "₹1398",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-de-tan-kit.jpg",
+    "source": "https://bebodywise.com/product/body-de-tan-kit"
+  },
+  {
+    "id": "body-care-triple-milk-deep-hydrating-bodywash-xp",
+    "category": "Body Care",
+    "concern": "Exfoliation and detan",
+    "name": "Triple Milk Deep Hydrating Body wash",
+    "tags": [],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/triple-milk-deep-hydrating-bodywash-xp.jpg",
+    "source": "https://bebodywise.com/product/triple-milk-deep-hydrating-bodywash-xp"
+  },
+  {
+    "id": "body-care-anti-stretch-mark-roll-on",
+    "category": "Body Care",
+    "concern": "Stretch Marks",
+    "name": "Anti-Stretch Mark Serum Roll On",
+    "tags": [
+      "50 ml",
+      "Regeneryl"
+    ],
+    "price": "₹599",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/anti-stretch-mark-roll-on.jpg",
+    "source": "https://bebodywise.com/product/anti-stretch-mark-roll-on"
+  },
+  {
+    "id": "body-care-daily-hydration-kit",
+    "category": "Body Care",
+    "concern": "Very Dry Skin & Cracked heels",
+    "name": "Daily Hydration Kit",
+    "tags": [
+      "dull-dry-skin",
+      "urea"
+    ],
+    "price": "₹899",
+    "mrp": "₹1098",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/daily-hydration-kit.jpg",
+    "source": "https://bebodywise.com/product/daily-hydration-kit"
+  },
+  {
+    "id": "body-care-advanced-urea-skin-heel-repair-kit-50ml",
+    "category": "Body Care",
+    "concern": "Very Dry Skin & Cracked heels",
+    "name": "Urea Heel & Skin Repair Kit - 50ml",
+    "tags": [],
+    "price": "₹998",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-urea-skin-heel-repair-kit-50ml.jpg",
+    "source": "https://bebodywise.com/product/advanced-urea-skin-heel-repair-kit-50ml"
+  },
+  {
+    "id": "body-care-30-urea-foot-roll-on",
+    "category": "Body Care",
+    "concern": "Cracked & Rough Heels",
+    "name": "30% Urea Foot Roll On - 50ml",
+    "tags": [
+      "50 ml",
+      "urea"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/30-urea-foot-roll-on.jpg",
+    "source": "https://bebodywise.com/product/30-urea-foot-roll-on"
+  },
+  {
+    "id": "health-&-fitness-calcium-gummies",
+    "category": "Health & Fitness",
+    "concern": "Stronger Bones & Joint Health",
+    "name": "Calcium Gummies",
+    "tags": [
+      "30 pcs",
+      "calcium"
+    ],
+    "price": "₹231",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/calcium-gummies.jpg",
+    "source": "https://bebodywise.com/product/calcium-gummies"
+  },
+  {
+    "id": "health-&-fitness-magnesium-glycinate-gummies-60n",
+    "category": "Health & Fitness",
+    "concern": "Regulating sleep cycle",
+    "name": "5-in-1 Magnesium Gummies with Glycinate & Vitamin D3 (60N)",
+    "tags": [
+      "60 pcs",
+      "magnesium"
+    ],
+    "price": "₹999",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/magnesium-glycinate-gummies-60n.jpg",
+    "source": "https://bebodywise.com/product/magnesium-glycinate-gummies-60n"
+  },
+  {
+    "id": "health-&-fitness-multivitamin-gummies",
+    "category": "Health & Fitness",
+    "concern": "Boost energy levels, Immunity",
+    "name": "Multivitamin Gummies",
+    "tags": [
+      "60 pcs",
+      "iron"
+    ],
+    "price": "₹699",
+    "mrp": "₹799",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/multivitamin-gummies.jpg",
+    "source": "https://bebodywise.com/product/multivitamin-gummies"
+  },
+  {
+    "id": "health-&-fitness-glutathione-gummies-60",
+    "category": "Health & Fitness",
+    "concern": "Glowing, Nourished Skin.",
+    "name": "Glutathione Gummies (60N)",
+    "tags": [
+      "60 pcs",
+      "glutathione"
+    ],
+    "price": "₹689",
+    "mrp": "₹1199",
+    "rating": "4.3",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/glutathione-gummies-60.jpg",
+    "source": "https://bebodywise.com/product/glutathione-gummies-60"
+  },
+  {
+    "id": "health-&-fitness-collagen-skin-gummies",
+    "category": "Health & Fitness",
+    "concern": "Fine Lines, Hydration",
+    "name": "Collagen Builder Gummies",
+    "tags": [
+      "60 pcs",
+      "collagen"
+    ],
+    "price": "₹499",
+    "mrp": "₹999",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/collagen-skin-gummies.jpg",
+    "source": "https://bebodywise.com/product/collagen-skin-gummies"
+  },
+  {
+    "id": "health-&-fitness-10-magnesium-lotion-300ml",
+    "category": "Health & Fitness",
+    "concern": "Muscle soreness and cramps",
+    "name": "10% Magnesium Body Lotion - 300 ml",
+    "tags": [
+      "300 ml",
+      "magnesium"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-magnesium-lotion-300ml.jpg",
+    "source": "https://bebodywise.com/product/10-magnesium-lotion-300ml"
+  },
+  {
+    "id": "sun-shield-ultra-light-sunscreen-spf50",
+    "category": "Sun Shield",
+    "concern": "Broad-Spectrum Sun Protection",
+    "name": "Ultra Light Sunscreen SPF50+",
+    "tags": [
+      "50 ml",
+      "spf 50"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/ultra-light-sunscreen-spf50.jpg",
+    "source": "https://bebodywise.com/product/ultra-light-sunscreen-spf50"
+  },
+  {
+    "id": "sun-shield-body-sunscreen-lotion-with-spf-50",
+    "category": "Sun Shield",
+    "concern": "Detan and Sun Protection",
+    "name": "De-Tan SPF 50+ Body Sunscreen Lotion",
+    "tags": [
+      "175 ML",
+      "SPF"
+    ],
+    "price": "₹549",
+    "mrp": "₹599",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-sunscreen-lotion-with-spf-50.jpg",
+    "source": "https://bebodywise.com/product/body-sunscreen-lotion-with-spf-50"
+  },
+  {
+    "id": "sun-shield-sun-care-duo-head-to-toe",
+    "category": "Sun Shield",
+    "concern": "Detan and Sun Protection",
+    "name": "Sun Care Duo for Face and Body",
+    "tags": [
+      "KIT OF 2",
+      "SPF"
+    ],
+    "price": "₹949",
+    "mrp": "₹1098",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/sun-care-duo-head-to-toe.jpg",
+    "source": "https://bebodywise.com/product/sun-care-duo-head-to-toe"
+  },
+  {
+    "id": "sun-shield-body-sunscreen-spray-with-spf-50",
+    "category": "Sun Shield",
+    "concern": "On-the-go Sun Protection",
+    "name": "Body Sunscreen Spray with SPF 50",
+    "tags": [
+      "100 ml",
+      "SPF 50"
+    ],
+    "price": "₹399",
+    "mrp": "₹499",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-sunscreen-spray-with-spf-50.jpg",
+    "source": "https://bebodywise.com/product/body-sunscreen-spray-with-spf-50"
+  },
+  {
+    "id": "sun-shield-summer-essentials-kit",
+    "category": "Sun Shield",
+    "concern": "Broad-Spectrum Sun Protection",
+    "name": "Summer Essentials Trio",
+    "tags": [
+      "kit of 3",
+      "SPF 50"
+    ],
+    "price": "₹999",
+    "mrp": "₹1197",
+    "rating": "4.9",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/summer-essentials-kit.jpg",
+    "source": "https://bebodywise.com/product/summer-essentials-kit"
+  },
+  {
+    "id": "sun-shield-face-body-sunscreen-kit",
+    "category": "Sun Shield",
+    "concern": "Complete Sun Protection",
+    "name": "Daily Sun Shield Kit",
+    "tags": [
+      "kit of 2",
+      "SPF 50"
+    ],
+    "price": "₹839",
+    "mrp": "₹998",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/face-body-sunscreen-kit.jpg",
+    "source": "https://bebodywise.com/product/face-body-sunscreen-kit"
+  },
+  {
+    "id": "sun-shield-lightest-mineral-sunscreen-spf50",
+    "category": "Sun Shield",
+    "concern": "Pregnancy Safe Sun Protection",
+    "name": "Lightest Mineral Sunscreen SPF 50+",
+    "tags": [
+      "50 ml",
+      "spf 50"
+    ],
+    "price": "₹449",
+    "mrp": "₹899",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/lightest-mineral-sunscreen-spf50.jpg",
+    "source": "https://bebodywise.com/product/lightest-mineral-sunscreen-spf50"
+  },
+  {
+    "id": "face-care-ultra-light-sunscreen-spf50",
+    "category": "Face Care",
+    "concern": "Broad-Spectrum Sun Protection",
+    "name": "Ultra Light Sunscreen SPF50+",
+    "tags": [
+      "50 ml",
+      "spf 50"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/ultra-light-sunscreen-spf50.jpg",
+    "source": "https://bebodywise.com/product/ultra-light-sunscreen-spf50"
+  },
+  {
+    "id": "face-care-2-salicylic-acid-face-wash",
+    "category": "Face Care",
+    "concern": "Mild Occasional Acne",
+    "name": "2% Salicylic Acid Face Wash",
+    "tags": [
+      "100 ml",
+      "salicylic acid"
+    ],
+    "price": "₹232",
+    "mrp": "₹299",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg",
+    "source": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+  },
+  {
+    "id": "face-care-1-peptide-ceramide-moisturizer",
+    "category": "Face Care",
+    "concern": "Repairing skin barrier",
+    "name": "1% Peptide & Ceramide Moisturizer",
+    "tags": [
+      "50 g",
+      "peptide"
+    ],
+    "price": "₹374",
+    "mrp": "₹499",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-peptide-ceramide-moisturizer.jpg",
+    "source": "https://bebodywise.com/product/1-peptide-ceramide-moisturizer"
+  },
+  {
+    "id": "face-care-hydrocolloid-acne-pimple-patch",
+    "category": "Face Care",
+    "concern": "Acne-Prone skin",
+    "name": "Hydrocolloid Acne Pimple Patch",
+    "tags": [
+      "24 pcs",
+      "hydrocolloid"
+    ],
+    "price": "₹299",
+    "mrp": "₹499",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hydrocolloid-acne-pimple-patch.jpg",
+    "source": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+  },
+  {
+    "id": "face-care-glutathione-gummies-60",
+    "category": "Face Care",
+    "concern": "Glowing, Nourished Skin.",
+    "name": "Glutathione Gummies (60N)",
+    "tags": [
+      "60 pcs",
+      "glutathione"
+    ],
+    "price": "₹689",
+    "mrp": "₹1199",
+    "rating": "4.3",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/glutathione-gummies-60.jpg",
+    "source": "https://bebodywise.com/product/glutathione-gummies-60"
+  },
+  {
+    "id": "face-care-acne-control-wash",
+    "category": "Face Care",
+    "concern": "Mild Occasional Acne",
+    "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+    "tags": [
+      "120 ml",
+      "salicylic acid"
+    ],
+    "price": "₹239",
+    "mrp": "₹349",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/acne-control-wash.jpg",
+    "source": "https://bebodywise.com/product/acne-control-wash"
+  },
+  {
+    "id": "face-care-collagen-skin-gummies",
+    "category": "Face Care",
+    "concern": "Fine Lines, Hydration",
+    "name": "Collagen Builder Gummies",
+    "tags": [
+      "60 pcs",
+      "collagen"
+    ],
+    "price": "₹499",
+    "mrp": "₹999",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/collagen-skin-gummies.jpg",
+    "source": "https://bebodywise.com/product/collagen-skin-gummies"
+  },
+  {
+    "id": "face-care-ice-roller",
+    "category": "Face Care",
+    "concern": "Reducing puffiness",
+    "name": "Ice Roller (1 N)",
+    "tags": [
+      "1 pc",
+      "roller"
+    ],
+    "price": "₹249",
+    "mrp": "₹499",
+    "rating": "4.5",
+    "label": "",
+    "available": false,
+    "image": "/storefront/catalogue/ice-roller.jpg",
+    "source": "https://bebodywise.com/product/ice-roller"
+  },
+  {
+    "id": "winter-care-10-urea-lotion-300ml",
+    "category": "Winter Care",
+    "concern": "Mild to Moderate Dry Skin",
+    "name": "10% Urea Body Lotion - 300 ml",
+    "tags": [
+      "300 ml",
+      "urea"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-urea-lotion-300ml.jpg",
+    "source": "https://bebodywise.com/product/10-urea-lotion-300ml"
+  },
+  {
+    "id": "winter-care-20-urea-roll-on-75ml",
+    "category": "Winter Care",
+    "concern": "Cracked & Rough Heels",
+    "name": "20% Urea Foot Roll On - 75 ml",
+    "tags": [
+      "75 ml",
+      "urea"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/20-urea-roll-on-75ml.jpg",
+    "source": "https://bebodywise.com/product/20-urea-roll-on-75ml"
+  },
+  {
+    "id": "winter-care-salicylic-ceramide-bodywash",
+    "category": "Winter Care",
+    "concern": "Exfoliation & barrier care",
+    "name": "1% Salicylic Ceramide Body Wash",
+    "tags": [
+      "250 ml",
+      "salicylic"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+    "source": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+  },
+  {
+    "id": "winter-care-daily-hydration-kit",
+    "category": "Winter Care",
+    "concern": "Very Dry Skin & Cracked heels",
+    "name": "Daily Hydration Kit",
+    "tags": [
+      "dull-dry-skin",
+      "urea"
+    ],
+    "price": "₹899",
+    "mrp": "₹1098",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/daily-hydration-kit.jpg",
+    "source": "https://bebodywise.com/product/daily-hydration-kit"
+  },
+  {
+    "id": "winter-care-deep-moisturization-kit",
+    "category": "Winter Care",
+    "concern": "Very dry skin",
+    "name": "Deep Moisturization Kit",
+    "tags": [],
+    "price": "₹1148",
+    "mrp": "",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/deep-moisturization-kit.jpg",
+    "source": "https://bebodywise.com/product/deep-moisturization-kit"
+  },
+  {
+    "id": "winter-care-triple-milk-deep-hydrating-bodywash",
+    "category": "Winter Care",
+    "concern": "Dry, dehydrated skin",
+    "name": "Triple Milk Deep Hydrating Body wash",
+    "tags": [
+      "250 ml",
+      "urea"
+    ],
+    "price": "₹549",
+    "mrp": "",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/triple-milk-deep-hydrating-bodywash.jpg",
+    "source": "https://bebodywise.com/product/triple-milk-deep-hydrating-bodywash"
+  },
+  {
+    "id": "winter-care-urea-skin-heel-repair-kit",
+    "category": "Winter Care",
+    "concern": "Very Dry and Flaky Skin",
+    "name": "Urea Skin & Heel Repair Kit",
+    "tags": [
+      "kit of 2",
+      "urea"
+    ],
+    "price": "₹749",
+    "mrp": "₹798",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/urea-skin-heel-repair-kit.jpg",
+    "source": "https://bebodywise.com/product/urea-skin-heel-repair-kit"
+  },
+  {
+    "id": "winter-care-20-urea-lotion-xp",
+    "category": "Winter Care",
+    "concern": "Very Dry and Flaky Skin",
+    "name": "20% Urea Lotion - 300ml",
+    "tags": [
+      "300 ml",
+      "urea"
+    ],
+    "price": "₹599",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/20-urea-lotion-xp.jpg",
+    "source": "https://bebodywise.com/product/20-urea-lotion-xp"
+  },
+  {
+    "id": "winter-care-1-zpto-anti-dandruff-shampoo",
+    "category": "Winter Care",
+    "concern": "Dandruff & Dryness",
+    "name": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+    "tags": [
+      "200 ml",
+      "zpto"
+    ],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-zpto-anti-dandruff-shampoo.jpg",
+    "source": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+  },
+  {
+    "id": "winter-care-1-ketoconazole-dandruff-shampoo-250ml",
+    "category": "Winter Care",
+    "concern": "Dandruff Control",
+    "name": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+    "tags": [
+      "250 ml",
+      "ketoconazole"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-250ml.jpg",
+    "source": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-250ml"
+  },
+  {
+    "id": "winter-care-dandruff-and-hairfall-kit",
+    "category": "Winter Care",
+    "concern": "Stage 1 Hair Loss & Dandruff",
+    "name": "Dandruff & Hairfall Kit",
+    "tags": [
+      "KIT OF 2",
+      "KETOCONAZOLE"
+    ],
+    "price": "₹799",
+    "mrp": "₹908",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/dandruff-and-hairfall-kit.jpg",
+    "source": "https://bebodywise.com/product/dandruff-and-hairfall-kit"
+  },
+  {
+    "id": "winter-care-1-zpto-ads-hg30-kit",
+    "category": "Winter Care",
+    "concern": "Hair fall & Dandruff",
+    "name": "Anti-Dandruff & Hair Fall Kit",
+    "tags": [
+      "shampoo",
+      "kit"
+    ],
+    "price": "₹998",
+    "mrp": "₹1098",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-zpto-ads-hg30-kit.jpg",
+    "source": "https://bebodywise.com/product/1-zpto-ads-hg30-kit"
+  },
+  {
+    "id": "offers-2-5-benzoyl-peroxide-bodywash",
+    "category": "Offers",
+    "concern": "Reducing Severe Body Acne",
+    "name": "2.5% Benzoyl Peroxide Body wash",
+    "tags": [
+      "250 ml",
+      "benzoyl peroxide"
+    ],
+    "price": "₹174",
+    "mrp": "₹349",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg",
+    "source": "https://bebodywise.com/product/2-5-benzoyl-peroxide-bodywash"
+  },
+  {
+    "id": "offers-benzoyl-peroxide-facewash",
+    "category": "Offers",
+    "concern": "Persistent Severe Acne",
+    "name": "2.5% Benzoyl Peroxide Facewash",
+    "tags": [
+      "100 ml",
+      "benzoyl peroxide"
+    ],
+    "price": "₹199",
+    "mrp": "₹399",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/benzoyl-peroxide-facewash.jpg",
+    "source": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+  },
+  {
+    "id": "offers-calcium-gummies",
+    "category": "Offers",
+    "concern": "Stronger Bones & Joint Health",
+    "name": "Calcium Gummies",
+    "tags": [
+      "30 pcs",
+      "calcium"
+    ],
+    "price": "₹231",
+    "mrp": "₹549",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/calcium-gummies.jpg",
+    "source": "https://bebodywise.com/product/calcium-gummies"
+  },
+  {
+    "id": "offers-2-salicylic-acid-face-wash",
+    "category": "Offers",
+    "concern": "Mild Occasional Acne",
+    "name": "2% Salicylic Acid Face Wash",
+    "tags": [
+      "100 ml",
+      "salicylic acid"
+    ],
+    "price": "₹232",
+    "mrp": "₹299",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg",
+    "source": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+  },
+  {
+    "id": "offers-acne-control-wash",
+    "category": "Offers",
+    "concern": "Mild Occasional Acne",
+    "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+    "tags": [
+      "120 ml",
+      "salicylic acid"
+    ],
+    "price": "₹239",
+    "mrp": "₹349",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/acne-control-wash.jpg",
+    "source": "https://bebodywise.com/product/acne-control-wash"
+  },
+  {
+    "id": "offers-advanced-hair-growth-serum-30ml",
+    "category": "Offers",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Serum (30ml)",
+    "tags": [
+      "30 ml",
+      "rosemary"
+    ],
+    "price": "₹349",
+    "mrp": "₹699",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-hair-growth-serum-30ml.jpg",
+    "source": "https://bebodywise.com/product/advanced-hair-growth-serum-30ml"
+  },
+  {
+    "id": "offers-4-aha-bha-underarm-rollon-frag-free-75",
+    "category": "Offers",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - Fragrance Free - 75 ml",
+    "tags": [
+      "75 ml",
+      "4% aha bha"
+    ],
+    "price": "₹499",
+    "mrp": "",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-rollon-frag-free-75.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-rollon-frag-free-75"
+  },
+  {
+    "id": "offers-1-peptide-ceramide-moisturizer",
+    "category": "Offers",
+    "concern": "Repairing skin barrier",
+    "name": "1% Peptide & Ceramide Moisturizer",
+    "tags": [
+      "50 g",
+      "peptide"
+    ],
+    "price": "₹374",
+    "mrp": "₹499",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-peptide-ceramide-moisturizer.jpg",
+    "source": "https://bebodywise.com/product/1-peptide-ceramide-moisturizer"
+  },
+  {
+    "id": "offers-lightest-mineral-sunscreen-spf50",
+    "category": "Offers",
+    "concern": "Pregnancy Safe Sun Protection",
+    "name": "Lightest Mineral Sunscreen SPF 50+",
+    "tags": [
+      "50 ml",
+      "spf 50"
+    ],
+    "price": "₹449",
+    "mrp": "₹899",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/lightest-mineral-sunscreen-spf50.jpg",
+    "source": "https://bebodywise.com/product/lightest-mineral-sunscreen-spf50"
+  },
+  {
+    "id": "offers-glutathione-gummies-60",
+    "category": "Offers",
+    "concern": "Glowing, Nourished Skin.",
+    "name": "Glutathione Gummies (60N)",
+    "tags": [
+      "60 pcs",
+      "glutathione"
+    ],
+    "price": "₹689",
+    "mrp": "₹1199",
+    "rating": "4.3",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/glutathione-gummies-60.jpg",
+    "source": "https://bebodywise.com/product/glutathione-gummies-60"
+  }
+]
