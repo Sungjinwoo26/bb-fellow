@@ -1,0 +1,69 @@
+{
+  "supplied_products": 56,
+  "previous_chat_products": 11,
+  "input_missing_field_entries": 589,
+  "research_fields_added": 3,
+  "remaining_missing_field_entries": 586,
+  "input_review_field_entries": 47,
+  "prior_chat_field_coverage": {
+    "purpose": 11,
+    "ingredients": 3,
+    "usage": 3,
+    "timeline": 3,
+    "warnings": 1
+  },
+  "new_chat_field_coverage": {
+    "purpose": 56,
+    "ingredients": 54,
+    "usage": 56,
+    "timeline": 45,
+    "warnings": 50
+  },
+  "independent_findings": [
+    {
+      "product_id": "6-aha-bha-underarm-roll-on-flora-75ml",
+      "field": "warnings.broken_or_irritated_skin"
+    },
+    {
+      "product_id": "1-zpto-anti-dandruff-shampoo",
+      "field": "warnings.broken_or_irritated_skin"
+    },
+    {
+      "product_id": "1-zpto-anti-dandruff-shampoo",
+      "field": "warnings.other"
+    }
+  ],
+  "pages_checked": 56,
+  "pages_accessible": 56,
+  "demo_decisions": {
+    "1-salicylic-acid-body-wash-350ml": "Use 375 mL as the demo variant because the current page heading and selector say 375 mL; do not use the 350 mL URL slug as a size claim. Do not state all-skin suitability because the page conflicts on very dry skin.",
+    "4-aha-bha-underarm-rollon-frag-free-75": "Use the product heading as the variant name, but do not claim fragrance-free suitability: the ingredient block lists perfume. Treat that conflict as unresolved until the label or brand confirms it.",
+    "advanced-hair-growth-serum": "For demo navigation use the 50 mL dropper selected by the product page; do not assume the conflicting spray instruction or pick 1% versus 3% rosemary without the label.",
+    "advanced-hair-growth-serum-30ml": "For demo navigation use the 30 mL dropper shown in the selector; do not infer the conflicting spray steps or rosemary percentage.",
+    "anti-frizz-serum": "Prefer the current text how-to of 2–3 pumps as a tentative demo reference; the gallery says 1–2, so do not serve an unqualified dosage and direct the user to the product label.",
+    "magnesium-glycinate-gummies-60n": "The page says its updated recommendation is two gummies while existing packaging says one; prefer the updated page as a tentative demo reference, but disclose the mismatch and do not resolve dosage without the label or professional advice.",
+    "multivitamin-gummies": "Prefer the how-to and nutrition label showing one gummy as a tentative reference; because an FAQ says two, do not give an unqualified dose or select one disputed ingredient list.",
+    "30-urea-foot-roll-on": "Treat the silicone-free exclusion as unconfirmed because the ingredient list names silicones; do not present the product as silicone-free.",
+    "1-peptide-ceramide-moisturizer": "Do not select a copper tripeptide concentration: 1% and 2000 ppm are materially inconsistent and may describe different scopes.",
+    "folli-advanced-plus-hair-growth-serum": "Do not select an AnaGain percentage: the text and image give different values, and the source does not establish their equivalence.",
+    "daily-hydration-kit": "Keep the named 10% lotion and body wash as the kit identity and do not assign the mismatched 20% product ingredient block to either component.",
+    "face-body-sunscreen-kit": "Keep the kit products separate; do not choose a disputed size or assert both are fragrance-free from the conflicting page blocks.",
+    "hydrocolloid-acne-pimple-patch": "Prefer the detailed how-to as a tentative reference, but report that the FAQ gives a conflicting duration and do not recommend a single wear-time as confirmed.",
+    "calcium-gummies": "Do not assume elemental calcium equals the mass of calcium salt or convert the ambiguous nutrition table into a dose.",
+    "dandruff-and-hairfall-kit": "Do not claim sulfate-free because the kit shampoo ingredient list names a sulfate.",
+    "sun-care-duo-head-to-toe": "Do not claim the whole kit is fragrance-free while the component information conflicts.",
+    "summer-essentials-kit": "Do not apply an unscoped fragrance-free statement to all three components."
+  },
+  "supplied_group_field_status_counts": {
+    "verified": 752,
+    "not_found": 531,
+    "needs_review": 31,
+    "not_applicable": 31
+  },
+  "current_group_field_status_counts": {
+    "verified": 755,
+    "not_found": 528,
+    "needs_review": 31,
+    "not_applicable": 31
+  }
+}

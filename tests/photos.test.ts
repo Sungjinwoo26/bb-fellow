@@ -15,16 +15,15 @@ describe('photo areas', () => {
  });
 });
 describe('photo navigation and persistence', () => {
- it('bypasses photos for body odour and returns to preparation after skipping all', () => {
-  const odour = {...base, selectedConcerns:['body_odour'] as AssessmentSession['selectedConcerns']}; expect(assessmentReducer(odour,{type:'continue'}).currentStep).toEqual({name:'question',questionId:'odour_timing'});
-  let s=assessmentReducer(base,{type:'continue'}); expect(s.currentStep.name).toBe('photo_area'); s=assessmentReducer(s,{type:'withoutPhotos'}); expect(s.photoStatuses.underarms).toBe('skipped'); s=assessmentReducer(s,{type:'back'}); expect(s.currentStep.name).toBe('photo_area');
+ it('takes all concerns directly to questions or results and returns to concerns', () => {
+  const odour = {...base, selectedConcerns:['body_odour'] as AssessmentSession['selectedConcerns']}; expect(assessmentReducer(odour,{type:'continue'}).currentStep).toEqual({name:'next_step_placeholder'});
+  const s=assessmentReducer(base,{type:'continue'}); expect(s.currentStep).toEqual({name:'question',questionId:'body_acne_goal'});
+  expect(assessmentReducer(s,{type:'back'}).currentStep).toEqual({name:'concerns'});
  });
- it('moves through areas and restores statuses after refresh without serializing images', () => {
-  let s=assessmentReducer(base,{type:'continue'}); s=assessmentReducer(s,{type:'photoStart'}); s=assessmentReducer(s,{type:'photoStatus',areaId:'affected_body',status:'added'}); s=assessmentReducer(s,{type:'continue'}); s=assessmentReducer(s,{type:'skip'});
-  expect(s.photoStatuses.underarms).toBe('skipped'); expect(s.currentStep).toEqual({name:'photo_area',areaId:'scalp_hair'});
-  const json=JSON.stringify(s); expect(json).not.toContain('blob:'); expect(json).not.toContain('previewUrl');
-  const restored=normalizeSession(JSON.parse(json),true)!; expect(restored.photoStatuses.affected_body).toBe('needs_readding'); expect(restored.photoStatuses.underarms).toBe('skipped');
-  expect(normalizeSession(JSON.parse(json))?.photoStatuses.affected_body).toBe('added');
+ it('restores an old photo step to the first question', () => {
+  for(const currentStep of [{name:'photo_preparation'},{name:'photo_area',areaId:'affected_body'},{name:'photo_analysis'}]) {
+   expect(normalizeSession({...base,currentStep},true)?.currentStep).toEqual({name:'question',questionId:'body_acne_goal'});
+  }
  });
  it('removes only statuses no longer relevant', () => {
   let s={...base, selectedConcerns:['body_acne_marks','strawberry_bumpy_skin'] as AssessmentSession['selectedConcerns'],photoStatuses:{affected_body:'added' as const}};

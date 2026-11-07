@@ -44,14 +44,12 @@ export function normalizeSession(value: unknown, afterRefresh = false): Assessme
     if (status === 'added' || status === 'skipped' || status === 'not_started' || status === 'needs_readding') photoStatuses[area.id] = afterRefresh && status === 'added' ? 'needs_readding' : status;
   }
   let currentStep: AssessmentStep = { name: 'concerns' };
-  const active = getActiveQuestions(selectedConcerns);
+  const active = getActiveQuestions(selectedConcerns,answers);
   if (!legacy && s.currentStep && typeof s.currentStep === 'object') {
     const step = s.currentStep as Record<string, unknown>;
-    if (step.name === 'photo_preparation' && areas.length) currentStep = { name: 'photo_preparation' };
-    if (step.name === 'photo_area' && typeof step.areaId === 'string') { const area = areas.find(a => a.id === step.areaId); currentStep = area ? { name: 'photo_area', areaId: area.id } : areas.length ? { name: 'photo_preparation' } : { name: 'concerns' }; }
-    if (step.name === 'photo_analysis' && areas.length) currentStep = afterRefresh ? {name:'photo_area',areaId:areas[0].id} : {name:'photo_analysis'};
+    if (step.name === 'photo_preparation' || step.name === 'photo_area' || step.name === 'photo_analysis') currentStep = active.length ? { name: 'question', questionId: active[0].id } : selectedConcerns.length ? { name:'next_step_placeholder' } : { name:'concerns' };
     if (step.name === 'question' && typeof step.questionId === 'string') currentStep = active.some(q => q.id === step.questionId) ? { name: 'question', questionId: step.questionId } : active.length ? { name: 'question', questionId: active[0].id } : { name: 'concerns' };
-    if (step.name === 'next_step_placeholder' && active.length) currentStep = { name: 'next_step_placeholder' };
+    if (step.name === 'next_step_placeholder' && selectedConcerns.length) currentStep = { name: 'next_step_placeholder' };
   }
   let preparation:PreparationState|null=null;
   if(s.preparation && typeof s.preparation==='object' && !Array.isArray(s.preparation)) {const p=s.preparation as Record<string,unknown>; if(validStart(p.startedAt,Date.now()) && typeof p.inputFingerprint==='string' && /^[a-f0-9]{32}$/.test(p.inputFingerprint)) {const result=recommendationSchema.safeParse(p.recommendation);preparation={startedAt:p.startedAt,inputFingerprint:p.inputFingerprint,recommendation:result.success && !(afterRefresh && p.containsPhotoChoices===true) ? result.data : null,containsPhotoChoices:p.containsPhotoChoices===true};}}

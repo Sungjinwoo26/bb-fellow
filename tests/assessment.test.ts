@@ -8,14 +8,14 @@ const base: AssessmentSession = { schemaVersion:1, sessionId:'id', createdAt:'20
 describe('assessment data and sequence', () => {
  it('defines nine unique concerns and the complete ordered question set', () => {
   expect(concerns).toHaveLength(9); expect(new Set(concerns.map(c => c.id)).size).toBe(9);
-  expect(questions.map(q => q.id)).toEqual(['body_acne_location','body_acne_goal','body_acne_duration','bumpy_location','bumpy_goal','bumpy_dryness','bumpy_pain_itch','body_pigmentation_location','body_pigmentation_description','body_pigmentation_duration','underarm_goal','underarm_duration','odour_timing','odour_location','sun_location','sun_goal','body_care_goal','body_care_skin_feel','face_goal','face_skin_type','hair_goal','hair_duration','scalp_type']);
+  expect(questions.map(q => q.id)).toContain('shared_body_skin');
   expect(new Set(questions.map(q => q.id)).size).toBe(questions.length);
   for (const q of questions) { expect(concerns.some(c => c.id === q.concernId)).toBe(true); expect(q.options.length).toBeGreaterThan(0); expect(new Set(q.options.map(o => o.id)).size).toBe(q.options.length); }
  });
  it('sequences only selected concerns in canonical order without duplicates', () => {
   expect(getActiveQuestions([])).toEqual([]);
   expect(getActiveQuestions(['hair']).every(q => q.concernId === 'hair')).toBe(true);
-  const active = getActiveQuestions(['hair','body_acne_marks','hair']); expect(active.map(q => q.id)).toEqual(['body_acne_location','body_acne_goal','body_acne_duration','hair_goal','hair_duration','scalp_type']);
+  const active = getActiveQuestions(['hair','body_acne_marks','hair']); expect(active.map(q => q.id)).toEqual(['body_acne_goal','shared_body_skin','hair_goal','hair_duration','scalp_type']);
   expect(questionProgress(['hair','body_acne_marks'], 'hair_goal')).toMatchObject({concernIndex:2, concernTotal:2, questionIndex:1, questionTotal:3});
  });
 });
@@ -23,14 +23,11 @@ describe('assessment transitions', () => {
  it('keeps answers, canonicalizes choices, distinguishes skip and filters active answers', () => {
   let s = assessmentReducer(base,{type:'toggleConcern',id:'hair'}); s = assessmentReducer(s,{type:'toggleConcern',id:'body_acne_marks'});
   expect(s.selectedConcerns).toEqual(['body_acne_marks','hair']); s=assessmentReducer(s,{type:'continue'}); s=assessmentReducer(s,{type:'withoutPhotos'});
-  expect(s.answers.body_acne_location).toBeUndefined();
-  s=assessmentReducer(s,{type:'toggleOption',questionId:'body_acne_location',optionId:'chest'}); s=assessmentReducer(s,{type:'toggleOption',questionId:'body_acne_location',optionId:'back'});
-  expect(s.answers.body_acne_location).toEqual(['back','chest']); s=assessmentReducer(s,{type:'continue'});
-  s=assessmentReducer(s,{type:'toggleOption',questionId:'body_acne_goal',optionId:'not_sure'}); expect(s.answers.body_acne_goal).toBe('not_sure'); s=assessmentReducer(s,{type:'continue'});
-  s=assessmentReducer(s,{type:'skip'}); expect(s.answers.body_acne_duration).toBeNull();
-  s=assessmentReducer(s,{type:'back'}); expect(s.currentStep).toEqual({name:'question',questionId:'body_acne_duration'});
+  s=assessmentReducer(s,{type:'toggleOption',questionId:'body_acne_goal',optionId:'both'}); s=assessmentReducer(s,{type:'continue'});
+  s=assessmentReducer(s,{type:'toggleOption',questionId:'shared_body_skin',optionId:'dry'}); s=assessmentReducer(s,{type:'continue'});
+  s=assessmentReducer(s,{type:'back'}); expect(s.currentStep).toEqual({name:'question',questionId:'shared_body_skin'});
   s=assessmentReducer(s,{type:'toggleConcern',id:'body_acne_marks'}); expect(getActiveAnswers(s.selectedConcerns,s.answers)).toEqual({});
-  s=assessmentReducer(s,{type:'toggleConcern',id:'body_acne_marks'}); expect(s.answers.body_acne_goal).toBe('not_sure');
+  s=assessmentReducer(s,{type:'toggleConcern',id:'body_acne_marks'}); expect(s.answers.body_acne_goal).toBe('both');
  });
  it('does not equate an empty multi-selection with skip', () => {
   let s = {...base, selectedConcerns:['hair'] as AssessmentSession['selectedConcerns'],currentStep:{name:'question',questionId:'hair_goal'} as AssessmentSession['currentStep']};

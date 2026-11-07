@@ -1,3 +1,4 @@
+import { chatRoute, productSearch } from './productChat';
 import { kitRoute } from './kit';
 import { catalogueRoute, recommendationsRoute, configuredData } from './recommendations';
 import { photoAnalysis, publicConfig, type AnalysisEnv } from './analysis';
@@ -19,6 +20,8 @@ export default {
   if(url.pathname==='/api/recommendations/version' && request.method==='GET') {const data=configuredData();return data ? Response.json({catalogueVersion:data.catalogue.version,rulesVersion:data.rules.version},{headers:{'Cache-Control':'no-store'}}) : Response.json({error:{code:'CATALOGUE_UNAVAILABLE'}},{status:503});}
   if(url.pathname==='/api/catalogue' && request.method==='GET') return catalogueRoute();
   if(url.pathname==='/api/recommendations' && request.method==='POST') return recommendationsRoute(request);
+  if(url.pathname==='/api/products/search' && request.method==='GET') return Response.json({products:productSearch(url.searchParams.get('q')??'')},{headers:{'Cache-Control':'no-store'}});
+  if(url.pathname==='/api/chat' && request.method==='POST') return chatRoute(request,env);
   if(url.pathname==='/api/health' && request.method==='GET') return Response.json({status:'ok',service:'find-my-routine-api'});
   if(url.pathname==='/api/photo-analysis/config' && request.method==='GET') return Response.json(publicConfig(env),{headers:{'Cache-Control':'no-store'}});
   if(url.pathname==='/api/photo-analysis' && request.method==='POST') {const limited=await checkPhotoRate(request,env);return limited ?? photoAnalysis(request,env);}

@@ -434,9 +434,13 @@ export const questions: QuestionDefinition[] = [
   {
     "id": "face_goal",
     "concernId": "face",
-    "label": "What would you like help with?",
+    "label": "What are you experiencing on your face?",
     "type": "multi",
     "options": [
+      {
+        "id": "individual_spots",
+        "label": "Individual pimples or spots"
+      },
       {
         "id": "acne_or_bumps",
         "label": "Acne or bumps"
@@ -461,6 +465,17 @@ export const questions: QuestionDefinition[] = [
         "id": "other",
         "label": "Other"
       }
+    ],
+    "allowSkip": true
+  },
+  {
+    "id": "face_breakout_pattern",
+    "concernId": "face",
+    "label": "Which best describes your breakouts?",
+    "type": "single",
+    "options": [
+      { "id": "occasional", "label": "Occasional pimples, blackheads or whiteheads" },
+      { "id": "persistent_painful", "label": "Persistent, red or painful breakouts" }
     ],
     "allowSkip": true
   },
@@ -577,3 +592,10 @@ export const questions: QuestionDefinition[] = [
     "allowSkip": true
   }
 ];
+
+// Shared when both body acne and general body care are selected.
+questions.push({ id:'shared_body_skin', concernId:'body_acne_marks', label:'How does the skin in the affected body area usually feel?', type:'single', allowSkip:true, options:[{id:'dry',label:'Dry'},{id:'comfortable',label:'Comfortable or normal'},{id:'oily',label:'Oily'}] });
+questions.push({ id:'bumpy_pigmentation_same_area', concernId:'strawberry_bumpy_skin', label:'Are the bumps and pigmentation in the same area?', type:'single', allowSkip:true, options:[{id:'yes',label:'Yes'},{id:'no',label:'No'}] });
+const careGoal=questions.find(q=>q.id==='body_care_goal')!;
+careGoal.label='What are you experiencing?';
+careGoal.options=[{id:'hydration',label:'Dry body skin'},{id:'very_dry',label:'Very dry or flaky body skin'},{id:'dry_feet_or_heels',label:'Rough or cracked heels'},{id:'stretch_marks',label:'Stretch marks'}];

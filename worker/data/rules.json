@@ -1,132 +1,6 @@
 {
-  "version": "demo-rules-2026-11-04a",
+  "version": "demo-rules-2026-11-07",
   "rules": [
-    {
-      "id": "body_acne_answer_bumps",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "body_acne_marks",
-      "productId": "demo_sa_body_wash",
-      "priority": 100,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_any_of",
-            "questionId": "body_acne_goal",
-            "optionIds": [
-              "active_bumps",
-              "both"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body wash associated with the bumps you mentioned."
-    },
-    {
-      "id": "body_acne_photo_bumps",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "body_acne_marks",
-      "productId": "demo_sa_body_wash",
-      "priority": 50,
-      "condition": {
-        "all": [
-          {
-            "type": "confirmed_photo_any_of",
-            "areaId": "affected_body",
-            "optionIds": [
-              "visible_bumps"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body wash associated with the visible bumps you confirmed."
-    },
-    {
-      "id": "bumpy_answer_texture",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "strawberry_bumpy_skin",
-      "productId": "demo_lactic_body_lotion",
-      "priority": 100,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_any_of",
-            "questionId": "bumpy_goal",
-            "optionIds": [
-              "rough_texture",
-              "both"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body lotion associated with the texture concern you selected."
-    },
-    {
-      "id": "bumpy_photo_bumps",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "strawberry_bumpy_skin",
-      "productId": "demo_lactic_body_lotion",
-      "priority": 50,
-      "condition": {
-        "all": [
-          {
-            "type": "confirmed_photo_any_of",
-            "areaId": "affected_body",
-            "optionIds": [
-              "visible_bumps"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body lotion associated with the visible bumps you confirmed."
-    },
-    {
-      "id": "body_pigmentation_location",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "body_pigmentation",
-      "productId": "demo_pigmentation_cream",
-      "priority": 100,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_any_of",
-            "questionId": "body_pigmentation_location",
-            "optionIds": [
-              "elbows",
-              "knees",
-              "neck",
-              "more_than_one_area"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample cream associated with the area you selected."
-    },
-    {
-      "id": "body_pigmentation_photo_tone",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "body_pigmentation",
-      "productId": "demo_pigmentation_cream",
-      "priority": 50,
-      "condition": {
-        "all": [
-          {
-            "type": "confirmed_photo_any_of",
-            "areaId": "elbows_knees_neck",
-            "optionIds": [
-              "uneven_looking_tone",
-              "visible_marks"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample cream associated with the appearance you confirmed."
-    },
     {
       "id": "underarm_answer_tone",
       "enabled": true,
@@ -167,26 +41,6 @@
         ]
       },
       "reason": "A sample underarm option associated with the appearance you confirmed."
-    },
-    {
-      "id": "odour_underarms",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "body_odour",
-      "productId": "demo_underarm_roll_on",
-      "priority": 100,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_any_of",
-            "questionId": "odour_location",
-            "optionIds": [
-              "underarms"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample underarm option associated with where you want help feeling fresh."
     },
     {
       "id": "sun_protection",
@@ -245,46 +99,6 @@
         ]
       },
       "reason": "A sample face sunscreen associated with your protection preference."
-    },
-    {
-      "id": "body_care_hydration",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "general_body_care",
-      "productId": "demo_urea_body_lotion",
-      "priority": 100,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_contains_any",
-            "questionId": "body_care_goal",
-            "optionIds": [
-              "hydration"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body lotion associated with your hydration preference."
-    },
-    {
-      "id": "body_care_cleansing",
-      "enabled": true,
-      "reviewStatus": "demo_only",
-      "concernId": "general_body_care",
-      "productId": "demo_hydrating_body_wash",
-      "priority": 90,
-      "condition": {
-        "all": [
-          {
-            "type": "answer_contains_any",
-            "questionId": "body_care_goal",
-            "optionIds": [
-              "everyday_cleansing"
-            ]
-          }
-        ]
-      },
-      "reason": "A sample body wash associated with your cleansing preference."
     },
     {
       "id": "face_dryness",

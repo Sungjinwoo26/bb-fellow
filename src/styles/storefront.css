@@ -10,3 +10,6 @@
 .store-product>button:disabled,.store-cart-action:disabled{background:#b7c1c8;cursor:not-allowed}
 
 .footer-home-link{display:block;margin:0 auto 42px;border:0;background:transparent;min-height:44px;padding:0}.store-footer .footer-home-link .footer-logo{margin:0}
+
+/* Make the assessment entry stand out in the brand’s primary blue. */
+.store-desktop-nav .desktop-assessment{border:2px solid #0098ff;border-radius:999px;padding:8px 15px;color:#002c54;min-height:42px}.store-desktop-nav .desktop-assessment:hover{background:#d7f5ff}.drawer-assessment{border-radius:999px!important;border:2px solid #0098ff!important;margin:8px 14px;width:calc(100% - 28px)!important}.mobile-assessment:focus-visible,.desktop-assessment:focus-visible,.drawer-assessment:focus-visible{outline:3px solid #002c54;outline-offset:3px}@media(max-width:850px){.mobile-assessment{width:max-content;max-width:calc(100% - 32px);min-height:42px;margin:4px auto 10px;padding:7px 20px;border:2px solid #0098ff;border-radius:999px;background:#d7f5ff;color:#002c54}.mobile-assessment:hover{background:#80d2ff}}

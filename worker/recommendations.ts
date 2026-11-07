@@ -64,8 +64,44 @@ export function matches(p:Predicate, input:RecommendationRequest):boolean {
 }
 export function generateRecommendations(input:RecommendationRequest,catalogue:Catalogue,rules:RuleSet):RecommendationResult {
  const items:RecommendationResult['items']=[],unmatchedConcernIds:ConcernId[]=[];
+ const selected=input.selectedConcerns;
+ const add=(id:string,concern:ConcernId,reason:string)=>{const permittedKits=['demo_body_acne_pack','demo_exfoliation_pigmentation_kit'];const product=catalogue.products.find(p=>p.id===id&&p.active&&(!p.preMadeKit||permittedKits.includes(p.id))&&!excludedProduct(p));if(!product)return false;const existing=items.find(i=>i.product.id===id);if(existing){if(!existing.matchedConcernIds.includes(concern))existing.matchedConcernIds.push(concern);if(!existing.reasons.includes(reason))existing.reasons.push(reason);}else items.push({product:publicProduct(product),quantity:1,matchedConcernIds:[concern],reasons:[reason]});return true;};
+ const streamlined:ConcernId[]=['body_acne_marks','strawberry_bumpy_skin','body_pigmentation','body_odour','general_body_care','face'];
+ const sameArea=selected.includes('body_pigmentation')&&selected.includes('strawberry_bumpy_skin')&&input.answers.bumpy_pigmentation_same_area==='yes';
  for(const concern of canonicalConcerns(input.selectedConcerns)){
-  if ((concern==='strawberry_bumpy_skin' && input.answers.bumpy_pain_itch==='yes') || (concern==='general_body_care' && input.answers.body_care_skin_feel==='dry')) { unmatchedConcernIds.push(concern); continue; }
+  if(streamlined.includes(concern)){
+   let added=false;const put=(id:string,why:string)=>{added=add(id,concern,why)||added;};
+   if(concern==='body_acne_marks'){
+    const goal=input.answers.body_acne_goal; const dry=input.answers.shared_body_skin==='dry';
+    if(goal==='active_bumps')put(dry?'demo_ceramide_body_wash':'demo_sa_body_wash','A sample wash for the body acne you described.');
+    if(goal==='marks_left_behind')put('demo_niacinamide_lotion','A sample lotion for the marks you described.');
+    if(goal==='both'){if(dry){put('demo_ceramide_body_wash','A sample wash for body acne and dry skin.');put('demo_niacinamide_lotion','A sample lotion for the marks you described.');}else put('demo_body_acne_pack','A sample pack for body acne and marks.');}
+   }
+   if(concern==='body_pigmentation')put(sameArea?'demo_exfoliation_pigmentation_kit':'demo_pigmentation_cream','A sample option for the body pigmentation you selected.');
+   if(concern==='strawberry_bumpy_skin'){
+    if(sameArea)put('demo_exfoliation_pigmentation_kit','A sample option for bumps and pigmentation in the same area.');
+    else if(selected.includes('body_acne_marks') && (input.answers.body_acne_goal==='active_bumps'||input.answers.body_acne_goal==='both')){const dry=input.answers.shared_body_skin==='dry';put(input.answers.body_acne_goal==='both'&&!dry?'demo_body_acne_pack':dry?'demo_ceramide_body_wash':'demo_sa_body_wash','The sample body wash also addresses your selected bumpy-skin concern.');}
+    else put('demo_aha_scrub','A sample scrub for the bumpy skin you selected.');
+   }
+   if(concern==='body_odour')put('demo_underarm_roll_on','A sample underarm option for body odour.');
+   if(concern==='general_body_care'){
+    const goals=Array.isArray(input.answers.body_care_goal)?input.answers.body_care_goal:[];
+    if(goals.includes('very_dry'))put('demo_20_urea_lotion','A sample lotion for very dry skin.');else if(goals.includes('hydration'))put('demo_urea_body_lotion','A sample lotion for dry body skin.');
+    if(goals.includes('dry_feet_or_heels'))put('demo_urea_foot_roll_on','A sample option for rough or dry heels.');
+    if(goals.includes('stretch_marks'))put('demo_stretch_mark_serum','A sample option for the stretch marks you selected.');
+   }
+   if(concern==='face'){
+    const goals=Array.isArray(input.answers.face_goal)?input.answers.face_goal:[];
+    if(goals.includes('acne_or_bumps')){
+     if(input.answers.face_breakout_pattern==='persistent_painful')put('demo_face_bp_25','A sample face wash for the persistent breakouts you described.');
+     else if(input.answers.face_breakout_pattern==='occasional' && ['oily','dry','combination','normal'].includes(String(input.answers.face_skin_type)))put(input.answers.face_skin_type==='oily'?'demo_face_sa_2':'demo_face_sa_1','A sample face wash matched to your breakouts and skin type.');
+    }
+    if(goals.includes('individual_spots'))put('demo_pimple_patch','A sample patch for individual spots.');
+    if(goals.includes('dryness'))put('demo_face_moisturizer','A sample moisturizer for facial dryness.');
+    if(goals.includes('everyday_protection'))put('demo_face_sunscreen','A sample sunscreen for everyday face protection.');
+   }
+   if(!added)unmatchedConcernIds.push(concern);continue;
+  }
   const candidates=rules.rules.filter(r=>r.enabled && r.concernId===concern && r.condition.all.every(p=>matches(p,input))).filter(r=>catalogue.products.some(p=>p.id===r.productId && p.active && !p.preMadeKit && !excludedProduct(p))).sort((a,b)=>b.priority-a.priority || a.id.localeCompare(b.id));
   const rule=candidates[0]; if(!rule){unmatchedConcernIds.push(concern);continue;}
   const product=catalogue.products.find(p=>p.id===rule.productId)!; const existing=items.find(i=>i.product.id===product.id);
