@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 test('homepage assistant opens, clarifies, follows selected product and resets',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByText('Ask me about')).toBeVisible();await page.getByRole('button',{name:'Open product assistant'}).click();const panel=page.getByRole('dialog',{name:'Bodywise product assistant'});await expect(panel).toBeVisible();await panel.getByRole('textbox',{name:'Your product question'}).fill('How often should I use the body wash?');await panel.getByRole('button',{name:'Send message'}).click();await expect(panel.getByText('Which product do you mean?')).toBeVisible();await panel.getByRole('button',{name:/1% Salicylic Acid Body Wash/}).first().click();await expect(panel.getByText(/product information I found/i)).toBeVisible();await expect(panel.getByRole('link',{name:/1% Salicylic Acid Body Wash/})).toHaveAttribute('href',/bebodywise\.com\/product\//);await panel.getByRole('button',{name:'Start new chat'}).click();await expect(panel.getByText('Which product do you mean?')).toHaveCount(0);await panel.getByRole('button',{name:'Close product assistant'}).click();await expect(panel).toHaveCount(0);
+ await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByText('Ask me about')).toBeVisible();await page.getByRole('button',{name:'Open product assistant'}).click();const panel=page.getByRole('dialog',{name:'Bodywise product assistant'});await expect(panel).toBeVisible();await panel.getByRole('textbox',{name:'Your product question'}).fill('How often should I use the body wash?');await panel.getByRole('button',{name:'Send message'}).click();await expect(panel.getByText('Which product do you mean?')).toBeVisible();await panel.getByRole('button',{name:/1% Salicylic Acid Body Wash/}).first().click();await expect(panel.getByText(/daily/i)).toBeVisible();await expect(panel.getByRole('link',{name:/1% Salicylic Acid Body Wash/})).toHaveAttribute('href',/bebodywise\.com\/product\//);await panel.getByRole('button',{name:'Start new chat'}).click();await expect(panel.getByText('Which product do you mean?')).toHaveCount(0);await panel.getByRole('button',{name:'Close product assistant'}).click();await expect(panel).toHaveCount(0);
 });
 
 test('the chat displays the answer without a Gemini label',async({page})=>{
@@ -16,4 +16,15 @@ test('formats assistant comparisons as readable bold and list content on mobile'
  await expect(panel.locator('.assistant-rich-text strong').filter({hasText:'First product:'})).toBeVisible();
  await expect(panel.locator('.assistant-rich-text li')).toHaveCount(2);
  await expect(panel.locator('.assistant-rich-text').last()).not.toContainText('**');
+});
+
+
+test('opens long product lists at their beginning on mobile',async({page})=>{
+ await page.setViewportSize({width:390,height:700});
+ const options=Array.from({length:8},(_,i)=>({id:`product-${i}`,name:`Product ${i+1}`,category:'Hair Care',image_url:'/missing.jpg'}));
+ await page.route('**/api/chat',route=>route.fulfill({json:{message:'Which product would you like to explore?',status:'clarify',product_options:options,selected_product_ids:[],sources:[],answer_mode:'verified_data_fallback'}}));
+ await page.goto('/');await page.getByRole('button',{name:'Open product assistant'}).click();
+ const panel=page.getByRole('dialog',{name:'Bodywise product assistant'});await panel.getByRole('textbox',{name:'Your product question'}).fill('Show products');await panel.getByRole('button',{name:'Send message'}).click();
+ await expect(panel.getByText('Which product would you like to explore?')).toBeInViewport();await expect(panel.getByRole('button',{name:/Product 1/})).toBeInViewport();
+ const thread=panel.locator('.assistant-thread');const values=await thread.evaluate(el=>({top:el.scrollTop,max:el.scrollHeight-el.clientHeight}));expect(values.max-values.top).toBeGreaterThan(100);
 });

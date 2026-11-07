@@ -55,6 +55,7 @@ function direct(p:Product,topic:string,message:string):string|null{
 }
 export const PRODUCT_ASSISTANT_PROMPT = `You are the Be Bodywise product information assistant, helping customers with a warm, welcoming and knowledgeable tone.
 Answer the customer's question directly in simple, everyday language, with a warm and helpful tone; prioritise what the product is for and how it fits the customer's goal.
+Speak directly to the customer as a friendly product guide, not as a search engine or a report; describe relevant benefits, explain why they matter, and offer a natural next step without pressure or unsupported promises.
 For comparisons, explain each product's practical use and meaningful difference, and give a simple choice based on the supplied information; two short sentences are fine when needed.
 Keep ingredient names, percentages, and technical language out unless the customer specifically asks for them or they are needed to identify a product; explain any necessary jargon plainly.
 Give useful, concrete examples of the kinds of needs each product is designed for, based on the supplied descriptions and relevant ingredient context; explain differences in format or care goals when useful.
@@ -79,6 +80,7 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  const previous=(input.selected_product_ids??[]).map(id=>products.find(p=>p.id===id)).filter((x):x is Product=>!!x);
  const matches=searchProducts(message);const q=norm(message);const percentages=[...q.matchAll(/\b(\d{1,2})\s*%/g)].map(x=>x[1]);
  let selected:Product[]=[];const topic=input.pending_ingredient?'ingredients':intent(message);
+ if(!input.selection_confirmed&&!input.pending_ingredient&&!matches.length&&topic==='purpose'&&!/\b(product|products|what|which|help|tell|explain|about|it|this|that|use|does|do|works|work|benefit|benefits|for|other|another|else|all)\b/.test(q))return response('Could you tell me a little more about what you’re looking for, or share the product name? I’d love to help.','clarify',previous);
  if(!input.selection_confirmed && /^(tell me about an? ingredient|ingredients?|tell me about ingredients|i want to know about an? ingredient)$/.test(q))
   return {...response('Of course! Which ingredient or product would you like to explore?','clarify',previous),pending_ingredient:true};
  if(!input.selection_confirmed && (input.pending_ingredient || ingredientGuide.some(item=>item.aliases.includes(q)) || (topic==='ingredients'&&!/\b(product|wash|lotion|serum|roll\s*on|cream|shampoo)\b/.test(q)&&!percentages.length))){
@@ -138,8 +140,14 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  let fact=comparison?selected.map(p=>({name:p.name,purpose:comparisonPurpose(p),brand_description:descriptions[p.id]??null,application_area:p.usage_fields.application_area??null,conflict_note:p.demo_assumption,format:/gumm/i.test(p.name)?'gummy':/shampoo/i.test(p.name)?'shampoo':/roll[\s-]*on/i.test(p.name)?'roll-on':/serum/i.test(p.name)?'serum':null})):direct(selected[0],topic,message);
  if(!comparison&&!fact&&topic==='usage'&&/how much|amount/.test(q)&&/roll[\s-]*on/i.test(selected[0].name)&&selected[0].usage_fields.steps)fact=selected[0].usage_fields.steps;
  if(!fact)return response(unavailableText(topic),'no_information',selected);
- const fallback=comparison?selected.map(p=>`${p.name}: ${comparisonPurpose(p)??'I don’t have a clear intended use for this product yet.'}`).join(' ')+ ' What would you most like help with?':`${selected[0].name}: ${(fact as string).replace(/\.\s+(?=[A-Z])/g,'; ').replace(/[.!?]+$/,'')}`;
- if(!fetchAI||!env.GEMINI_API_KEY||!env.GEMINI_MODEL)return response(comparison?fallback:`${fallback}; feel free to ask another question.`,comparison?'answered':'unavailable',selected);
+ let fallback:string;
+ if(comparison)fallback=selected.map(p=>`${p.name}: ${comparisonPurpose(p)??'Tell me what you are looking for and I can help you explore this product.'}`).join(' ')+' What would you most like help with?';
+ else if(topic==='purpose'&&/^for\b/i.test((fact as string).trim())){
+  const purpose=(fact as string).trim().replace(/^for\s*:?\s*/i,'').replace(/\s*[|].*$/,'').replace(/[.!?]+$/,'').replace(/\s*&\s*/g,' and ').toLowerCase();
+  const highlights=selected[0].ingredients?.split(',').slice(0,2).map(s=>s.trim()).filter(Boolean).join(' and ');
+  fallback=`The ${selected[0].name} is designed for ${purpose}.${highlights?` It highlights ingredients like ${highlights}.`:''} Would you like to know how to use it?`;
+ }else fallback=`For ${selected[0].name}, ${(fact as string).replace(/\.\s+(?=[A-Z])/g,'; ').replace(/[.!?]+$/,'')}. Would you like to know more?`;
+ if(!fetchAI||!env.GEMINI_API_KEY||!env.GEMINI_MODEL)return response(fallback,comparison?'answered':'unavailable',selected);
  try{
   const ai=new GoogleGenAI({apiKey:env.GEMINI_API_KEY});
   for(const maxOutputTokens of [2048,4096]){
@@ -155,7 +163,7 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
   }
   console.warn('Product assistant: no complete provider answer');
  }catch(error){const e=error as {name?:string;status?:number};console.warn('Product assistant: provider request failed', {name:e?.name??'Error',status:typeof e?.status==='number'?e.status:undefined});}
- return response(comparison?fallback:`Here’s the product information I found: ${fallback}; feel free to ask another question.`,'unavailable',selected);
+ return response(fallback,'unavailable',selected);
 }
 export async function chatRoute(request:Request,env:{GEMINI_API_KEY?:string;GEMINI_MODEL?:string}){try{if(Number(request.headers.get('content-length'))>8192)return Response.json({error:'Request too large'},{status:413});const raw=await request.text();if(raw.length>8192)return Response.json({error:'Request too large'},{status:413});const data=JSON.parse(raw) as ChatRequest;if(typeof data.message!=='string'||!data.message.trim()||data.message.length>1000||!Array.isArray(data.selected_product_ids??[])||(data.selected_product_ids??[]).length>4||(data.selected_product_ids??[]).some(id=>typeof id!=='string'||!products.some(p=>p.id===id)))return Response.json({error:'Invalid request'},{status:400});return Response.json(await answerChat(data,env),{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'Invalid request'},{status:400});}}
 export function productSearch(query:string){return searchProducts(query.slice(0,120)).slice(0,8).map(option);}
