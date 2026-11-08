@@ -42,3 +42,5 @@
 .assistant-compose button:disabled{cursor:default}
 .assistant-loading{margin:12px 4px;padding:10px 14px;width:max-content;border-radius:14px;background:#e8f4fa;color:#315e77}
 @media(max-width:600px){.assistant-panel{width:calc(100vw - 16px);height:calc(100dvh - 16px);border-radius:18px}.assistant-thread{padding:15px}.assistant-message{max-width:96%}.assistant-compose{padding-bottom:max(12px,env(safe-area-inset-bottom))}}
+
+.assistant-expert-card{display:flex;align-items:center;gap:12px;margin-top:10px;padding:14px;border:1px solid #badce9;border-radius:14px;background:#eaf6fc;color:#064d7d;text-decoration:none}.assistant-expert-card:hover{background:#dceff8}.assistant-expert-card:focus-visible{outline:3px solid #00528e;outline-offset:2px}.assistant-expert-card>span:nth-child(2){flex:1}.assistant-expert-card strong,.assistant-expert-card small{display:block}.assistant-expert-card small{margin-top:4px;color:#486779;line-height:1.35}.assistant-expert-icon{display:grid;place-items:center;width:38px;height:38px;flex:none;border-radius:50%;background:#00528e;color:white;font-size:20px}
