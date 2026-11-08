@@ -1,12 +1,18 @@
 import { GoogleGenAI } from '@google/genai';
 import productData from './data/chatProducts.json';
 import productDescriptions from './data/productDescriptions.json';
+import answerData from './data/preparedAnswers.json';
 
 type Product={id:string;name:string;category:string;source_url:string;image_url:string;purpose:string|null;ingredients:string|null;usage:string|null;timeline:string|null;warnings:string|null;usage_fields:Record<string,string|undefined>;timeline_fields:Record<string,string|undefined>;warning_fields:Record<string,string|undefined>;full_ingredients:string|null;review_fields:string[];demo_assumption:string|null;verification_status:string;last_verified_at:string;notes:string};
 const products=productData as Product[];
 const descriptions:Record<string,string>=productDescriptions;
-type ChatRequest={message:string;selected_product_ids?:string[];selection_confirmed?:boolean;previous_list?:'underarm_rollons'|'rollons';pending_ingredient?:boolean};
+type ChatRequest={message:string;selected_product_ids?:string[];selection_confirmed?:boolean;previous_list?:'underarm_rollons'|'rollons';pending_ingredient?:boolean;follow_up?:'usage'|'timeline'};
 type Source={title:string;url:string};
+type PreparedAnswer={id:string;type:string;products:string[];answer:string;sources:string[];status:string;ingredient?:string};
+const preparedAnswers=answerData.answers as PreparedAnswer[];
+const preparedById=new Map(preparedAnswers.map(a=>[a.id,a]));
+const preparedComparisons=new Map(preparedAnswers.filter(a=>a.type==='comparison').map(a=>[[...a.products].sort().join('|'),a]));
+const preparedIngredients=preparedAnswers.filter(a=>a.type==='ingredient'&&a.ingredient);
 const norm=(s:string)=>s.toLowerCase().replace(/[^a-z0-9%]+/g,' ').trim();
 const stop=new Set(['what','which','when','where','how','does','with','about','would','should','this','that','product','products','bodywise','have','from','your','please','tell','like','use','using','much','often','long','take','results','skin','care','the','for','and','are','you','can','its','between','difference']);
 const words=(s:string)=>norm(s).split(' ').filter(x=>x.length>2&&!stop.has(x));
@@ -44,6 +50,18 @@ const ingredientGuide=[
  {name:'glycerin',aliases:['glycerin','glycerine'],benefit:'helps smooth and soften skin',url:'https://www.aad.org/public/everyday-care/skin-care-secrets/routine/facial-masks-and-skin-care'}
 ];
 function response(message:string,status:'answered'|'clarify'|'no_information'|'unavailable',selected:Product[],opts:Product[]=[],mode:'ai'|'verified_data_fallback'='verified_data_fallback'){return {message,status,product_options:opts.map(option),selected_product_ids:selected.map(x=>x.id),sources:selected.map(source),answer_mode:mode};}
+function preparedResponse(answer:PreparedAnswer,selected:Product[],followUp?:'usage'|'timeline'){
+ const titles=new Map(products.map(p=>[p.source_url,p.name]));
+ return {...response(answer.answer,'answered',selected),sources:answer.sources.map(url=>({title:titles.get(url)??new URL(url).hostname,url})),answer_mode:'prepared_answer' as const,...(followUp?{follow_up:followUp}:{})};
+}
+function standardQuestion(q:string):'usage'|'timeline'|'ingredients'|'compare'|'overview'|null{
+ if(/^(how do i use (a product|the product|this product|it|this|that)|how to use (a product|the product|this product|it|this|that)|(?:yes )?how do i add it to my routine|how can i add it to my routine|how to add it to my routine)$/.test(q))return 'usage';
+ if(/^(when might i see (the )?results|when will i see (the )?results|when can i see (the )?results|when might i see a difference|when will i see a difference)$/.test(q))return 'timeline';
+ if(/^(tell me about an ingredient|tell me about (the )?ingredients|what are the ingredients|what ingredients does it contain)$/.test(q))return 'ingredients';
+ if(/^(compare two products|compare these products|compare them|compare these|compare the two)$/.test(q))return 'compare';
+ if(/^(tell me about it|what is it for|what does it do|tell me about this product)$/.test(q))return 'overview';
+ return null;
+}
 function intent(message:string){const q=norm(message);if(/diagnos|pregnan|breastfeed|safe for me|suitable for me|skin condition|prescrib|medicin|mix with|combine with|irritation|allerg/.test(q))return 'medical';if(/compare|difference|versus|\bvs\b/.test(q))return 'compare';if(/how long|timeline|when.*result|months|weeks|see results|time.*work/.test(q))return 'timeline';if(/warn|precaution|patch test|restrictions|fragrance|perfume|silicone|sulfate/.test(q))return 'warnings';if(/ingredient|what.*contain|percentage|salicylic|niacinamide/.test(q)&&!/how.*use|how.*apply|how often|how much|how many|rinse|wash off|frequency/.test(q))return 'ingredients';if(/how.*use|how.*apply|how often|how much|how many|pumps|drops|rinse|morning|night|frequency|wash off/.test(q))return 'usage';return 'purpose';}
 function direct(p:Product,topic:string,message:string):string|null{
  const q=norm(message);
@@ -80,7 +98,16 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  const previous=(input.selected_product_ids??[]).map(id=>products.find(p=>p.id===id)).filter((x):x is Product=>!!x);
  const matches=searchProducts(message);const q=norm(message);const percentages=[...q.matchAll(/\b(\d{1,2})\s*%/g)].map(x=>x[1]);
  let selected:Product[]=[];const topic=input.pending_ingredient?'ingredients':intent(message);
- if(!input.selection_confirmed&&!input.pending_ingredient&&!matches.length&&topic==='purpose'&&!/\b(product|products|what|which|help|tell|explain|about|it|this|that|use|does|do|works|work|benefit|benefits|for|other|another|else|all)\b/.test(q))return response('Could you tell me a little more about what you’re looking for, or share the product name? I’d love to help.','clarify',previous);
+ const preset=standardQuestion(q)??(!input.selection_confirmed&&input.follow_up&&/^(yes|yes please|sure|please|okay|ok|yeah|yep)$/.test(q)?input.follow_up:null);
+ if(!input.selection_confirmed){
+  const namedIngredient=preparedIngredients.find(a=>{const name=norm(a.ingredient??'');return name&&(q===name||q===`tell me about ${name}`||q===`what is ${name}`||q===`what does ${name} do`);});
+  if(namedIngredient){
+   const related=namedIngredient.products.map(id=>products.find(p=>p.id===id)).filter((p):p is Product=>!!p);
+   return {...preparedResponse(namedIngredient,[]),product_options:related.slice(0,8).map(option)};
+  }
+  if(input.pending_ingredient){const product=products.find(p=>norm(p.name)===q);const answer=product&&preparedById.get(`ingredients:${product.id}`);if(product&&answer)return preparedResponse(answer,[product],'usage');}
+ }
+ if(!input.selection_confirmed&&!input.pending_ingredient&&!preset&&!matches.length&&topic==='purpose'&&!/\b(product|products|what|which|help|tell|explain|about|it|this|that|use|does|do|works|work|benefit|benefits|for|other|another|else|all)\b/.test(q))return response('Could you tell me a little more about what you’re looking for, or share the product name? I’d love to help.','clarify',previous);
  if(!input.selection_confirmed && /^(tell me about an? ingredient|ingredients?|tell me about ingredients|i want to know about an? ingredient)$/.test(q))
   return {...response('Of course! Which ingredient or product would you like to explore?','clarify',previous),pending_ingredient:true};
  if(!input.selection_confirmed && (input.pending_ingredient || ingredientGuide.some(item=>item.aliases.includes(q)) || (topic==='ingredients'&&!/\b(product|wash|lotion|serum|roll\s*on|cream|shampoo)\b/.test(q)&&!percentages.length))){
@@ -115,7 +142,9 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  }
  if(input.selection_confirmed && topic==='compare' && previous.length===1){const options=comparisonOptions(previous[0]);return response(options.length?`Choose a second product from these related ${comparisonGroup(previous[0])} options.`:'I couldn’t find a related comparison in the current catalogue; you can name another product to compare.','clarify',previous,options.slice(0,8));}
  if(input.selection_confirmed && previous.length)selected=previous;
+ else if(preset&&input.follow_up&&previous.length===1)selected=previous;
  else if(topic==='compare'&&percentages.length>=2){selected=percentages.map(n=>matches.find(p=>norm(p.name).includes(n+'%'))).filter((p):p is Product=>!!p);if(selected.length!==percentages.length)return response('I couldn’t find both exact variants. Please choose the products you want to compare.','clarify',[],matches.slice(0,6));}
+ else if(topic==='compare'&&previous.length===2)selected=previous;
  else if(matches.length && percentages.length===1)selected=[matches[0]];
  else if(matches.length&&norm(message).includes(norm(matches[0].name)))selected=[matches[0]];
  else if(previous.length && (/\b(it|its|this|that|these|those)\b/.test(q)||matches.length===0)){if(previous.length>1)return response('Which product do you mean?','clarify',[],previous);selected=previous;}
@@ -125,6 +154,12 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  else if(previous.length>1)return response('Which product do you mean?','clarify',[],previous);
  else if(/ingredient|salicylic|niacinamide/.test(q))return response('I don’t have a verified general ingredient reference yet. Choose a product to see its documented ingredients.','no_information',[]);
  else return response('Which product would you like to know about?','clarify',[],products.slice(0,8));
+ if(selected.length===1 && (preset==='usage'||preset==='timeline'||preset==='ingredients'||preset==='overview')){
+  const answer=preparedById.get(`${preset}:${selected[0].id}`);
+  if(answer){const next=/would you like to know how to (?:add it to your routine|use it)/i.test(answer.answer)?'usage':undefined;return preparedResponse(answer,selected,next);}
+ }
+ if(selected.length===1&&input.pending_ingredient){const answer=preparedById.get(`ingredients:${selected[0].id}`);if(answer)return preparedResponse(answer,selected,'usage');}
+ if(selected.length===2&&topic==='compare'&&(preset==='compare'||/^compare (the )?\d+% and \d+% (underarm )?roll ons?$/.test(q))){const answer=preparedComparisons.get(selected.map(p=>p.id).sort().join('|'));if(answer)return preparedResponse(answer,selected);}
  if(selected.length===1 && ((input.selection_confirmed && /\b(other|another|alternatives?|else)\b/.test(q)) || (q===norm(selected[0].name)&&!input.pending_ingredient)))return response(`What would you like to know about ${selected[0].name}?`,'clarify',selected);
  if(selected.length===1 && selected[0].demo_assumption && ((topic==='warnings' && /fragrance|perfume|silicone|sulfate/.test(q)) || (topic==='usage' && /how much|how many|amount|pumps|how long.*wear/.test(q) && selected[0].review_fields.some(x=>x.startsWith('usage.'))) || (topic==='ingredients' && /percentage|concentration|rosemary|anagain|copper/.test(q) && selected[0].review_fields.some(x=>x.startsWith('ingredients.'))))){
   if(topic==='warnings')return response('The product description and ingredient list conflict on that claim, so please check the packaging before choosing.','no_information',selected);
@@ -165,5 +200,5 @@ export async function answerChat(input:ChatRequest,env:{GEMINI_API_KEY?:string;G
  }catch(error){const e=error as {name?:string;status?:number};console.warn('Product assistant: provider request failed', {name:e?.name??'Error',status:typeof e?.status==='number'?e.status:undefined});}
  return response(fallback,'unavailable',selected);
 }
-export async function chatRoute(request:Request,env:{GEMINI_API_KEY?:string;GEMINI_MODEL?:string}){try{if(Number(request.headers.get('content-length'))>8192)return Response.json({error:'Request too large'},{status:413});const raw=await request.text();if(raw.length>8192)return Response.json({error:'Request too large'},{status:413});const data=JSON.parse(raw) as ChatRequest;if(typeof data.message!=='string'||!data.message.trim()||data.message.length>1000||!Array.isArray(data.selected_product_ids??[])||(data.selected_product_ids??[]).length>4||(data.selected_product_ids??[]).some(id=>typeof id!=='string'||!products.some(p=>p.id===id)))return Response.json({error:'Invalid request'},{status:400});return Response.json(await answerChat(data,env),{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'Invalid request'},{status:400});}}
+export async function chatRoute(request:Request,env:{GEMINI_API_KEY?:string;GEMINI_MODEL?:string}){try{if(Number(request.headers.get('content-length'))>8192)return Response.json({error:'Request too large'},{status:413});const raw=await request.text();if(raw.length>8192)return Response.json({error:'Request too large'},{status:413});const data=JSON.parse(raw) as ChatRequest;if(typeof data.message!=='string'||!data.message.trim()||data.message.length>1000||!Array.isArray(data.selected_product_ids??[])||(data.selected_product_ids??[]).length>4||(data.selected_product_ids??[]).some(id=>typeof id!=='string'||!products.some(p=>p.id===id))||(data.follow_up!==undefined&&!['usage','timeline'].includes(data.follow_up))||(data.pending_ingredient!==undefined&&typeof data.pending_ingredient!=='boolean')||(data.selection_confirmed!==undefined&&typeof data.selection_confirmed!=='boolean'))return Response.json({error:'Invalid request'},{status:400});return Response.json(await answerChat(data,env),{headers:{'Cache-Control':'no-store'}});}catch{return Response.json({error:'Invalid request'},{status:400});}}
 export function productSearch(query:string){return searchProducts(query.slice(0,120)).slice(0,8).map(option);}

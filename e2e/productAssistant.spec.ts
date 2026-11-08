@@ -28,3 +28,16 @@ test('opens long product lists at their beginning on mobile',async({page})=>{
  await expect(panel.getByText('Which product would you like to explore?')).toBeInViewport();await expect(panel.getByRole('button',{name:/Product 1/})).toBeInViewport();
  const thread=panel.locator('.assistant-thread');const values=await thread.evaluate(el=>({top:el.scrollTop,max:el.scrollHeight-el.clientHeight}));expect(values.max-values.top).toBeGreaterThan(100);
 });
+
+
+test('uses the prepared ingredient answer and follows up with its stored routine',async({page})=>{
+ await page.setViewportSize({width:390,height:844});await page.goto('/');await page.getByRole('button',{name:'Open product assistant'}).click();
+ const panel=page.getByRole('dialog',{name:'Bodywise product assistant'});
+ await panel.getByRole('button',{name:'Tell me about an ingredient.'}).click();
+ await panel.getByRole('textbox',{name:'Your product question'}).fill('4% AHA BHA Underarm Roll On - Fragrance Free - 75 ml');
+ await panel.getByRole('button',{name:'Send message'}).click();
+ await expect(panel.getByText('Key ingredients and how they help')).toBeVisible();
+ await expect(panel.getByText('Alpha Arbutin',{exact:true})).toBeVisible();
+ await panel.getByRole('textbox',{name:'Your product question'}).fill('yes please');await panel.getByRole('button',{name:'Send message'}).click();
+ await expect(panel.getByText(/roll evenly/i)).toBeVisible();
+});

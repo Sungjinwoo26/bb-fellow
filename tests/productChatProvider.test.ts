@@ -24,12 +24,12 @@ describe('Gemini response handling', () => {
  });
  it('sends both product use cases to Gemini for a plain-language comparison', async () => {
   generateContent.mockResolvedValue({ text: 'Choose the first for mild pigmentation or the second for a more exfoliating option.', candidates: [{ finishReason: 'STOP' }] });
-  const result = await answerChat({message:'Compare two products',selected_product_ids:['4-aha-bha-underarm-rollon-frag-free-75','6-aha-bha-underarm-roll-on-flora-75ml'],selection_confirmed:true},env);
+  const result = await answerChat({message:'Compare these products for odour',selected_product_ids:['4-aha-bha-underarm-rollon-frag-free-75','6-aha-bha-underarm-roll-on-flora-75ml'],selection_confirmed:true},env);
   expect(result.answer_mode).toBe('ai');const sent=JSON.parse(generateContent.mock.calls[0][0].contents);expect(sent.products).toHaveLength(2);expect(sent.products[0].purpose).toMatch(/mild pigmentation/i);expect(sent.products[1].purpose).toMatch(/stubborn pigmentation/i);expect(sent.products[0]).not.toHaveProperty('ingredients');
  });
  it('does not return an unconfirmed fragrance claim in a comparison',async()=>{
   generateContent.mockResolvedValue({text:'The first is fragrance-free and the second has a floral scent.',candidates:[{finishReason:'STOP'}]});
-  const result=await answerChat({message:'Compare two products',selected_product_ids:['4-aha-bha-underarm-rollon-frag-free-75','6-aha-bha-underarm-roll-on-flora-75ml'],selection_confirmed:true},env);
+  const result=await answerChat({message:'Compare these products for odour',selected_product_ids:['4-aha-bha-underarm-rollon-frag-free-75','6-aha-bha-underarm-roll-on-flora-75ml'],selection_confirmed:true},env);
   expect(result.answer_mode).toBe('verified_data_fallback');expect(result.message).not.toMatch(/floral scent/i);expect(result.message).toMatch(/mild pigmentation/i);
  });
 });
