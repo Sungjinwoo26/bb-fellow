@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS chat_conversation_turns (
  answer_mode TEXT NOT NULL,
  cache_status TEXT,
  status TEXT NOT NULL,
+ request_id TEXT,
  PRIMARY KEY(conversation_id, turn_index)
 );
 CREATE INDEX IF NOT EXISTS chat_conversation_turns_created_at ON chat_conversation_turns(created_at);
+CREATE INDEX IF NOT EXISTS chat_conversation_turns_request_id ON chat_conversation_turns(request_id);

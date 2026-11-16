@@ -15,4 +15,9 @@ describe('chat review storage',()=>{
  it('records provider-unavailable replies in a conversation even though legacy review excludes them',async()=>{
   const run=vi.fn().mockResolvedValue({});const bind=vi.fn(()=>({run}));const db={prepare:vi.fn(()=>({bind}))};await saveChatReview(db,{conversation_id:'11111111-1111-4111-8111-111111111111',turn_index:3,message:'Next?'},{message:'Please try again.',status:'unavailable',answer_mode:'ai'});expect(db.prepare).toHaveBeenCalledOnce();expect(db.prepare.mock.calls[0][0]).toContain('chat_conversation_turns');
  });
+ it('stores the server request ID with the conversation turn',async()=>{
+  const run=vi.fn().mockResolvedValue({});const bind=vi.fn(()=>({run}));const db={prepare:vi.fn(()=>({bind}))};
+  await saveChatReview(db,{conversation_id:'11111111-1111-4111-8111-111111111111',turn_index:1,message:'A product question'},{message:'Please retry',status:'unavailable'},'22222222-2222-4222-8222-222222222222');
+  expect(db.prepare.mock.calls[0][0]).toContain('request_id');expect(bind.mock.calls[0].at(-1)).toBe('22222222-2222-4222-8222-222222222222');
+ });
 });

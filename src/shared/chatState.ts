@@ -7,6 +7,7 @@ export const chatStateSchema=z.object({
  concerns:z.array(short).max(12), areas:z.array(short).max(8), excluded_ingredients:z.array(short).max(12).default([]), requested_product_type:short.nullable(), skin_hair_type:short.nullable(),
  observed_concerns:z.array(short).max(20).optional(),
  pending_concern:z.object({message:short,concerns:z.array(short).max(12),hair_concerns:z.array(hairConcernSchema).max(6),body_areas:z.array(short).max(8),excluded_ingredients:z.array(short).max(12)}).strict().optional(),
+ pending_question:z.object({message:short,product_ids:z.array(short).max(4)}).strict().optional(),
  answered_questions:z.array(z.object({question:short,answer:short})).max(20), asked_questions:z.array(short).max(20), remaining_questions:z.number().int().min(0).max(3),
  pregnancy_context:z.enum(['pregnant','postpartum','breastfeeding']).nullable(),
  hair_context:z.object({observed:z.array(hairConcernSchema).max(6),focus:hairConcernSchema.nullable(),flakes:z.enum(['yes','no','unknown']).nullable()}).optional()

@@ -11,7 +11,9 @@ const policies:Record<string,Policy>={
  dry:{question:'Where would you like help with dryness?',choices:['Body skin','Rough or cracked heels','Not sure'],patterns:[/dry skin|dryness/i,/cracked.*heels|rough.*heels/i,/dry skin|dryness/i],area:'body'},
  bodycare:{question:'What would you like help with for your body skin?',choices:['Dry body skin','Rough or cracked heels','Stretch marks','Everyday cleansing','Not sure'],patterns:[/dry skin|dryness/i,/cracked.*heels|rough.*heels/i,/stretch mark/i,/body wash.*dry|body wash.*hydrat/i,/$a/],area:'body'},
 };
-export function bodyPolicy(message:string,turn:ChatTurn,historyQuestion:string):{category:string;choice:number|null;followup?:boolean}|null{
+export function bodyPolicy(message:string,turn:ChatTurn,historyQuestion:string):{category:string;choice:number|null;followup?:boolean;format_override?:string}|null{
+ if(historyQuestion==='Would you like to see heel roll-ons instead?'&&/^(?:yes|yes please|show heel roll-ons)$/i.test(message.trim()))return {category:'dry',choice:1,followup:true,format_override:'roll on'};
+ if(historyQuestion==='Would you like to see heel roll-ons instead?'&&/^(?:no|no thanks)$/i.test(message.trim()))return {category:'heel_alternative_declined',choice:null,followup:true};
  if(historyQuestion===policies.acne.question&&/^(?:(?:on|around)\s+)?(?:my\s+)?(?:back|chest|shoulders|arms|legs)[.!]?$/i.test(message.trim()))return {category:'acne',choice:null,followup:true};
  if(historyQuestion==='Are the marks left by breakouts, or are you noticing uneven skin tone?' ){
   if(/^marks after breakouts$/i.test(message.trim()))return {category:'acne',choice:1,followup:true};
@@ -40,6 +42,7 @@ export function bodyPolicy(message:string,turn:ChatTurn,historyQuestion:string):
  return null;
 }
 export function bodyDecision(category:string,choice:number|null,state:ChatState,turn:ChatTurn){
+ if(category==='heel_alternative_declined')return {products:[],question:null,choices:[],area:'body',reason:'alternative_declined'};
  if(category==='marks')return {products:[],question:'Are the marks left by breakouts, or are you noticing uneven skin tone?',choices:['Marks after breakouts','Uneven skin tone','Not sure'],area:'body',reason:'marks_type_needed'};
  if(category==='marks_unknown')return {products:[],question:'Could you describe what the marks look like?',choices:[],area:'body',reason:'marks_detail_needed'};
  const policy=policies[category];if(!policy)return null;
@@ -51,6 +54,7 @@ export function bodyDecision(category:string,choice:number|null,state:ChatState,
  const find=(pattern:RegExp)=>distinctProductSizes(candidates.filter(p=>pattern.test(`${p.name} ${p.purpose}`))).filter(p=>!state.requested_product_type||matchesProductFormat(p,state.requested_product_type)).slice(0,2);
  const acneMix=()=>[...new Map([find(policy.patterns[0])[0],find(policy.patterns[1])[0]].filter((p):p is NonNullable<typeof p>=>!!p).map(p=>[p.id,p])).values()];
  const products=category==='acne'&&(choice===null||choice===2||choice===3)?acneMix():choice===null?(category==='bodycare'?[]:find(category==='pigmentation'?policy.patterns[1]:category==='strawberry'||category==='odour'?policy.patterns[0]:new RegExp(policy.patterns.map(p=>p.source).join('|'),'i'))):find(policy.patterns[choice]);
+ if(category==='dry'&&choice===1&&state.requested_product_type==='cream'&&!products.length){const alternatives=selectProducts('body',{...stateForSearch,requested_product_type:'roll on'}).eligible;const available=distinctProductSizes(alternatives.filter(p=>!!p.purpose&&!p.review_fields.some(f=>f==='purpose'||f.startsWith('purpose.'))&&!/\b(?:severe|kit|pack|bundle)\b/i.test(`${p.name} ${p.purpose}`)&&policy.patterns[1].test(`${p.name} ${p.purpose}`)&&matchesProductFormat(p,'roll on')));if(available.length)return {products:[],question:'I couldn’t confirm a heel cream. Would you like to see heel roll-ons instead?',choices:['Yes','No'],area:'body',reason:'alternative_format_available'};}
  const outcomes=policy.patterns.map(pattern=>find(pattern).map(p=>p.id).sort().join('|'));
  const ask=choice===null&&category!=='odour'&&new Set(outcomes).size>1;
  return {products,question:ask?policy.question:null,choices:ask?policy.choices:[],area:areas[0],reason:products.length?'catalogue_match':'no_supported_match'};
