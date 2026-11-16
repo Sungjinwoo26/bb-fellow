@@ -968,7 +968,23 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   }
   if(referenced.length>1&&!cheaper){const result=response('Which product would you like the price for?','clarify',[],referenced.slice(0,8));const updated=advanceState(state,input.message,input.history??[],[],result,products,interpreted??undefined);return {...result,product_cards:[],conversation_state:updated.state};}
  }
- if(!interpreted){aiEvent(env,'chat_response','interpretation_unavailable',answerStarted,1);return retry();}
+ if(!interpreted){
+  // If interpretation is unavailable, only handle a narrow, explicit search
+  // using the existing catalogue filters; never infer a diagnosis or dosage.
+  if(/\b(?:dandruff|dandruf|flakes)\b/i.test(input.message)&&/\b(?:shampoo|shamppo|shampu|shampoo)\b/i.test(input.message)&&!/\b(?:pregnan\w*|breast.?feed\w*|allerg\w*|rash|irritat\w*|pain\w*|bleed\w*|severe|how|often|ingredient|compare|safe|suitable|use|apply)\b/i.test(input.message)){
+   const safeState={...state,areas:['hair'],requested_product_type:'shampoo'};
+   const chosen=selectProducts(input.message,safeState).eligible.find(p=>/\bshampoo\b/i.test(p.name)&&/\bdandruff\b/i.test(p.purpose??'')&&!p.review_fields.some(f=>f==='purpose'||f.startsWith('purpose.')));
+   if(chosen){const result={...response(deterministicRecommendations([chosen]),'answered',[chosen]),recommendations:[option(chosen)],answer_mode:'verified_data_fallback' as const};const updated=advanceState(safeState,input.message,input.history??[],[chosen.id],result,products);aiEvent(env,'chat_response','catalogue_search_after_interpreter_failure',answerStarted,1);return {...result,product_cards:cardsFor([chosen]),conversation_state:updated.state};}
+  }
+  aiEvent(env,'chat_response','interpretation_unavailable',answerStarted,1);return retry();
+ }
+ const textureQuestion='Where are you noticing the bumps or texture?';
+ if((lastAssistant===textureQuestion||state.asked_questions.at(-1)===textureQuestion)&&/^(?:(?:on|around|over)\s+)?(?:my\s+)?(?:back|body|chest|legs?|arms?|face|both)[.!]?$/i.test(input.message.trim())){
+  const area=/\bface\b/i.test(input.message)?'face':/\bboth\b/i.test(input.message)?null:'body';
+  const result={...response('Are you noticing individual spots, marks, or rough bumps?','clarify',[]),choices:['Individual spots','Marks','Rough bumps','Not sure']};
+  const turn={...interpreted,action:'answer_follow_up' as const,reference_scope:'none' as const,referenced_products:[],body_areas:area?[area]:['face','body']};
+  const updated=advanceState(state,input.message,input.history??[],[],result,products,turn);return {...result,product_cards:[],conversation_state:{...updated.state,active_product_ids:[]},interpretation:turn,answer_mode:'verified_data_fallback' as const};
+ }
  if(state.areas.includes('body')&&/\b(?:marks?|scars?)\b/i.test(input.message)&&/\b(?:no active|leftover|after (?:acne|pimples?|breakouts?))\b/i.test(input.message)&&/\b(?:one|1|single)\s+product\b/i.test(input.message)&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|bleed\w*|severe)\b/i.test(input.message)){
   const chosen=selectProducts('body acne marks',{...state,areas:['body'],requested_product_type:null}).eligible.find(p=>p.id==='niacinamide-body-lotion'&&/acne marks/i.test(p.purpose??''));
   if(chosen){const result={...response(deterministicRecommendations([chosen]),'answered',[chosen]),recommendations:[option(chosen)],answer_mode:'verified_data_fallback' as const};const next={...interpreted,action:'find_product' as const,reference_scope:'none' as const,referenced_products:[],body_areas:['body']};const updated=advanceState(state,input.message,input.history??[],[chosen.id],result,products,next);return {...result,product_cards:cardsFor([chosen]),conversation_state:updated.state};}
@@ -1066,6 +1082,7 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   return {...result,product_cards:[],conversation_state:updated.state,interpretation:interpreted,answer_mode:'ai' as const};
  }
  const base=usageYes&&selectedUsage.length===1?await answerChatBase({...input,message:'How do I use this product?',input_source:'typed',selected_product_ids:selectedUsage,follow_up:undefined},env,false,{...interpreted,action:'product_question',reference_scope:'active_product',referenced_products:selectedUsage,intents:['usage']}):await answerChatBase({...input,message:expandedMessage,input_source:'typed'},env,false,interpreted);
+ if(base.status==='unavailable'){aiEvent(env,'chat_response','base_answer_unavailable',answerStarted,1);return retry();}
  console.info('chat_route_decision',{action:interpreted.action,status:base.status,product_count:base.selected_product_ids.length,reason:base.status==='clarify'?'needs_clarification':base.status==='no_information'?'catalogue_information_missing':base.selected_product_ids.length?'catalogue_selection':'no_product_selected'});
  let written:string|null=null;let omitUnexplainedSuggestions=false;
  if(base.status==='clarify'&&base.message.includes('I couldn’t confirm a heel cream. Would you like to see heel roll-ons instead?'))written=base.message;
@@ -1077,7 +1094,7 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   if(phrased&&suggested.length){const details=await groundedAnswer(input.message,suggested,['purpose'],env,{concerns:interpreted.concerns,body_areas:interpreted.body_areas,excluded_ingredients:state.excluded_ingredients??[],skin_hair_type:state.skin_hair_type,recent_messages:(input.history??[]).slice(-4).map(x=>({role:x.role,text:x.text.slice(0,400)}))});written=details?`${details}\n\n${phrased}`:phrased;omitUnexplainedSuggestions=!details;}
   else written=phrased;
  }
- else if(base.status==='no_information'||base.status==='unavailable'||base.selected_product_ids.length===0||input.follow_up==='routine')written=await writeV1Reference(input.message,base.message,'reference',env);
+ else if(base.status==='no_information'||base.selected_product_ids.length===0||input.follow_up==='routine')written=await writeV1Reference(input.message,base.message,'reference',env);
  else {
   const focusedThinning=/\b(?:only|just)\b/i.test(input.message)&&/\b(?:thinn?ing|hair\s*(?:fall|loss))\b/i.test(input.message)&&base.selected_product_ids.length>0;
   const intents=usageYes?['usage']:focusedThinning?['purpose']:[...new Set([...interpreted.intents,...(('interpretation' in base && base.interpretation?.intents) || [])])].filter(x=>['purpose','usage','ingredients','timeline','price','comparison'].includes(x));
