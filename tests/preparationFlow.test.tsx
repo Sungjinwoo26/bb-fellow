@@ -13,21 +13,33 @@ beforeEach(()=>{vi.useFakeTimers();vi.setSystemTime(new Date('2026-01-01'));prop
 afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();});
 async function tick(ms:number){await act(async()=>{await vi.advanceTimersByTimeAsync(ms);});}
 describe('preparation request and timer',()=>{
- it('starts one request under Strict Mode, waits 30 seconds, and accepts an empty result',async()=>{
+ it('starts one request under Strict Mode, waits 15 seconds, and accepts an empty result',async()=>{
   const fetcher=vi.fn(async()=>new Response(JSON.stringify(result),{status:200}));vi.stubGlobal('fetch',fetcher);
-  render(<StrictMode><PreparationScreen {...props}/></StrictMode>);expect(screen.getByText('00:30')).toBeTruthy();await tick(1);expect(fetcher).toHaveBeenCalledTimes(1);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);
-  await tick(29998);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);await tick(1);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(false);
+  render(<StrictMode><PreparationScreen {...props}/></StrictMode>);expect(screen.getByText('00:15')).toBeTruthy();await tick(1);expect(fetcher).toHaveBeenCalledTimes(1);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);
+  await tick(14998);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);await tick(1);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(false);
   fireEvent.click(screen.getByRole('button',{name:'See my personalised kit'}));expect(screen.getByText('No sample products matched')).toBeTruthy();
  });
+ it('returns from the kit to the report without a timer and opens the kit again immediately',async()=>{
+  vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify(result),{status:200})));
+  render(<PreparationScreen {...props}/>);await tick(15000);
+  fireEvent.click(screen.getByRole('button',{name:'See my personalised kit'}));
+  fireEvent.click(screen.getByRole('button',{name:'View my report'}));
+  expect(screen.getByRole('heading',{name:'Your personalised report'})).toBeTruthy();
+  expect(screen.queryByText('Preparation time remaining')).toBeNull();
+  expect(screen.queryByRole('progressbar',{name:'Preparation progress'})).toBeNull();
+  const button=screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement;
+  expect(button.disabled).toBe(false);fireEvent.click(button);
+  expect(screen.getByText('No sample products matched')).toBeTruthy();
+ });
  it('waits for a slow response after the timer and ignores late results after unmount',async()=>{
-  let resolve!:(v:Response)=>void;vi.stubGlobal('fetch',vi.fn(()=>new Promise<Response>(r=>{resolve=r;})));const view=render(<PreparationScreen {...props}/>);await tick(30001);expect(screen.getByText('Your sample kit is taking a little longer.')).toBeTruthy();expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);view.unmount();await act(async()=>resolve(new Response(JSON.stringify(result),{status:200})));expect(props.onSave.mock.calls.filter(x=>x[0].recommendation).length).toBe(0);
+  let resolve!:(v:Response)=>void;vi.stubGlobal('fetch',vi.fn(()=>new Promise<Response>(r=>{resolve=r;})));const view=render(<PreparationScreen {...props}/>);await tick(30001);expect(screen.getByText('Your kit is taking a little longer.')).toBeTruthy();expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);view.unmount();await act(async()=>resolve(new Response(JSON.stringify(result),{status:200})));expect(props.onSave.mock.calls.filter(x=>x[0].recommendation).length).toBe(0);
  });
  it('allows retry after failure without resetting elapsed time',async()=>{
   const fetcher=vi.fn().mockResolvedValueOnce(new Response('',{status:503})).mockResolvedValueOnce(new Response(JSON.stringify(result),{status:200}));vi.stubGlobal('fetch',fetcher);render(<PreparationScreen {...props}/>);await tick(30000);expect(screen.getAllByText('We couldn’t prepare your sample kit.').length).toBeGreaterThan(0);fireEvent.click(screen.getByRole('button',{name:'Retry'}));await tick(1);expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(false);expect(screen.getByText('00:00')).toBeTruthy();
  });
  it('reuses a saved successful result after checking catalogue and rule versions',async()=>{
   const fetcher=vi.fn(async()=>new Response(JSON.stringify({catalogueVersion:'v1',rulesVersion:'v1'}),{status:200}));vi.stubGlobal('fetch',fetcher);
-  const startedAt=Date.now()-12000;const saved={startedAt,inputFingerprint:fingerprint(request),recommendation:result as never,containsPhotoChoices:false};render(<PreparationScreen {...props} preparation={saved}/>);await tick(1);expect(fetcher).toHaveBeenCalledTimes(1);expect(String(fetcher.mock.calls[0]?.[0])).toBe('/api/recommendations/version');expect(screen.getByText('00:18')).toBeTruthy();expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);
+  const startedAt=Date.now()-12000;const saved={startedAt,inputFingerprint:fingerprint(request),recommendation:result as never,containsPhotoChoices:false};render(<PreparationScreen {...props} preparation={saved}/>);await tick(1);expect(fetcher).toHaveBeenCalledTimes(1);expect(String(fetcher.mock.calls[0]?.[0])).toBe('/api/recommendations/version');expect(screen.getByText('00:03')).toBeTruthy();expect((screen.getByRole('button',{name:'See my personalised kit'}) as HTMLButtonElement).disabled).toBe(true);
  });
  it('requests a fresh result when saved catalogue versions change without restarting the timer',async()=>{
   const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify({catalogueVersion:'v2',rulesVersion:'v1'}),{status:200})).mockResolvedValueOnce(new Response(JSON.stringify(result),{status:200}));vi.stubGlobal('fetch',fetcher);

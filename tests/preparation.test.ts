@@ -4,7 +4,7 @@ import { canOpen,concernText,fingerprint,requestFor,timer,validStart } from '../
 import { normalizeSession,saveSession,readSession,SESSION_KEY,startSession,type AssessmentSession } from '../src/app/session';
 const session:AssessmentSession={schemaVersion:1,sessionId:'test',createdAt:'2026-01-01T00:00:00.000Z',currentStep:{name:'next_step_placeholder'},selectedConcerns:['body_acne_marks'],answers:{body_acne_goal:'active_bumps'},photoStatuses:{},photosBypassed:true};
 describe('preparation timer',()=>{
- it('uses timestamp and rounds up until complete',()=>{expect(timer(1000,1000)).toMatchObject({display:'00:30',progress:0});expect(timer(1000,1999).display).toBe('00:30');expect(timer(1000,2000).display).toBe('00:29');expect(timer(1000,31000)).toMatchObject({display:'00:00',progress:1});expect(timer(1000,61000).progress).toBe(1);});
+ it('uses timestamp and rounds up until complete',()=>{expect(timer(1000,1000)).toMatchObject({display:'00:15',progress:0});expect(timer(1000,1999).display).toBe('00:15');expect(timer(1000,2000).display).toBe('00:14');expect(timer(1000,16000)).toMatchObject({display:'00:00',progress:1});expect(timer(1000,61000).progress).toBe(1);});
  it('does not unlock without both requirements and rejects invalid starts',()=>{expect(canOpen(1,'success',{})).toBe(false);expect(canOpen(0,'loading',null)).toBe(false);expect(canOpen(0,'error',null)).toBe(false);expect(canOpen(0,'success',{items:[]})).toBe(true);expect(validStart(NaN,10000)).toBe(false);expect(validStart(12000,10000)).toBe(false);expect(validStart(9000,10000)).toBe(true);});
 });
 describe('fingerprint and persistence',()=>{

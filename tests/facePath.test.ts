@@ -18,7 +18,7 @@ describe('face assessment',()=>{
   expect(run({face_goal:['acne_or_bumps']}).items).toEqual([]);
  });
  it('combines concerns without duplicate face sunscreen',()=>{
-  const result=run({face_goal:['dryness','individual_spots','everyday_protection'],sun_goal:'patches',sun_location:['face']},['tanning_sun_damage','face']);
+  const result=run({face_goal:['dryness','individual_spots','everyday_protection'],sun_areas:['face'],shared_pregnancy:'no'},['tanning_sun_damage','face']);
   expect(result.items.map(x=>x.product.id)).toEqual(['demo_face_sunscreen','demo_pimple_patch','demo_face_moisturizer']);
   expect(result.items[0].matchedConcernIds).toEqual(['tanning_sun_damage','face']);
  });

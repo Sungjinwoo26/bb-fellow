@@ -1,0 +1,14 @@
+import {describe,it,expect,vi,afterEach} from 'vitest';
+import {answerChat} from '../worker/productChat';
+import chat from '../worker/data/chatProducts.json';
+import store from '../src/data/storefrontProducts.json';
+afterEach(()=>vi.unstubAllGlobals());
+const free='4-aha-bha-underarm-rollon-frag-free-75';const flora='6-aha-bha-underarm-roll-on-flora-75ml';
+describe('product prices and fragrance',()=>{
+ it('answers the current price directly without repeating the previous topic',async()=>{const fetcher=vi.fn();vi.stubGlobal('fetch',fetcher);const r=await answerChat({message:'ok and price?',input_source:'typed',selected_product_ids:[free],history:[{role:'user',text:'is it fragrance free?'},{role:'assistant',text:'The label and ingredient list conflict.'}]},{OPENAI_API_KEY:'test'});expect(r.message).toBe('The price is ₹499.');expect(r.message).not.toMatch(/fragrance|perfume/i);expect(fetcher).toHaveBeenCalledTimes(2);});
+ it('gives MRP and selling price for the exact matching variant',async()=>{const r=await answerChat({message:'what is the price?',input_source:'typed',selected_product_ids:[flora]},{});expect(r.message).toBe('The MRP is ₹549, but you can get it for ₹499 right now.');});
+ it('does not mislabel a selling price as MRP',async()=>{const r=await answerChat({message:'what is the MRP?',input_source:'typed',selected_product_ids:[free]},{});expect(r.message).toBe('The price is ₹499.');});
+ it('asks which variant when multiple products are selected',async()=>{const r=await answerChat({message:'price?',input_source:'typed',selected_product_ids:[free,flora]},{});expect(r.status).toBe('clarify');expect(r.product_options.map(p=>p.id)).toEqual([free,flora]);});
+ it('uses the corrected fragrance-free variants and preserves fragrance in the Flora variant',async()=>{const freeVariants=chat.filter(p=>/fragrance[ -]?free|no fragrance/i.test(p.name));expect(freeVariants).toHaveLength(4);for(const p of freeVariants){expect(p.full_ingredients).not.toMatch(/\b(perfume|parfum|fragrance)\b/i);expect(p.notes).toMatch(/product-owner clarification/i);const r=await answerChat({message:'is it fragrance free?',input_source:'typed',selected_product_ids:[p.id]},{});expect(r.message).toMatch(/fragrance-free.*does not contain added perfume/i);}const scented=chat.find(p=>p.id===flora)!;expect(scented.full_ingredients).toMatch(/\bperfume\b/i);const r=await answerChat({message:'does it contain perfume?',input_source:'typed',selected_product_ids:[flora]},{});expect(r.message).toMatch(/includes perfume/i);});
+ it('can match all chatbot products to one consistent storefront price record',()=>{for(const p of chat){const matches=store.filter(x=>x.source.replace(/\/$/,'')===p.source_url.replace(/\/$/,''));expect(matches.length).toBeGreaterThan(0);expect(new Set(matches.map(x=>`${x.price}|${x.mrp}`)).size).toBe(1);}});
+});

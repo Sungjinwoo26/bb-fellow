@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
-async function start(page:Page,labels:string[]) { await page.goto('/'); await page.getByRole('button',{name:'Take a self-assessment'}).first().click(); await page.getByRole('button',{name:'Find my routine',exact:true}).click(); for(const label of labels)await page.getByRole('checkbox',{name:label,exact:true}).check(); await page.getByRole('button',{name:'Continue',exact:true}).click(); }
+async function start(page:Page,labels:string[]) { await page.goto('/'); await page.getByRole('button',{name:'Get your personalized kit'}).first().click(); await page.getByRole('button',{name:'Find my kit',exact:true}).click(); for(const label of labels)await page.getByRole('checkbox',{name:label,exact:true}).check(); await page.getByRole('button',{name:'Continue',exact:true}).click(); }
 async function noOverflow(page:Page){await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);}
 async function skipQuestions(page:Page,count:number){for(let n=0;n<count;n++)await page.getByRole('button',{name:'Skip',exact:true}).click();}
 async function prepareAndOpen(page:Page){await expect(page.getByRole('heading',{name:'Your routine focus'})).toBeVisible(); await expect(page.getByRole('button',{name:'See my personalised kit'})).toBeDisabled(); await page.clock.fastForward(30_000); await expect(page.getByRole('button',{name:'See my personalised kit'})).toBeEnabled(); await page.getByRole('button',{name:'See my personalised kit'}).click();}
@@ -49,7 +50,7 @@ test('failed photo analysis can be retried without losing the photo',async({page
 });
 
 test('keyboard focus, 200% CSS zoom and reduced motion preserve usable controls',async({page})=>{
- await page.setViewportSize({width:640,height:800});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.evaluate(()=>{document.body.style.zoom='200%';});await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await page.keyboard.press('Tab');const focused=page.locator(':focus-visible');await expect(focused).toBeVisible();const outline=await focused.evaluate(el=>getComputedStyle(el).outlineStyle);expect(outline).not.toBe('none');await page.getByRole('button',{name:'Take a self-assessment'}).first().click();await page.getByRole('button',{name:'Find my routine',exact:true}).click();await page.getByRole('checkbox',{name:'Body Odour'}).check();await page.getByRole('button',{name:'Continue',exact:true}).click();const skip=page.getByRole('button',{name:'Skip',exact:true});const box=await skip.boundingBox();expect(box).not.toBeNull();expect(box!.width).toBeGreaterThanOrEqual(44);expect(box!.height).toBeGreaterThanOrEqual(44);
+ await page.setViewportSize({width:640,height:800});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/');await page.evaluate(()=>{document.body.style.zoom='200%';});await expect.poll(()=>page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await page.keyboard.press('Tab');const focused=page.locator(':focus-visible');await expect(focused).toBeVisible();const outline=await focused.evaluate(el=>getComputedStyle(el).outlineStyle);expect(outline).not.toBe('none');await page.getByRole('button',{name:'Get your personalized kit'}).first().click();await page.getByRole('button',{name:'Find my kit',exact:true}).click();await page.getByRole('checkbox',{name:'Body Odour'}).check();await page.getByRole('button',{name:'Continue',exact:true}).click();const skip=page.getByRole('button',{name:'Skip',exact:true});const box=await skip.boundingBox();expect(box).not.toBeNull();expect(box!.width).toBeGreaterThanOrEqual(44);expect(box!.height).toBeGreaterThanOrEqual(44);
 });
 
 
@@ -75,19 +76,55 @@ test('face and body skin choices share a screen and face concerns get their own 
 
 
 test('mobile storefront navigation, carousel, product tabs and demo cart',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByRole('heading',{name:'Every Body Works Wonders'})).toBeVisible();await noOverflow(page);await page.getByRole('button',{name:'Show banner 2'}).click();await expect(page.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');await page.getByRole('button',{name:'Open menu'}).click();await expect(page.getByRole('button',{name:'Shop By Category'})).toBeVisible();await page.getByRole('button',{name:'Close menu'}).click();await page.getByRole('button',{name:/Hair Care Hair Fall/}).click();await expect(page.getByRole('heading',{name:'Best Sellers'})).toBeVisible();await page.getByRole('button',{name:'ADD',exact:true}).first().click();await page.getByRole('button',{name:'Open demo cart, 1 items'}).click();await expect(page.getByRole('dialog',{name:'Demo cart'})).toContainText('Biotin Hair Gummies');await page.getByRole('button',{name:'Close cart'}).click();await page.getByRole('tab',{name:'Body Care'}).click();await expect(page.getByRole('heading',{name:'10% Urea Body Lotion - 300 ml'})).toBeVisible();await page.getByRole('button',{name:'View details for 10% Urea Body Lotion - 300 ml'}).click();await expect(page.getByRole('dialog',{name:'10% Urea Body Lotion - 300 ml details'})).toBeVisible();await page.getByRole('button',{name:'Close product details'}).click();await page.getByRole('button',{name:'Take a self-assessment'}).first().click();await expect(page.getByRole('heading',{name:'A routine made around you'})).toBeVisible();
+ await page.setViewportSize({width:390,height:844});await page.goto('/');await expect(page.getByRole('heading',{name:'Every Body Works Wonders'})).toBeVisible();await noOverflow(page);await page.getByRole('button',{name:'Show banner 2'}).click();await expect(page.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');await page.getByRole('button',{name:'Open menu'}).click();await expect(page.getByRole('button',{name:'Shop By Category'})).toBeVisible();await page.getByRole('button',{name:'Close menu'}).click();await page.getByRole('button',{name:/Hair Care Hair Fall/}).click();await expect(page.getByRole('heading',{name:'Best Sellers'})).toBeVisible();await page.getByRole('button',{name:'ADD',exact:true}).first().click();await page.getByRole('button',{name:'Open demo cart, 1 items'}).click();await expect(page.getByRole('dialog',{name:'Demo cart'})).toContainText('Biotin Hair Gummies');await page.getByRole('button',{name:'Close cart'}).click();await page.getByRole('tab',{name:'Body Care'}).click();await expect(page.getByRole('heading',{name:'10% Urea Body Lotion - 300 ml'})).toBeVisible();await page.getByRole('button',{name:'View details for 10% Urea Body Lotion - 300 ml'}).click();await expect(page.getByRole('main',{name:'10% Urea Body Lotion - 300 ml details'})).toBeVisible();await page.getByRole('button',{name:'Back to shop'}).click();await page.getByRole('button',{name:'Get your personalized kit'}).first().click();await expect(page.getByRole('heading',{name:'Your kit, made for you.'})).toBeVisible();
 });
 
 test('all storefront categories show their own product images and details on mobile and desktop',async({page})=>{
  for(const width of [375,1280]){
   await page.setViewportSize({width,height:900});await page.goto('/');
   for(const name of ['Hair Care','Body Care','Winter Care','Health & Fitness','Offers','Sun Shield','Face Care']){
-   await page.getByRole('tab',{name,exact:true}).click();const card=page.locator('.store-product').first();await expect(card).toBeVisible();const picture=card.locator('img');await expect(picture).toBeVisible();await expect.poll(()=>picture.evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);await card.getByRole('button',{name:/View details for/}).click();await expect(page.getByRole('dialog')).toBeVisible();await page.getByRole('button',{name:'Close product details'}).click();
+   await page.getByRole('tab',{name,exact:true}).click();const card=page.locator('.store-product').first();await expect(card).toBeVisible();const picture=card.locator('img');await expect(picture).toBeVisible();await expect.poll(()=>picture.evaluate((img:HTMLImageElement)=>img.naturalWidth)).toBeGreaterThan(0);await card.getByRole('button',{name:/View details for/}).click();await expect(page.locator('.product-page')).toBeVisible();await page.getByRole('button',{name:'Back to shop'}).click();
   }
   await noOverflow(page);
  }
 });
 
+test('every catalogue product has a reloadable page',async({page})=>{
+ test.setTimeout(120000);const catalogue=JSON.parse(readFileSync('src/data/storefrontProducts.json','utf8')) as {id:string;name:string}[];await page.setViewportSize({width:390,height:844});
+ for(const product of catalogue){await page.goto(`/?product=${encodeURIComponent(product.id)}`);await expect(page.locator('.product-page h1'),product.id).toHaveText(product.name);await expect(page.locator('.product-page img')).toBeVisible();}
+});
+
 test('the Be Bodywise logo returns from the assessment to the storefront',async({page})=>{
- await page.setViewportSize({width:390,height:844});await page.goto('/');await page.getByRole('button',{name:'Take a self-assessment'}).first().click();await page.getByRole('button',{name:'Find my routine',exact:true}).click();await expect(page.getByRole('heading',{name:'What would you like help with?'})).toBeVisible();await page.getByRole('button',{name:'Be Bodywise home'}).click();await expect(page.getByRole('heading',{name:'Every Body Works Wonders'})).toBeVisible();
+ await page.setViewportSize({width:390,height:844});await page.goto('/');await page.getByRole('button',{name:'Get your personalized kit'}).first().click();await page.getByRole('button',{name:'Find my kit',exact:true}).click();await expect(page.getByRole('heading',{name:'What would you like help with?'})).toBeVisible();await page.getByRole('button',{name:'Be Bodywise home'}).click();await expect(page.getByRole('heading',{name:'Every Body Works Wonders'})).toBeVisible();
+});
+
+test('category cards remain selectable and keyboard accessible without visible checkboxes',async({page})=>{
+ for(const viewport of [{width:390,height:844},{width:320,height:700}]){
+  await page.setViewportSize(viewport);await page.goto('/');await page.evaluate(()=>{sessionStorage.clear();history.replaceState(null,'','/')});await page.reload();await page.getByRole('button',{name:'Get your personalized kit'}).last().click();await page.getByRole('button',{name:'Find my kit',exact:true}).click();
+  const cards=page.locator('.concerns-screen .choice-card');await expect(cards).toHaveCount(9);const card=cards.first(),check=card.getByRole('checkbox');const art=await card.locator('.concern-art').boundingBox();const bounds=await card.boundingBox();expect(art!.x+art!.width).toBeLessThanOrEqual(bounds!.x+bounds!.width);await card.click();await expect(check).toBeChecked();await expect(card).toHaveClass(/selected/);await check.focus();await page.keyboard.press('Space');await expect(check).not.toBeChecked();expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ }
+});
+
+test('featured carousel moves smoothly with controls and scrolling',async({page})=>{
+ for(const width of [390,1280]){
+  await page.setViewportSize({width,height:844});await page.goto('/');const carousel=page.getByRole('region',{name:'Featured offers'});const track=carousel.locator('.hero-track');
+  await carousel.getByRole('button',{name:'Next banner'}).click();await expect(carousel.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');await expect.poll(()=>track.evaluate(el=>el.scrollLeft)).toBeGreaterThan(10);
+  await carousel.getByRole('button',{name:'Show banner 3'}).click();await expect(carousel.getByRole('button',{name:'Show banner 3'})).toHaveAttribute('aria-current','true');await expect.poll(()=>track.evaluate(el=>el.scrollLeft)).toBeGreaterThan(20);
+  await carousel.getByRole('button',{name:'Previous banner'}).click();await expect(carousel.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');
+  await track.dispatchEvent('pointerdown');await track.evaluate(el=>el.scrollTo({left:0,behavior:'instant'}));await expect(carousel.getByRole('button',{name:'Show banner 1'})).toHaveAttribute('aria-current','true');await noOverflow(page);
+ }
+});
+
+test('featured carousel responds to a phone swipe and arrow keys',async({page,context})=>{
+ await page.setViewportSize({width:390,height:844});await page.goto('/');const carousel=page.getByRole('region',{name:'Featured offers'});const track=carousel.locator('.hero-track');const rect=await track.boundingBox();const session=await context.newCDPSession(page);const y=rect!.y+rect!.height/2;await session.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:330,y}]});for(const x of [290,250,210,170,130,90])await session.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x,y}]});await session.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await expect(carousel.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');await carousel.getByRole('button',{name:'Next banner'}).focus();await page.keyboard.press('ArrowRight');await expect(carousel.getByRole('button',{name:'Show banner 3'})).toHaveAttribute('aria-current','true');
+});
+
+test('desktop carousel ends with the last poster and no trailing block',async({page})=>{
+ for(const width of [625,1280]){
+  await page.setViewportSize({width,height:844});await page.goto('/');const carousel=page.getByRole('region',{name:'Featured offers'});await carousel.getByRole('button',{name:'Show banner 3'}).click();await expect(carousel.getByRole('button',{name:'Show banner 3'})).toHaveAttribute('aria-current','true');const track=carousel.locator('.hero-track');await expect.poll(()=>track.evaluate(el=>Math.abs(el.scrollWidth-el.clientWidth-el.scrollLeft))).toBeLessThan(10);expect(await track.evaluate(el=>getComputedStyle(el,'::after').display)).toBe('none');
+ }
+});
+
+test('featured carousel advances every seven seconds and pauses on interaction',async({page})=>{
+ await page.clock.install();await page.setViewportSize({width:1280,height:844});await page.goto('/');const carousel=page.getByRole('region',{name:'Featured offers'});await expect(carousel.getByRole('button',{name:'Show banner 1'})).toHaveAttribute('aria-current','true');await page.clock.runFor(7100);await expect(carousel.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');await carousel.hover();await page.clock.runFor(9000);await expect(carousel.getByRole('button',{name:'Show banner 2'})).toHaveAttribute('aria-current','true');
 });

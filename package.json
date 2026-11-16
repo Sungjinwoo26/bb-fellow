@@ -11,11 +11,12 @@
     "deploy": "npm run build && node scripts/check-deploy-output.mjs && wrangler deploy",
     "cf-typegen": "wrangler types",
     "test": "vitest run",
-    "validate:data": "vitest run tests/catalogueValidation.test.ts",
+    "validate:data": "vitest run tests/catalogueValidation.test.ts tests/storefrontPrices.test.ts tests/chatCatalogueCoverage.test.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
     "@google/genai": "^3.0.0",
+    "@mediapipe/tasks-vision": "^1.2.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "zod": "^4.6.7"

@@ -1,0 +1,14 @@
+import {describe,it,expect} from 'vitest';
+import {bodyPolicy,bodyDecision} from '../worker/bodyChat';
+import {initialChatState,type ChatTurn} from '../src/shared/chatState';
+const turn:ChatTurn={action:'find_product',reference_scope:'none',referenced_products:[],product_types:[],concerns:[],body_areas:[],excluded_ingredients:[],intents:[],missing_information:[],confidence:'high'};
+const state=initialChatState();
+describe('chat-specific body concerns',()=>{
+ it.each([['I have body acne','acne'],['I have strawberry legs','strawberry'],['pigmentation on my elbows','pigmentation'],['my underarm odour','underarm'],['dry body skin','dry'],['rough heels','dry']])('recognizes %s',(message,category)=>expect(bodyPolicy(message,turn,'')?.category).toBe(category));
+ it.each(['acne','strawberry','pigmentation','underarm','dry'])('matches %s to eligible catalogue products and meaningful choices',category=>{const decision=bodyDecision(category,null,state,turn)!;expect(decision.products.length).toBeGreaterThan(0);expect(decision.products.every(p=>!!p.purpose&&!/\b(?:severe|benzoyl peroxide)\b/i.test(`${p.name} ${p.purpose}`))).toBe(true);if(decision.question)expect(decision.choices.length).toBeGreaterThan(1)});
+ it('honors excluded product IDs',()=>{const initial=bodyDecision('acne',0,state,turn)!;const rejected={...state,rejected_product_ids:initial.products.map(p=>p.id)};const next=bodyDecision('acne',0,rejected,turn)!;expect(next.products.some(p=>rejected.rejected_product_ids.includes(p.id))).toBe(false)});
+ it('covers both active breakouts and marks without offering two similar washes',()=>{const both=bodyDecision('acne',2,state,turn)!;expect(both.products.some(p=>/body acne/i.test(`${p.name} ${p.purpose}`))).toBe(true);expect(both.products.some(p=>/acne marks/i.test(`${p.name} ${p.purpose}`))).toBe(true)});
+ it('does not mix scalp or acne products into a body-dryness request',()=>{const dry=bodyDecision('dry',0,state,turn)!;expect(dry.products.length).toBeGreaterThan(0);expect(dry.products.every(p=>/body/i.test(`${p.category} ${p.name}`)&&!/\b(?:scalp|dandruff|acne)\b/i.test(`${p.name} ${p.purpose}`))).toBe(true)});
+ it('does not select acne or exfoliating products for unspecified everyday cleansing',()=>{const routine=bodyDecision('bodycare',3,state,turn)!;expect(routine.products.length).toBeGreaterThan(0);expect(routine.products.every(p=>!/\b(?:salicylic|aha|bha|exfoliat|acne)\b/i.test(`${p.name} ${p.purpose}`))).toBe(true)});
+ it('shows underarm odour products immediately for a body odour selection',()=>{const match=bodyPolicy('Body odour',turn,'What would you like help with on your body?');expect(match?.category).toBe('odour');const decision=bodyDecision('odour',null,state,turn)!;expect(decision.question).toBeNull();expect(decision.products.length).toBeGreaterThan(0);expect(decision.products.every(p=>/underarm/i.test(p.name)&&/odou?r/i.test(`${p.name} ${p.purpose}`))).toBe(true)});
+});

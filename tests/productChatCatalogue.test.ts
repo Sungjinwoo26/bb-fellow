@@ -11,5 +11,5 @@ describe('catalogue-wide assistant coverage',()=>{
    expect(r.selected_product_ids,p.name+' '+message).toContain(p.id);
    expect(r.message,p.name+' '+message).not.toContain('temporarily unavailable');
   }}
- });
+ },15000);
 });

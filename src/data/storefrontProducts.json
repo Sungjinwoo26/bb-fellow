@@ -1227,5 +1227,1009 @@
     "available": true,
     "image": "/storefront/catalogue/glutathione-gummies-60.jpg",
     "source": "https://bebodywise.com/product/glutathione-gummies-60"
+  },
+  {
+    "id": "hair-care-hair-fall-control-mini",
+    "category": "Hair Care",
+    "concern": "Frizz ,Hair Fall control",
+    "name": "Hair Cleansing and Conditioning Kit",
+    "tags": [
+      "kit of 2",
+      "keratin"
+    ],
+    "price": "₹749",
+    "mrp": "₹998",
+    "rating": "4.4",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-fall-control-mini.jpg",
+    "source": "https://bebodywise.com/product/hair-fall-control-mini"
+  },
+  {
+    "id": "body-care-salicylic-acid-face-wash",
+    "category": "Body Care",
+    "concern": "Acne prone skin",
+    "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+    "tags": [
+      "Acne Prevention and Oil Control",
+      "Active Acne Treatment/Control"
+    ],
+    "price": "₹239",
+    "mrp": "₹349",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/salicylic-acid-face-wash.jpg",
+    "source": "https://bebodywise.com/product/salicylic-acid-face-wash"
+  },
+  {
+    "id": "hair-care-hair-pro-growth-pack",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Hair Growth Pack",
+    "tags": [
+      "kit of 2",
+      "biotin"
+    ],
+    "price": "₹949",
+    "mrp": "₹1448",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-pro-growth-pack.jpg",
+    "source": "https://bebodywise.com/product/hair-pro-growth-pack"
+  },
+  {
+    "id": "hair-care-biotin-multivitamin-hair-gummies-2m",
+    "category": "Hair Care",
+    "concern": "Stage 1 Hair Loss",
+    "name": "Biotin Hair Gummies (60)",
+    "tags": [
+      "60 pc",
+      "biotin"
+    ],
+    "price": "₹849",
+    "mrp": "₹999",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/biotin-multivitamin-hair-gummies-2m.jpg",
+    "source": "https://bebodywise.com/product/biotin-multivitamin-hair-gummies-2m"
+  },
+  {
+    "id": "body-care-aha-bha-body-pack",
+    "category": "Body Care",
+    "concern": "Strawberry skin & roughness",
+    "name": "AHA-BHA Body Pack",
+    "tags": [
+      "kit of 2",
+      "aha bha"
+    ],
+    "price": "₹688",
+    "mrp": "₹798",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/aha-bha-body-pack.jpg",
+    "source": "https://bebodywise.com/product/aha-bha-body-pack"
+  },
+  {
+    "id": "body-care-1-salicylic-acid-body-wash",
+    "category": "Body Care",
+    "concern": "Controlling Body Acne & Bumps",
+    "name": "1% Salicylic Acid Body Wash - 250 mL",
+    "tags": [
+      "250 ml",
+      "salicylic acid"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg",
+    "source": "https://bebodywise.com/product/1-salicylic-acid-body-wash"
+  },
+  {
+    "id": "body-care-niacinamide-body-lotion",
+    "category": "Body Care",
+    "concern": "Reducing acne marks",
+    "name": "10% Niacinamide Body Lotion",
+    "tags": [
+      "200 ml",
+      "niacinamide"
+    ],
+    "price": "₹399",
+    "mrp": "₹499",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/niacinamide-body-lotion.jpg",
+    "source": "https://bebodywise.com/product/niacinamide-body-lotion"
+  },
+  {
+    "id": "body-care-5-lactic-acid-body-lotion",
+    "category": "Body Care",
+    "concern": "Improving Strawberry Skin",
+    "name": "5% Lactic Acid Body Lotion",
+    "tags": [
+      "200 ml",
+      "lactic acid"
+    ],
+    "price": "₹449",
+    "mrp": "₹449",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-lactic-acid-body-lotion.jpg",
+    "source": "https://bebodywise.com/product/5-lactic-acid-body-lotion"
+  },
+  {
+    "id": "hair-care-biotin-hair-gummies-120",
+    "category": "Hair Care",
+    "concern": "Stage 1 Hair Loss",
+    "name": "Biotin Hair Gummies (120)",
+    "tags": [
+      "120 pcs",
+      "biotin"
+    ],
+    "price": "₹1699",
+    "mrp": "₹1999",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/biotin-hair-gummies-120.jpg",
+    "source": "https://bebodywise.com/product/biotin-hair-gummies-120"
+  },
+  {
+    "id": "body-care-5-niacinamide-body-wash",
+    "category": "Body Care",
+    "concern": "Glow & Pollution Protection",
+    "name": "5% Niacinamide Body Wash",
+    "tags": [
+      "250 ml",
+      "niacinamide"
+    ],
+    "price": "₹329",
+    "mrp": "₹399",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-niacinamide-body-wash.jpg",
+    "source": "https://bebodywise.com/product/5-niacinamide-body-wash"
+  },
+  {
+    "id": "body-care-2-aha-body-wash",
+    "category": "Body Care",
+    "concern": "Cell turnover & Exfoliation",
+    "name": "2% AHA Body Wash",
+    "tags": [
+      "250 ml",
+      "2% AHA"
+    ],
+    "price": "₹199",
+    "mrp": "₹399",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/2-aha-body-wash.jpg",
+    "source": "https://bebodywise.com/product/2-aha-body-wash"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-roll-on",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 50 mL - Flora",
+    "tags": [
+      "50 ml",
+      "flora"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-roll-on.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-roll-on"
+  },
+  {
+    "id": "body-care-10-aha-body-scrub",
+    "category": "Body Care",
+    "concern": "Exfoliation & Strawberry Legs",
+    "name": "10% AHA Body Scrub (200g)",
+    "tags": [
+      "200 g",
+      "aha"
+    ],
+    "price": "₹369",
+    "mrp": "₹399",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-aha-body-scrub.jpg",
+    "source": "https://bebodywise.com/product/10-aha-body-scrub"
+  },
+  {
+    "id": "body-care-pigmentation-repair-cream",
+    "category": "Body Care",
+    "concern": "Reducing Body Pigmentation",
+    "name": "Pigmentation Repair Cream",
+    "tags": [
+      "100 g",
+      "lactic acid"
+    ],
+    "price": "₹599",
+    "mrp": "₹599",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/pigmentation-repair-cream.jpg",
+    "source": "https://bebodywise.com/product/pigmentation-repair-cream"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-roll-on-no-fragrance",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 50 mL - No Fragrance",
+    "tags": [
+      "50 ml",
+      "4% aha bha"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-roll-on-no-fragrance.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-roll-on-no-fragrance"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-roll-on-watermelon",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 50 mL - Watermelon",
+    "tags": [
+      "50 ml",
+      "watermelon"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-roll-on-watermelon.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-roll-on-watermelon"
+  },
+  {
+    "id": "body-care-strawberry-skin-pack",
+    "category": "Body Care",
+    "concern": "Keratosis pilaris, bumpy skin",
+    "name": "Strawberry Skin Pack",
+    "tags": [
+      "KIT of 3",
+      "salicylic acid"
+    ],
+    "price": "₹999",
+    "mrp": "₹1197",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/strawberry-skin-pack.jpg",
+    "source": "https://bebodywise.com/product/strawberry-skin-pack"
+  },
+  {
+    "id": "body-care-underarm-pigmentation-kit-no-fragrance",
+    "category": "Body Care",
+    "concern": "Underarm Odour, Pigmentation",
+    "name": "Underarm Pigmentation Kit - No Fragrance",
+    "tags": [
+      "kit of 2",
+      "4% aha bha"
+    ],
+    "price": "₹799",
+    "mrp": "₹948",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/underarm-pigmentation-kit-no-fragrance.jpg",
+    "source": "https://bebodywise.com/product/underarm-pigmentation-kit-no-fragrance"
+  },
+  {
+    "id": "hair-care-advanced-hair-growth-pack",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Pack",
+    "tags": [
+      "Hair Growth",
+      "Hair"
+    ],
+    "price": "₹949",
+    "mrp": "₹1448",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-hair-growth-pack.jpg",
+    "source": "https://bebodywise.com/product/advanced-hair-growth-pack"
+  },
+  {
+    "id": "body-care-sabodywash-scrub",
+    "category": "Body Care",
+    "concern": "Keratosis pilaris, bumpy skin",
+    "name": "Strawberry Skin Exfoliation kit",
+    "tags": [
+      "kit of 2",
+      "salicylic Acid"
+    ],
+    "price": "₹649",
+    "mrp": "₹748",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/sabodywash-scrub.jpg",
+    "source": "https://bebodywise.com/product/sabodywash-scrub"
+  },
+  {
+    "id": "hair-care-advanced-hair-growth-pack-xp",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Pack",
+    "tags": [
+      "Hair Growth",
+      "Hair"
+    ],
+    "price": "₹949",
+    "mrp": "₹1448",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-hair-growth-pack-xp.jpg",
+    "source": "https://bebodywise.com/product/advanced-hair-growth-pack-xp"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-roll-on-2-months-xp",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Advanced Hair Growth Serum Roll-On (Pack of 2)",
+    "tags": [
+      "kit of 2",
+      "rosemary"
+    ],
+    "price": "₹969",
+    "mrp": "₹1198",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-roll-on-2-months-xp.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-roll-on-2-months-xp"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-pp-roll-on",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Advanced Hair Growth Serum Roll-On for Post-Pregnancy Hair Thinning",
+    "tags": [
+      "Straight",
+      "Wavy"
+    ],
+    "price": "₹569",
+    "mrp": "₹599",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-pp-roll-on.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-pp-roll-on"
+  },
+  {
+    "id": "body-care-aha-body-wash-deal",
+    "category": "Body Care",
+    "concern": "Cell turnover & Exfoliation",
+    "name": "2% AHA Body Wash",
+    "tags": [],
+    "price": "₹199",
+    "mrp": "₹399",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/aha-body-wash-deal.jpg",
+    "source": "https://bebodywise.com/product/aha-body-wash-deal"
+  },
+  {
+    "id": "face-care-brow-lash-serum",
+    "category": "Face Care",
+    "concern": "Brow & Lash growth",
+    "name": "Brow & Lash Growth Serum",
+    "tags": [
+      "5 ml",
+      "LashLD"
+    ],
+    "price": "₹379",
+    "mrp": "₹399",
+    "rating": "4.3",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/brow-lash-serum.jpg",
+    "source": "https://bebodywise.com/product/brow-lash-serum"
+  },
+  {
+    "id": "hair-care-hair-growth-pack-30ml-xp",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Pack with Dropper 30ml",
+    "tags": [
+      "Hair Growth",
+      "Hair"
+    ],
+    "price": "₹848",
+    "mrp": "₹1248",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-pack-30ml-xp.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-pack-30ml-xp"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-30ml-xp-1",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Serum (30ml)",
+    "tags": [
+      "Hair Growth",
+      "Hair"
+    ],
+    "price": "₹349",
+    "mrp": "₹699",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-30ml-xp-1.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-30ml-xp-1"
+  },
+  {
+    "id": "body-care-20-urea-roll-on-50ml",
+    "category": "Body Care",
+    "concern": "Cracked & Rough Heels",
+    "name": "20% Urea Foot Roll On - 50 ml",
+    "tags": [
+      "50 ml",
+      "urea"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/20-urea-roll-on-50ml.jpg",
+    "source": "https://bebodywise.com/product/20-urea-roll-on-50ml"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-roll-on-aqua",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 50 mL - Aqua",
+    "tags": [
+      "50 ml",
+      "aqua"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-roll-on-aqua.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-roll-on-aqua"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-roll-on-oudh",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 50 mL - Oudh",
+    "tags": [
+      "50 ml",
+      "oudh"
+    ],
+    "price": "₹329",
+    "mrp": "₹349",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-roll-on-oudh.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-roll-on-oudh"
+  },
+  {
+    "id": "body-care-4-aha-bha-underarm-rollon-75",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "4% AHA BHA Underarm Roll On - 75 mL - Flora",
+    "tags": [
+      "75 ml",
+      "4% aha bha"
+    ],
+    "price": "₹499",
+    "mrp": "₹499",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/4-aha-bha-underarm-rollon-75.jpg",
+    "source": "https://bebodywise.com/product/4-aha-bha-underarm-rollon-75"
+  },
+  {
+    "id": "body-care-salicylic-acid-body-wash-700",
+    "category": "Body Care",
+    "concern": "Controlling Body Acne & Bumps",
+    "name": "1% Salicylic Acid Body Wash - 700 ml",
+    "tags": [
+      "700 ml",
+      "salicylic acid"
+    ],
+    "price": "₹699",
+    "mrp": "₹699",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/salicylic-acid-body-wash-700.jpg",
+    "source": "https://bebodywise.com/product/salicylic-acid-body-wash-700"
+  },
+  {
+    "id": "body-care-5-aha-bha-bodywash",
+    "category": "Body Care",
+    "concern": "Exfoliation and detan",
+    "name": "5% AHA BHA Exfoliating Body Wash - 250 mL",
+    "tags": [
+      "250 ml",
+      "aha bha"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-aha-bha-bodywash.jpg",
+    "source": "https://bebodywise.com/product/5-aha-bha-bodywash"
+  },
+  {
+    "id": "body-care-advanced-magnesium-gummies-60n",
+    "category": "Body Care",
+    "concern": "Regulating sleep cycle",
+    "name": "5-in-1 Magnesium Gummies with Glycinate & Vitamin D3 (60N)",
+    "tags": [
+      "60 pcs",
+      "magnesium"
+    ],
+    "price": "₹999",
+    "mrp": "₹999",
+    "rating": "",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-magnesium-gummies-60n.jpg",
+    "source": "https://bebodywise.com/product/advanced-magnesium-gummies-60n"
+  },
+  {
+    "id": "body-care-body-exfoliation-pigmentation-kit",
+    "category": "Body Care",
+    "concern": "Rough skin & Pigmentation",
+    "name": "Body Exfoliation & Pigmentation Kit",
+    "tags": [],
+    "price": "₹848",
+    "mrp": "₹1198",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-exfoliation-pigmentation-kit.jpg",
+    "source": "https://bebodywise.com/product/body-exfoliation-pigmentation-kit"
+  },
+  {
+    "id": "body-care-body-sunscreen-spray-with-spf-50-deal",
+    "category": "Body Care",
+    "concern": "On-the-go Sun Protection",
+    "name": "Body Sunscreen Spray with SPF 50",
+    "tags": [],
+    "price": "₹249",
+    "mrp": "₹499",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/body-sunscreen-spray-with-spf-50-deal.jpg",
+    "source": "https://bebodywise.com/product/body-sunscreen-spray-with-spf-50-deal"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-aqua",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 50 ml - Aqua",
+    "tags": [],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-aqua.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-aqua"
+  },
+  {
+    "id": "body-care-30-urea-foot-roll-on-75ml",
+    "category": "Body Care",
+    "concern": "Cracked & Rough Heels",
+    "name": "30% Urea Foot Roll On 75 ml",
+    "tags": [],
+    "price": "₹649",
+    "mrp": "₹699",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/30-urea-foot-roll-on-75ml.jpg",
+    "source": "https://bebodywise.com/product/30-urea-foot-roll-on-75ml"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-aqua-75ml",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 75 ml - Aqua",
+    "tags": [],
+    "price": "₹499",
+    "mrp": "₹549",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-aqua-75ml.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-aqua-75ml"
+  },
+  {
+    "id": "hair-care-hair-growth-pack-rosemary-roll-on-90n",
+    "category": "Hair Care",
+    "concern": "Stage 2 Hair Loss",
+    "name": "Advanced Hair Growth Pack with Roll On 25ml",
+    "tags": [],
+    "price": "₹1399",
+    "mrp": "₹2098",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-pack-rosemary-roll-on-90n.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-pack-rosemary-roll-on-90n"
+  },
+  {
+    "id": "body-care-strawberry-skin-kit",
+    "category": "Body Care",
+    "concern": "Keratosis pilaris, bumpy skin",
+    "name": "Strawberry Skin Kit",
+    "tags": [],
+    "price": "₹698",
+    "mrp": "₹998",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/strawberry-skin-kit.jpg",
+    "source": "https://bebodywise.com/product/strawberry-skin-kit"
+  },
+  {
+    "id": "hair-care-hair-growth-serum-roll-on-50ml",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Advanced Hair Growth Roll On 50mL",
+    "tags": [
+      "50 ml",
+      "rosemary"
+    ],
+    "price": "₹849",
+    "mrp": "₹999",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-growth-serum-roll-on-50ml.jpg",
+    "source": "https://bebodywise.com/product/hair-growth-serum-roll-on-50ml"
+  },
+  {
+    "id": "hair-care-hair-strengthening-serum-50-ml",
+    "category": "Hair Care",
+    "concern": "Frizzy, unruly hair",
+    "name": "Hair Strengthening Serum (50mL)",
+    "tags": [
+      "Straight",
+      "Wavy"
+    ],
+    "price": "₹299",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/hair-strengthening-serum-50-ml.jpg",
+    "source": "https://bebodywise.com/product/hair-strengthening-serum-50-ml"
+  },
+  {
+    "id": "body-care-10-urea-lotion",
+    "category": "Body Care",
+    "concern": "Very Dry and Flaky Skin",
+    "name": "10% Urea Body Lotion - 200 ml",
+    "tags": [
+      "200 ml",
+      "urea"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-urea-lotion.jpg",
+    "source": "https://bebodywise.com/product/10-urea-lotion"
+  },
+  {
+    "id": "body-care-magnesium-gummies-and-lotion-kit",
+    "category": "Body Care",
+    "concern": "Better Sleep & Muscle Recovery",
+    "name": "Complete Magnesium Care",
+    "tags": [
+      "kit of 2",
+      "magnesium"
+    ],
+    "price": "₹1498",
+    "mrp": "₹1498",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/magnesium-gummies-and-lotion-kit.jpg",
+    "source": "https://bebodywise.com/product/magnesium-gummies-and-lotion-kit"
+  },
+  {
+    "id": "body-care-glycolic-acid-stick",
+    "category": "Body Care",
+    "concern": "Pigmentation, Ingrown Hair, KP",
+    "name": "7% Glycolic Acid Exfoliating Body Stick - 30g",
+    "tags": [
+      "30 g",
+      "glycolic acid"
+    ],
+    "price": "₹599",
+    "mrp": "₹599",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/glycolic-acid-stick.jpg",
+    "source": "https://bebodywise.com/product/glycolic-acid-stick"
+  },
+  {
+    "id": "body-care-10-aha-body-scrub-300",
+    "category": "Body Care",
+    "concern": "Exfoliation & Strawberry Legs",
+    "name": "10% AHA Body Scrub (300g)",
+    "tags": [
+      "300 g",
+      "aha"
+    ],
+    "price": "₹499",
+    "mrp": "₹499",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-aha-body-scrub-300.jpg",
+    "source": "https://bebodywise.com/product/10-aha-body-scrub-300"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 50mL - Flora",
+    "tags": [
+      "50 ml",
+      "6% aha bha"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on"
+  },
+  {
+    "id": "body-care-face-and-body-acne-kit",
+    "category": "Body Care",
+    "concern": "Reducing Severe Body Acne",
+    "name": "Face & Body Acne Kit",
+    "tags": [],
+    "price": "₹349",
+    "mrp": "₹748",
+    "rating": "4.6",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/face-and-body-acne-kit.jpg",
+    "source": "https://bebodywise.com/product/face-and-body-acne-kit"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-twin-pack-75ml",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "Underarm Twin Defence Pack",
+    "tags": [],
+    "price": "₹998",
+    "mrp": "₹1098",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-twin-pack-75ml.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-twin-pack-75ml"
+  },
+  {
+    "id": "hair-care-keratin-shampoo-with-roll-on",
+    "category": "Hair Care",
+    "concern": "Hair Thinning",
+    "name": "Anti Hair Fall Kit",
+    "tags": [],
+    "price": "₹899",
+    "mrp": "₹1098",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/keratin-shampoo-with-roll-on.jpg",
+    "source": "https://bebodywise.com/product/keratin-shampoo-with-roll-on"
+  },
+  {
+    "id": "body-care-5-aha-bha-bodywash-700ml-flora",
+    "category": "Body Care",
+    "concern": "Exfoliation and detan",
+    "name": "5% AHA BHA Exfoliating Body Wash - Flora (700ml)",
+    "tags": [
+      "700 ML",
+      "AHA BHA"
+    ],
+    "price": "₹699",
+    "mrp": "₹799",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-aha-bha-bodywash-700ml-flora.jpg",
+    "source": "https://bebodywise.com/product/5-aha-bha-bodywash-700ml-flora"
+  },
+  {
+    "id": "face-care-face-razor-for-women",
+    "category": "Face Care",
+    "concern": "Precise facial hair removal",
+    "name": "Face Razor",
+    "tags": [
+      "Oily Skin",
+      "Dry Skin"
+    ],
+    "price": "₹199",
+    "mrp": "₹199",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/face-razor-for-women.jpg",
+    "source": "https://bebodywise.com/product/face-razor-for-women"
+  },
+  {
+    "id": "hair-care-1-ketoconazole-dandruff-shampoo-150ml",
+    "category": "Hair Care",
+    "concern": "Dandruff Control",
+    "name": "1% Ketoconazole Dandruff Shampoo",
+    "tags": [
+      "150 ml",
+      "ketoconazole"
+    ],
+    "price": "₹359",
+    "mrp": "₹359",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-150ml.jpg",
+    "source": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-150ml"
+  },
+  {
+    "id": "body-care-niacinamide-body-wash-700",
+    "category": "Body Care",
+    "concern": "Glow & Pollution Protection",
+    "name": "5% Niacinamide Body Wash - 700 ml",
+    "tags": [
+      "700 ml",
+      "niacinamide"
+    ],
+    "price": "₹699",
+    "mrp": "₹699",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/niacinamide-body-wash-700.jpg",
+    "source": "https://bebodywise.com/product/niacinamide-body-wash-700"
+  },
+  {
+    "id": "body-care-advanced-magnesium-gummies-30n",
+    "category": "Body Care",
+    "concern": "Regulating sleep cycle",
+    "name": "5-in-1 Magnesium Gummies with Beads 30N",
+    "tags": [
+      "60 pcs",
+      "magnesium"
+    ],
+    "price": "₹649",
+    "mrp": "₹649",
+    "rating": "4.7",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/advanced-magnesium-gummies-30n.jpg",
+    "source": "https://bebodywise.com/product/advanced-magnesium-gummies-30n"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-watermelon",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 50 ml - Watermelon",
+    "tags": [
+      "50 ml",
+      "6% aha bha"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "1.0",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-watermelon.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-watermelon"
+  },
+  {
+    "id": "body-care-6-aha-bha-underarm-roll-on-frag-free",
+    "category": "Body Care",
+    "concern": "Underarm Odour/ Pigmentation",
+    "name": "6% AHA BHA Underarm Roll On - 50 ml - Fragrance free",
+    "tags": [
+      "50 ml",
+      "6% aha bha"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "4.5",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/6-aha-bha-underarm-roll-on-frag-free.jpg",
+    "source": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-frag-free"
+  },
+  {
+    "id": "body-care-12-aha-scrub",
+    "category": "Body Care",
+    "concern": "Exfoliation & Strawberry Legs",
+    "name": "12% AHA Scrub - 300gm",
+    "tags": [
+      "300 g",
+      "aha"
+    ],
+    "price": "₹599",
+    "mrp": "₹599",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/12-aha-scrub.jpg",
+    "source": "https://bebodywise.com/product/12-aha-scrub"
+  },
+  {
+    "id": "body-care-10-magnesium-lotion",
+    "category": "Body Care",
+    "concern": "Muscle soreness and cramps",
+    "name": "10% Magnesium Body Lotion - 200 ml",
+    "tags": [
+      "200 ml",
+      "magnesium"
+    ],
+    "price": "₹349",
+    "mrp": "₹349",
+    "rating": "4.8",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/10-magnesium-lotion.jpg",
+    "source": "https://bebodywise.com/product/10-magnesium-lotion"
+  },
+  {
+    "id": "body-care-5-aha-bha-bodywash-250ml-flora",
+    "category": "Body Care",
+    "concern": "Exfoliation and detan",
+    "name": "5% AHA BHA Exfoliating Body Wash - Flora (250ml)",
+    "tags": [
+      "250 ml",
+      "aha bha"
+    ],
+    "price": "₹399",
+    "mrp": "₹399",
+    "rating": "",
+    "label": "",
+    "available": true,
+    "image": "/storefront/catalogue/5-aha-bha-bodywash-250ml-flora.jpg",
+    "source": "https://bebodywise.com/product/5-aha-bha-bodywash-250ml-flora"
   }
 ]

@@ -13,3 +13,45 @@
 
 /* Make the assessment entry stand out in the brand’s primary blue. */
 .store-desktop-nav .desktop-assessment{border:2px solid #0098ff;border-radius:999px;padding:8px 15px;color:#002c54;min-height:42px}.store-desktop-nav .desktop-assessment:hover{background:#d7f5ff}.drawer-assessment{border-radius:999px!important;border:2px solid #0098ff!important;margin:8px 14px;width:calc(100% - 28px)!important}.mobile-assessment:focus-visible,.desktop-assessment:focus-visible,.drawer-assessment:focus-visible{outline:3px solid #002c54;outline-offset:3px}@media(max-width:850px){.mobile-assessment{width:max-content;max-width:calc(100% - 32px);min-height:42px;margin:4px auto 10px;padding:7px 20px;border:2px solid #0098ff;border-radius:999px;background:#d7f5ff;color:#002c54}.mobile-assessment:hover{background:#80d2ff}}
+
+.expert-kicker{color:#0063bc;font-size:12px;font-weight:700;letter-spacing:.12em}.expert-options{display:grid;gap:12px;margin:22px 0}.expert-options article{padding:16px;border:1px solid #d4e9f4;background:#f2faff;border-radius:14px}.expert-options article p{margin:8px 0 0}.expert-demo-note{color:#526e7e;font-size:13px}
+
+.expert-page-overlay{position:fixed;inset:0;z-index:120;background:#f3faff;overflow-y:auto;display:flex;justify-content:center}.expert-page-overlay .expert-page{position:relative;width:min(100%,680px);min-height:100%;max-height:none;margin:0;padding:56px 24px;background:#fff;box-shadow:none}.expert-page h2{font-size:clamp(32px,6vw,46px);color:#002c54}.expert-page>p{line-height:1.5}.expert-page .store-cart-action{margin-top:16px}
+
+.product-page{min-height:calc(100vh - 100px);background:#fff;color:#102c42}.product-page-inner{max-width:1120px;margin:auto;padding:24px 28px 64px}.product-page-back{border:0;background:none;color:#00528e;font-size:14px;padding:10px 0;min-height:44px;cursor:pointer}.product-page-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start;margin-top:12px}.product-page-image img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#e6eef4;border-radius:12px}.product-page-info{padding-top:10px}.product-page-info h1{font-size:clamp(27px,3vw,40px);line-height:1.15;letter-spacing:-.025em;margin:12px 0 18px}.product-page-info .product-tags{margin:0 0 24px}.product-page-info .detail-price{margin:20px 0 28px}.product-page-info .detail-price strong{font-size:28px}.product-page-info .detail-disclaimer{line-height:1.5;margin-bottom:22px}.product-page-info .store-cart-action{max-width:440px;min-height:52px}@media(max-width:700px){.product-page-inner{padding:14px 16px 48px}.product-page-layout{grid-template-columns:1fr;gap:16px;margin-top:2px}.product-page-info{padding-top:0}.product-page-info h1{font-size:26px}.product-page-info .product-tags{margin-bottom:16px}.product-page-info .detail-price{margin:16px 0 22px}}
+
+/* Product pages keep navigation and the assistant in the document flow so
+   neither covers the product image or the purchase control. */
+.storefront--product .store-header{position:relative;top:auto}
+.storefront--product .product-page{min-height:0}
+.storefront--product .product-page-inner{padding-bottom:24px}
+.storefront--product .assistant-widget{position:relative;right:auto;bottom:auto;display:flex;justify-content:flex-end;width:min(100% - 56px,1064px);margin:0 auto 32px}
+.storefront--product .assistant-panel{position:fixed;right:24px;bottom:24px}
+@media(max-width:700px){
+ .storefront--product .product-page-inner{padding-top:20px}
+ .storefront--product .assistant-widget{width:calc(100% - 32px);margin-bottom:24px}
+ .storefront--product .assistant-panel{inset:8px;right:8px;bottom:8px}
+}
+
+/* A single continuous, scroll-snapping carousel on touch and desktop. */
+.store-hero .hero-carousel{position:relative}
+.store-hero .hero-track{position:relative;display:flex;justify-content:flex-start;gap:10px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;transform:none;padding:0 8px;-webkit-overflow-scrolling:touch}
+.store-hero .hero-track::-webkit-scrollbar{display:none}
+.store-hero .hero-track::after{content:'';display:block;flex:0 0 calc(53% - 10px)}
+.store-hero .hero-slide,.store-hero .hero-slide:not(.active),.store-hero .hero-slide.next{display:block;order:initial;flex:0 0 47%;scroll-snap-align:start;scroll-margin-left:8px;cursor:pointer}
+.store-hero .hero-controls{display:flex;justify-content:center;align-items:center;gap:8px;margin:8px auto 0}
+.store-hero .hero-arrow{display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid #c7e1ee;border-radius:50%;background:#fff;color:#00528e;font-size:26px;line-height:1;cursor:pointer}
+.store-hero .hero-dots{display:flex;align-items:center;gap:0;margin:0}
+.store-hero .hero-dots button{display:grid;place-items:center;width:30px;height:36px;background:transparent;border:0;border-radius:0;cursor:pointer}
+.store-hero .hero-dots button::after{content:'';width:9px;height:9px;border-radius:20px;background:#b5ddf1;transition:width .2s ease,background-color .2s ease}
+.store-hero .hero-dots button.active{width:30px;background:transparent}
+.store-hero .hero-dots button.active::after{width:19px;background:#00528e}
+.store-hero .hero-arrow:focus-visible,.store-hero .hero-dots button:focus-visible,.store-hero .hero-slide:focus-visible{outline:3px solid #0098ff;outline-offset:2px}
+@media(max-width:850px){.store-hero .hero-track{gap:8px}.store-hero .hero-slide,.store-hero .hero-slide:not(.active),.store-hero .hero-slide.next{flex-basis:84%}.store-hero .hero-track::after{flex-basis:calc(16% - 8px)}}
+@media(prefers-reduced-motion:reduce){.store-hero .hero-dots button::after{transition:none}}
+
+/* Desktop ends at the last poster instead of showing a trailing placeholder. */
+@media(hover:hover) and (pointer:fine){
+ .store-hero .hero-track::after{display:none}
+ .store-hero .hero-slide:last-of-type{scroll-snap-align:end}
+}

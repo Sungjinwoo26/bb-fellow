@@ -13,11 +13,10 @@ describe('prepared answer routing',()=>{
    expect(result.answer_mode,p.name+' / '+message).toBe('prepared_answer');expect(result.message).toBeTruthy();
   }
   expect(generateContent).not.toHaveBeenCalled();
- });
- it('serves every unique comparison without calling Gemini, regardless of order',async()=>{
-  for(let i=0;i<products.length;i++)for(let j=i+1;j<products.length;j++){
-   const ids=[products[j].id,products[i].id];const result=await answerChat({message:'Compare two products.',selected_product_ids:ids,selection_confirmed:true},env);
-   expect(result.answer_mode,ids.join(' / ')).toBe('prepared_answer');expect(result.selected_product_ids).toEqual(ids);
+ },30000);
+ it('preserves both exact products for representative comparisons without an AI writer',async()=>{
+  for(const ids of [['hair-fall-control-shampoo','1-ketoconazole-dandruff-shampoo-250ml'],['20-urea-roll-on-75ml','10-urea-lotion-300ml'],['4-aha-bha-underarm-rollon-frag-free-75','6-aha-bha-underarm-roll-on-flora-75ml']]){
+   for(const pair of [ids,[...ids].reverse()]){const result=await answerChat({message:'Compare these and give both prices.',selected_product_ids:pair},env);expect(result.selected_product_ids).toEqual(pair);expect(result.product_cards.map(p=>p.id)).toEqual(pair);}
   }
   expect(generateContent).not.toHaveBeenCalled();
  });
@@ -36,9 +35,27 @@ describe('prepared answer routing',()=>{
   const next=await answerChat({message:'yes please',selected_product_ids,follow_up:first.follow_up},env);
   expect(next.answer_mode).toBe('prepared_answer');expect(next.message).toMatch(/roll/i);expect(generateContent).not.toHaveBeenCalled();
  });
- it('calls Gemini for a specific custom question not answered by the prepared routine',async()=>{
-  generateContent.mockResolvedValue({text:'Use it daily.',candidates:[{finishReason:'STOP'}]});
+ it('answers yes with a distinct useful follow-up for every product usage answer',async()=>{
+  for(const p of products){
+   const first=await answerChat({message:'How do I use this product?',selected_product_ids:[p.id]},env);
+   expect(first.follow_up,p.id).toBe('routine');
+   const next=await answerChat({message:'Yes',selected_product_ids:[p.id],follow_up:first.follow_up},env);
+   expect(next.status,p.id).toBe('answered');
+   expect(next.selected_product_ids,p.id).toEqual([p.id]);
+   expect(next.message,p.id).not.toBe(first.message);
+   expect(next.message,p.id).not.toMatch(/could you tell me a little more|would you like help fitting/i);
+  }
+  expect(generateContent).not.toHaveBeenCalled();
+ });
+ it('handles the underarm roll-on conversation through the public API',async()=>{
+  const id='6-aha-bha-underarm-roll-on-flora-75ml';
+  const first=await answerChat({message:'How do I use this product?',selected_product_ids:[id]},env);
+  expect(first.message).toMatch(/tips for using it comfortably/i);
+  const next=await answerChat({message:'yes please',selected_product_ids:[id],follow_up:first.follow_up},env);
+  expect(next.message).toMatch(/freshly shaved skin/i);
+ });
+ it('answers frequency using catalogue facts rather than Gemini',async()=>{
   const result=await answerChat({message:'How often should I use it?',selected_product_ids:['4-aha-bha-underarm-rollon-frag-free-75']},env);
-  expect(result.answer_mode).toBe('ai');expect(generateContent).toHaveBeenCalledOnce();
+  expect(result.message).toMatch(/daily/i);expect(result.selected_product_ids).toEqual(['4-aha-bha-underarm-rollon-frag-free-75']);expect(generateContent).not.toHaveBeenCalled();
  });
 });

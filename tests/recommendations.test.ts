@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { configuredData,generateRecommendations,validateInput,recommendationsRoute,catalogueRoute,matches, type RuleSet } from '../worker/recommendations';
 import type { RecommendationRequest } from '../src/shared/recommendations';
 const data=configuredData()!;
-const base:RecommendationRequest={sessionId:'test',selectedConcerns:['underarm_pigmentation','body_odour'],answers:{underarm_goal:'mild',odour_location:'underarms'},confirmedPhotoSelections:[]};
+const base:RecommendationRequest={sessionId:'test',selectedConcerns:['underarm_pigmentation','body_odour'],answers:{underarm_concerns:['odour'],odour_location:'underarms'},confirmedPhotoSelections:[]};
 const generate=(input:RecommendationRequest)=>generateRecommendations(input,data.catalogue,data.rules);
 const post=(value:unknown)=>new Request('https://example.test/api/recommendations',{method:'POST',headers:{'Content-Type':'application/json'},body:typeof value==='string'?value:JSON.stringify(value)});
 describe('recommendation engine',()=>{
- it('merges a shared product and preserves both reasons and canonical concerns',()=>{const r=generate(base);expect(r.items).toHaveLength(1);expect(r.items[0]).toMatchObject({product:{id:'demo_underarm_roll_on'},quantity:1,matchedConcernIds:['underarm_pigmentation','body_odour']});expect(r.items[0].reasons).toHaveLength(2);expect(r.unmatchedConcernIds).toEqual([]);expect(r).not.toHaveProperty('discount');});
+ it('merges a shared product and preserves both reasons and canonical concerns',()=>{const r=generate(base);expect(r.items).toHaveLength(1);expect(r.items[0]).toMatchObject({product:{id:'demo_underarm_roll_on'},quantity:1,matchedConcernIds:['underarm_pigmentation','body_odour']});expect(r.items[0].reasons).toHaveLength(1);expect(r.unmatchedConcernIds).toEqual([]);expect(r).not.toHaveProperty('discount');});
  it('returns distinct products in canonical order and no invented match',()=>{const r=generate({...base,selectedConcerns:['hair','body_acne_marks'],answers:{hair_goal:['hairline_concerns'],body_acne_goal:'active_bumps'}});expect(r.items.map(x=>x.product.id)).toEqual(['demo_sa_body_wash']);expect(r.unmatchedConcernIds).toEqual(['hair']);});
  it('matches only explicit answers and confirmed photo choices',()=>{
   const photo:RecommendationRequest={...base,selectedConcerns:['body_acne_marks'],answers:{body_acne_goal:'not_sure'},confirmedPhotoSelections:[{areaId:'affected_body',selectedOptionIds:['visible_bumps'],notSure:false,source:'user_confirmed_photo_review'}]};expect(generate(photo).items).toEqual([]);
@@ -17,9 +17,9 @@ describe('recommendation engine',()=>{
   const input:RecommendationRequest={...base,selectedConcerns:['body_acne_marks'],answers:{body_acne_goal:'both',shared_body_skin:'comfortable'},confirmedPhotoSelections:[{areaId:'affected_body',selectedOptionIds:['visible_bumps'],notSure:false,source:'user_confirmed_photo_review'}]};expect(generate(input).items[0].product.id).toBe('demo_body_acne_pack');
   const baseRule=data.rules.rules.find(r=>r.id==='face_dryness')!;const face:RecommendationRequest={...base,selectedConcerns:['face'],answers:{face_goal:['dryness']},confirmedPhotoSelections:[]};const altered:RuleSet={...data.rules,rules:[{...baseRule,id:'z_rule',productId:'demo_lactic_body_lotion'},{...baseRule,id:'a_rule'}]};expect(generateRecommendations(face,data.catalogue,altered).items[0].product.id).toBe('demo_face_moisturizer');
  });
- it('uses the face sunscreen only for face-only sun location',()=>{
-  function sun(location:string[]|null,goal:string|null='patches'){return generate({...base,selectedConcerns:['tanning_sun_damage'],answers:{sun_goal:goal,...(location?{sun_location:location}:{})}}).items.map(x=>x.product.id);}
-  expect(sun(['face'])).toEqual(['demo_face_sunscreen']);expect(sun(['arms'])).toEqual(['demo_body_sunscreen']);expect(sun(['face','arms'])).toEqual(['demo_body_sunscreen']);expect(sun(null)).toEqual(['demo_body_sunscreen']);expect(sun(['face'],null)).toEqual([]);
+ it('routes face and body sun protection based on area and pregnancy',()=>{
+  function sun(areas:string[],pregnancy='no'){return generate({...base,selectedConcerns:['tanning_sun_damage'],answers:{sun_areas:areas,shared_pregnancy:pregnancy}}).items.map(x=>x.product.id);}
+  expect(sun(['face'])).toEqual(['demo_face_sunscreen']);expect(sun(['body'])).toEqual(['demo_body_sunscreen']);expect(sun(['face','body'])).toEqual(['demo_sun_duo']);expect(sun(['face'],'yes')).toEqual(['demo_mineral_sunscreen']);
  });
  it('maps selected bumpy and dry body concerns to demo products',()=>{expect(generate({...base,selectedConcerns:['strawberry_bumpy_skin'],answers:{}}).items[0].product.id).toBe('demo_aha_scrub');expect(generate({...base,selectedConcerns:['general_body_care'],answers:{body_care_goal:['hydration']}}).items[0].product.id).toBe('demo_urea_body_lotion');});
  it('includes a face-specific sample for selected acne or bumps',()=>{const r=generate({...base,selectedConcerns:['general_body_care','face'],answers:{body_care_goal:['hydration'],face_goal:['acne_or_bumps'],face_breakout_pattern:'occasional',face_skin_type:'oily'}});expect(r.items.map(x=>x.product.id)).toEqual(['demo_urea_body_lotion','demo_face_sa_2']);expect(r.unmatchedConcernIds).toEqual([]);});

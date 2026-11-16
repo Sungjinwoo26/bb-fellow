@@ -27,7 +27,7 @@ export function assessmentReducer(s: AssessmentSession, action: AssessmentAction
   if (action.type === 'navigate') return { ...s, currentStep: action.step };
   if (action.type === 'toggleOption') {
     const q = questions.find(q => q.id === action.questionId);
-    if (!q || !s.selectedConcerns.includes(q.concernId) || !q.options.some(o => o.id === action.optionId)) return s;
+    if (!q || !(s.selectedConcerns.includes(q.concernId) || (q.id==='shared_pregnancy' && s.selectedConcerns.length>0)) || !q.options.some(o => o.id === action.optionId)) return s;
     const previous = s.answers[q.id];
     if (q.type === 'single') return { ...s, answers: { ...s.answers, [q.id]: action.optionId } };
     const selected = Array.isArray(previous) ? previous : [];

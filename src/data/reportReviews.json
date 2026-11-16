@@ -1,0 +1,568 @@
+{
+  "demo_sa_body_wash": [
+    {
+      "review_id": "rev_001",
+      "reviewer_name": "Kavya Singh",
+      "individual_rating": 5,
+      "review_title": "Love it!",
+      "review_excerpt": "Used it for 2 months and my body acne has significantly reduced.",
+      "source_url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+    },
+    {
+      "review_id": "rev_002",
+      "reviewer_name": "Simran Bhatia",
+      "individual_rating": 4,
+      "review_title": "Amazing texture",
+      "review_excerpt": "The colour and small beads exfoliate so well, my bacne feels much smoother.",
+      "source_url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+    },
+    {
+      "review_id": "rev_003",
+      "reviewer_name": "Mehak Arora",
+      "individual_rating": 5,
+      "review_title": "Smells great",
+      "review_excerpt": "I really like that the body wash keeps me smelling fresh for hours.",
+      "source_url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+    }
+  ],
+  "demo_ceramide_body_wash": [
+    {
+      "review_id": "rev_006",
+      "reviewer_name": "Paramika Iyer",
+      "individual_rating": 4,
+      "review_title": "Multipurpose and easy !!",
+      "review_excerpt": "The effective yet gentle formula is perfect for regular use. Seeing visible change in my bumps, all without compromising on my skin hydration.",
+      "source_url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+    },
+    {
+      "review_id": "rev_007",
+      "reviewer_name": "Sanya Singhania",
+      "individual_rating": 4,
+      "review_title": "Good for acne prone skin",
+      "review_excerpt": "This body wash perfectly balances exfoliation and nourishment. Works really effectively but doesn't leave my skin dry or stretched at all.",
+      "source_url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+    },
+    {
+      "review_id": "rev_008",
+      "reviewer_name": "Geeta Ghosh",
+      "individual_rating": null,
+      "review_title": "Nice!",
+      "review_excerpt": "This is the best body wash I've ever used! I saw results quickly – smoother, brighter skin. It's gentle yet effective, and perfect for my dry skin",
+      "source_url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+    }
+  ],
+  "demo_niacinamide_lotion": [
+    {
+      "review_id": "rev_010",
+      "reviewer_name": "Divya M.",
+      "individual_rating": null,
+      "review_title": "It really working well without",
+      "review_excerpt": "It really working well without irritating Smell was nyc Reduced my back acne",
+      "source_url": "https://bebodywise.com/product/niacinamide-body-lotion"
+    },
+    {
+      "review_id": "rev_011",
+      "reviewer_name": "Deborah S.",
+      "individual_rating": null,
+      "review_title": "Best lotion for acne",
+      "review_excerpt": "Provides good hydration for the body and when paired with salicylic body wash, there's improvement in fading of mild scars, for deep scars have to use for a longer time ...",
+      "source_url": "https://bebodywise.com/product/niacinamide-body-lotion"
+    },
+    {
+      "review_id": "rev_012",
+      "reviewer_name": "Sayali G.",
+      "individual_rating": 5,
+      "review_title": "10% niacinamide body lotion",
+      "review_excerpt": "This lotion is not at all oily not sticky. It's just amazing. Recommended to all skin type . Love be bodywise products ❤️️",
+      "source_url": "https://bebodywise.com/product/niacinamide-body-lotion"
+    }
+  ],
+  "demo_body_acne_pack": [
+    {
+      "review_id": "rev_013",
+      "reviewer_name": "Kirti J.",
+      "individual_rating": 5,
+      "review_title": "Genuinely fixed my Bacne!",
+      "review_excerpt": "I can see my acne and acne scar are reducing with each passing day",
+      "source_url": "https://bebodywise.com/product/body-care-mini-pack"
+    },
+    {
+      "review_id": "rev_014",
+      "reviewer_name": "Rutuja T",
+      "individual_rating": 4,
+      "review_title": "Only soft skin!",
+      "review_excerpt": "After using it consistently I'm really seeing results. It is very gentle on my skin and also has a moisturising properly. But you have to be consistent... Great products!",
+      "source_url": "https://bebodywise.com/product/body-care-mini-pack"
+    },
+    {
+      "review_id": "rev_015",
+      "reviewer_name": "Ruchika D",
+      "individual_rating": null,
+      "review_title": "My skin loves it!",
+      "review_excerpt": "I had backne and bodywise body wash worked like magic. ... The salicylic acid reduced my body acne and the results were visible.",
+      "source_url": "https://bebodywise.com/product/body-care-mini-pack"
+    }
+  ],
+  "demo_aha_scrub": [
+    {
+      "review_id": "rev_016",
+      "reviewer_name": "Sharon T.",
+      "individual_rating": 5,
+      "review_title": "I absolutely loved the scrub.",
+      "review_excerpt": "I absolutely loved the scrub. Its gentle and effective on the skin and makes it so smooth.",
+      "source_url": "https://bebodywise.com/product/10-aha-body-scrub"
+    },
+    {
+      "review_id": "rev_017",
+      "reviewer_name": "Priyanka L.",
+      "individual_rating": null,
+      "review_title": "Good one",
+      "review_excerpt": "I had a great experience with this one, scrub beads are larger and smoother, they remove dead skin without irritating the skin. Recommended.",
+      "source_url": "https://bebodywise.com/product/10-aha-body-scrub"
+    }
+  ],
+  "demo_pigmentation_cream": [
+    {
+      "review_id": "rev_018",
+      "reviewer_name": "Kashish S",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "After using this cream consistently, the pigmentation has reduced and the skin also feels much smoother.",
+      "source_url": "https://bebodywise.com/product/pigmentation-repair-cream"
+    },
+    {
+      "review_id": "rev_019",
+      "reviewer_name": "Divya D",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "I bought this cream specifically for the pigmentation around my neck.",
+      "source_url": "https://bebodywise.com/product/pigmentation-repair-cream"
+    },
+    {
+      "review_id": "rev_020",
+      "reviewer_name": "Sowjanya K",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "I’ve been using it on my knees, elbows and neck, and the pigmented areas have gradually started looking more even.",
+      "source_url": "https://bebodywise.com/product/pigmentation-repair-cream"
+    }
+  ],
+  "demo_exfoliation_pigmentation_kit": [
+    {
+      "review_id": "rev_022",
+      "reviewer_name": "Aishwarya Nair",
+      "individual_rating": 4,
+      "review_title": "Finally something that actually works!",
+      "review_excerpt": "I had dark patches and rough bumps on my arms for years and I finally found this kit - it has worked wonders.",
+      "source_url": "https://bebodywise.com/product/body-exfoliation-pigmentation-kit"
+    },
+    {
+      "review_id": "rev_023",
+      "reviewer_name": "Ritika Sharma",
+      "individual_rating": 5,
+      "review_title": "Worked for my pigmentation.",
+      "review_excerpt": "I have sensitive skin and was worried about irritation but both products were surprisingly gentle. My elbows and knees feel smoother, and pigmentation has reduced. Surely recommend!",
+      "source_url": "https://bebodywise.com/product/body-exfoliation-pigmentation-kit"
+    },
+    {
+      "review_id": "rev_024",
+      "reviewer_name": "Priya Verma",
+      "individual_rating": 5,
+      "review_title": "Super easy to include into my routine",
+      "review_excerpt": "I wasn’t expecting much but my chicken skin has visibly reduced. The glycolic stick exfoliates without drying and the pigmentation cream felt light and easy to apply.",
+      "source_url": "https://bebodywise.com/product/body-exfoliation-pigmentation-kit"
+    }
+  ],
+  "demo_underarm_kit": [
+    {
+      "review_id": "rev_028",
+      "reviewer_name": "Priya Rawal",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "my body odour is gone and I can finally see my pigmentation reduce too. ... so consistency is important but the result was worth it!",
+      "source_url": "https://bebodywise.com/product/underarm-pigmentation-kit-no-fragrance"
+    },
+    {
+      "review_id": "rev_029",
+      "reviewer_name": "Nitika S",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "i can really see reduction in darkness in my underarms.",
+      "source_url": "https://bebodywise.com/product/underarm-pigmentation-kit-no-fragrance"
+    },
+    {
+      "review_id": "rev_030",
+      "reviewer_name": "Niyati S.",
+      "individual_rating": null,
+      "review_title": null,
+      "review_excerpt": "This kit has really been a great addition to my routine. The roll-on is long-lasting and effective, and the cream has actually lightened my dark underarms....love it!",
+      "source_url": "https://bebodywise.com/product/underarm-pigmentation-kit-no-fragrance"
+    }
+  ],
+  "demo_urea_foot_roll_on": [
+    {
+      "review_id": "rev_038",
+      "reviewer_name": "Aisha J.",
+      "individual_rating": 5,
+      "review_title": "No more cracked heels!",
+      "review_excerpt": "My heels are so cracked..sandals heels mein bilkul acha nhi dikhta..i have tried many options in the market...BUT THIS actual worked, not just temporary fix",
+      "source_url": "https://bebodywise.com/product/20-urea-roll-on-75ml"
+    },
+    {
+      "review_id": "rev_039",
+      "reviewer_name": "Vritika L.",
+      "individual_rating": 5,
+      "review_title": "Soft heelss",
+      "review_excerpt": "Mere rough crack heels ke liye ye ache se kaam kiya...mere heels ab ek dum soft soft hogye hai. Bodywise 10/10 product!",
+      "source_url": "https://bebodywise.com/product/20-urea-roll-on-75ml"
+    },
+    {
+      "review_id": "rev_040",
+      "reviewer_name": "Divya G.",
+      "individual_rating": 5,
+      "review_title": "Winter must-have",
+      "review_excerpt": "every winter mere heels crack ho jaate hai, dry & rough",
+      "source_url": "https://bebodywise.com/product/20-urea-roll-on-75ml"
+    }
+  ],
+  "demo_stretch_mark_serum": [
+    {
+      "review_id": "rev_041",
+      "reviewer_name": "Nitika Sinha",
+      "individual_rating": 5,
+      "review_title": "Finally seeing a difference",
+      "review_excerpt": "After trying so many stretch mark solutions in the market I can finally say I can see a difference...its so non-sticky I love it",
+      "source_url": "https://bebodywise.com/product/anti-stretch-mark-roll-on"
+    },
+    {
+      "review_id": "rev_042",
+      "reviewer_name": "Riya",
+      "individual_rating": 5,
+      "review_title": "Actually seeing a difference",
+      "review_excerpt": "Started using this after postpartum weight gain. The older stretch marks around my stomach have visibly softened in about 2 months.",
+      "source_url": "https://bebodywise.com/product/anti-stretch-mark-roll-on"
+    },
+    {
+      "review_id": "rev_043",
+      "reviewer_name": "Sneha",
+      "individual_rating": 5,
+      "review_title": "Good for weight loss marks",
+      "review_excerpt": "I lost close to 14 kilos last year and got marks near my thighs. This roll on has made them look lighter and skin feels smoother too.",
+      "source_url": "https://bebodywise.com/product/anti-stretch-mark-roll-on"
+    }
+  ],
+  "demo_face_sa_1": [
+    {
+      "review_id": "rev_044",
+      "reviewer_name": "Mahima B.",
+      "individual_rating": 5,
+      "review_title": "Extraordinary product",
+      "review_excerpt": "Amazing product which works on my skin well and gives a bounce texture and controls pimples and marks and show a blushy skin",
+      "source_url": "https://bebodywise.com/product/acne-control-wash"
+    },
+    {
+      "review_id": "rev_045",
+      "reviewer_name": "Rutika J.",
+      "individual_rating": 5,
+      "review_title": "This product has effectively reduced",
+      "review_excerpt": "This product has effectively reduced my blackheads and made my skin visibly brighter and more radiant.",
+      "source_url": "https://bebodywise.com/product/acne-control-wash"
+    },
+    {
+      "review_id": "rev_046",
+      "reviewer_name": "Janna p.",
+      "individual_rating": null,
+      "review_title": "Happy!!",
+      "review_excerpt": "I had many blackheads, especially on my cheeks, but after using it regularly, my skin became clearer and blackheads reduced a lot.",
+      "source_url": "https://bebodywise.com/product/acne-control-wash"
+    }
+  ],
+  "demo_face_sa_2": [
+    {
+      "review_id": "rev_047",
+      "reviewer_name": "Asritha K.",
+      "individual_rating": 5,
+      "review_title": "Using this face wash I",
+      "review_excerpt": "Using this face wash I started noticing my skin became softer and my blackheads have reduced happy using this product",
+      "source_url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+    },
+    {
+      "review_id": "rev_049",
+      "reviewer_name": "Pavithra M.",
+      "individual_rating": null,
+      "review_title": "Reduces Pimples",
+      "review_excerpt": "Have seen a noticable difference after using for 3 months",
+      "source_url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+    }
+  ],
+  "demo_face_bp_25": [
+    {
+      "review_id": "rev_050",
+      "reviewer_name": "Gansa M.",
+      "individual_rating": null,
+      "review_title": "It's completely reduced acne",
+      "review_excerpt": "I already use this facewash it's amazing product now it's comes with more update it's control my acne and inflammation reduce redness but it's takes time atleast two continue usage ...",
+      "source_url": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+    },
+    {
+      "review_id": "rev_051",
+      "reviewer_name": "Soumita G.",
+      "individual_rating": null,
+      "review_title": "It is really a good",
+      "review_excerpt": "It is really a good face wash for acne prone skin. Definitely purchase this one",
+      "source_url": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+    },
+    {
+      "review_id": "rev_052",
+      "reviewer_name": "Manisha S.",
+      "individual_rating": 5,
+      "review_title": "Must buy",
+      "review_excerpt": "It's too good and effective",
+      "source_url": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+    }
+  ],
+  "demo_pimple_patch": [
+    {
+      "review_id": "rev_053",
+      "reviewer_name": "Priyanka B.",
+      "individual_rating": 5,
+      "review_title": "Great",
+      "review_excerpt": "It works well",
+      "source_url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+    },
+    {
+      "review_id": "rev_054",
+      "reviewer_name": "AKANKSHA Y.",
+      "individual_rating": null,
+      "review_title": "Good one , must try!",
+      "review_excerpt": "I found it very effective from first application itself",
+      "source_url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+    },
+    {
+      "review_id": "rev_055",
+      "reviewer_name": "Itishree P.",
+      "individual_rating": null,
+      "review_title": "Very effective",
+      "review_excerpt": "Got hands-on it and very effective,loved it!",
+      "source_url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+    }
+  ],
+  "demo_face_moisturizer": [
+    {
+      "review_id": "rev_056",
+      "reviewer_name": "Amruthavarshini K.",
+      "individual_rating": null,
+      "review_title": "Moisturizer",
+      "review_excerpt": "Too good non sticky, easy blend, help boosting and balance moisture on face. Best product",
+      "source_url": "https://bebodywise.com/product/1-peptide-ceramide-moisturizer"
+    },
+    {
+      "review_id": "rev_057",
+      "reviewer_name": "Shalini V.",
+      "individual_rating": null,
+      "review_title": "It's really a wonderful moisturizer",
+      "review_excerpt": "It's really a wonderful moisturizer since I used. Absorbs quickly and wonderful results",
+      "source_url": "https://bebodywise.com/product/1-peptide-ceramide-moisturizer"
+    },
+    {
+      "review_id": "rev_058",
+      "reviewer_name": "Prajakta S.",
+      "individual_rating": null,
+      "review_title": "Superlight and hydrating. Thanks",
+      "review_excerpt": "Superlight and hydrating. Thanks",
+      "source_url": "https://bebodywise.com/product/1-peptide-ceramide-moisturizer"
+    }
+  ],
+  "demo_face_sunscreen": [
+    {
+      "review_id": "rev_059",
+      "reviewer_name": "Vivica G",
+      "individual_rating": 5,
+      "review_title": "So far, so good",
+      "review_excerpt": "I was a bit hesitant to buy this knowing that most sunscreens tend to be sticky and leave a white film on your face making it look ashy.",
+      "source_url": "https://bebodywise.com/product/ultra-light-sunscreen-spf50"
+    },
+    {
+      "review_id": "rev_060",
+      "reviewer_name": "Lata S.",
+      "individual_rating": 5,
+      "review_title": "Amazing!",
+      "review_excerpt": "Does the job perfectly and prevent us from sunburn all the time.",
+      "source_url": "https://bebodywise.com/product/ultra-light-sunscreen-spf50"
+    },
+    {
+      "review_id": "rev_061",
+      "reviewer_name": "Sinjini",
+      "individual_rating": 5,
+      "review_title": "Does the job so so well",
+      "review_excerpt": "I have used it on my face, and it has kept me from getting sun spots etc. I use it every time I go outside!",
+      "source_url": "https://bebodywise.com/product/ultra-light-sunscreen-spf50"
+    }
+  ],
+  "demo_mineral_sunscreen": [
+    {
+      "review_id": "rev_064",
+      "reviewer_name": "Mitilesh",
+      "individual_rating": 5,
+      "review_title": "Finally a pregnancy safe sunscreen!",
+      "review_excerpt": "This sunscreen is a winner for both me and my partner! The pregnancy-safe formula is a huge plus. Definitely a repurchase!",
+      "source_url": "https://bebodywise.com/product/lightest-mineral-sunscreen-spf50"
+    },
+    {
+      "review_id": "rev_065",
+      "reviewer_name": "Ganga",
+      "individual_rating": 5,
+      "review_title": "Love it, will repurchase it forever!",
+      "review_excerpt": "This sunscreen is so comfortable to wear! As someone with sensitive skin, finding a good mineral sunscreen is tough.",
+      "source_url": "https://bebodywise.com/product/lightest-mineral-sunscreen-spf50"
+    },
+    {
+      "review_id": "rev_066",
+      "reviewer_name": "Jyotsma",
+      "individual_rating": 5,
+      "review_title": "Does the job very well",
+      "review_excerpt": "Mineral sunscreen that is lightweight! It absorbs quickly, leaves no white cast, and isn't greasy at all. Plus, it's surprisingly moisturizing. Highly recommend",
+      "source_url": "https://bebodywise.com/product/lightest-mineral-sunscreen-spf50"
+    }
+  ],
+  "demo_body_sunscreen": [
+    {
+      "review_id": "rev_067",
+      "reviewer_name": "Riya Agarwal",
+      "individual_rating": 5,
+      "review_title": "Lightweight and effective",
+      "review_excerpt": "I use this every morning before stepping out. It spreads easily and does not make my skin dry.",
+      "source_url": "https://bebodywise.com/product/body-sunscreen-lotion-with-spf-50"
+    },
+    {
+      "review_id": "rev_068",
+      "reviewer_name": "Pooja Mehta",
+      "individual_rating": 5,
+      "review_title": "Perfect for summers",
+      "review_excerpt": "Lightweight, absorbs fast, and easy to apply on arms, back and legs before leaving home.",
+      "source_url": "https://bebodywise.com/product/body-sunscreen-lotion-with-spf-50"
+    }
+  ],
+  "demo_hair_fall_shampoo": [
+    {
+      "review_id": "rev_073",
+      "reviewer_name": "RanjanaGhosh R.",
+      "individual_rating": null,
+      "review_title": "The shampoo is good. Cant",
+      "review_excerpt": "The shampoo is good. Cant say that the hair fall has gone but yes it is much lesser",
+      "source_url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+    },
+    {
+      "review_id": "rev_074",
+      "reviewer_name": "Savitha K.",
+      "individual_rating": null,
+      "review_title": "I have been used it",
+      "review_excerpt": "I have been used it for 2 yrs. It's actually increased my hair length and thickness. Best shampoo ❤️️",
+      "source_url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+    }
+  ],
+  "demo_hair_growth_serum": [
+    {
+      "review_id": "rev_076",
+      "reviewer_name": "Shruti L.",
+      "individual_rating": 5,
+      "review_title": "Fab Results! Super Impressed",
+      "review_excerpt": "This serum is just magical! I have seen such an improvement in my hair growth and that also just in 12 weeks! Very powerful & effective. BEST IN THE MARKET",
+      "source_url": "https://bebodywise.com/product/advanced-hair-growth-serum"
+    },
+    {
+      "review_id": "rev_077",
+      "reviewer_name": "Ekshita Goyal",
+      "individual_rating": 5,
+      "review_title": "My hair length increased",
+      "review_excerpt": "Using this animexil serum for 4 months has shown me such great results. My hair is long and healthy.",
+      "source_url": "https://bebodywise.com/product/advanced-hair-growth-serum"
+    },
+    {
+      "review_id": "rev_078",
+      "reviewer_name": "Kritika T.",
+      "individual_rating": 5,
+      "review_title": "Can't believe the Hair Growth",
+      "review_excerpt": "My hair volume has increase my hair just feels healthier.",
+      "source_url": "https://bebodywise.com/product/advanced-hair-growth-serum"
+    }
+  ],
+  "demo_zpto_shampoo": [
+    {
+      "review_id": "rev_079",
+      "reviewer_name": "Anusha Chawla",
+      "individual_rating": 5,
+      "review_title": "No more dryness after dandruff care",
+      "review_excerpt": "Finally found a dandruff shampoo that doesn’t dry my hair! My scalp feels clean and calm after every wash",
+      "source_url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+    },
+    {
+      "review_id": "rev_080",
+      "reviewer_name": "Pragati Apte",
+      "individual_rating": 5,
+      "review_title": "Worth the switch",
+      "review_excerpt": "Game changer. Cleared stubborn dandruff without stripping my hair. Highly recommend this one",
+      "source_url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+    },
+    {
+      "review_id": "rev_081",
+      "reviewer_name": "Prapti Jain",
+      "individual_rating": 4.5,
+      "review_title": "Can see visible results",
+      "review_excerpt": "Usually my scalp feels tight after washing, but this keeps it hydrated and flake-free all week",
+      "source_url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+    }
+  ],
+  "demo_hair_conditioner": [
+    {
+      "review_id": "rev_082",
+      "reviewer_name": "Chhaya t.",
+      "individual_rating": 5,
+      "review_title": "Work efficiently",
+      "review_excerpt": "Great texture,work with little quantity. removes all frizzyness ,smoothen your hair and feels wow",
+      "source_url": "https://bebodywise.com/product/deep-moisturizing-conditioner"
+    },
+    {
+      "review_id": "rev_083",
+      "reviewer_name": "Kanchi M.",
+      "individual_rating": null,
+      "review_title": "Keratin shampoo -conditioner best duo",
+      "review_excerpt": "(May be more than that) i just love this conditioner, it leavs hair so smooth and manageable and bouncy ❤️️ i pair it with Keratin shampoo.",
+      "source_url": "https://bebodywise.com/product/deep-moisturizing-conditioner"
+    },
+    {
+      "review_id": "rev_084",
+      "reviewer_name": "Idamakanti K.",
+      "individual_rating": null,
+      "review_title": "Amazing Results",
+      "review_excerpt": "The hair became soo smooth .Loved it.I would love to buy it again...",
+      "source_url": "https://bebodywise.com/product/deep-moisturizing-conditioner"
+    }
+  ],
+  "demo_frizz_serum": [
+    {
+      "review_id": "rev_085",
+      "reviewer_name": "Ishita Kapoor",
+      "individual_rating": 5,
+      "review_title": "Smooth even on day two",
+      "review_excerpt": "Applied this on damp hair after washing and my hair still looked smooth two days later!",
+      "source_url": "https://bebodywise.com/product/anti-frizz-serum"
+    },
+    {
+      "review_id": "rev_086",
+      "reviewer_name": "Rhea Deshmukh",
+      "individual_rating": 5,
+      "review_title": "Finally, less frizz!",
+      "review_excerpt": "My wavy hair usually gets so frizzy after it dries, especially when I let it air dry. This serum has made my waves look soo much nicer.",
+      "source_url": "https://bebodywise.com/product/anti-frizz-serum"
+    },
+    {
+      "review_id": "rev_087",
+      "reviewer_name": "Mehak Batra",
+      "individual_rating": 5,
+      "review_title": "Soft baal, kam frizz",
+      "review_excerpt": "Mere baal in general kaafi frizzy aur dry hai. ... Iss serum ko use karne ke baad se frizz kaafi kam dikhta hai and fragrance bhi kaafi achi hai",
+      "source_url": "https://bebodywise.com/product/anti-frizz-serum"
+    }
+  ]
+}

@@ -599,3 +599,16 @@ questions.push({ id:'bumpy_pigmentation_same_area', concernId:'strawberry_bumpy_
 const careGoal=questions.find(q=>q.id==='body_care_goal')!;
 careGoal.label='What are you experiencing?';
 careGoal.options=[{id:'hydration',label:'Dry body skin'},{id:'very_dry',label:'Very dry or flaky body skin'},{id:'dry_feet_or_heels',label:'Rough or cracked heels'},{id:'stretch_marks',label:'Stretch marks'}];
+
+// Streamlined assessment paths; legacy definitions remain for stored-session compatibility.
+questions.push(
+ {id:'underarm_concerns',concernId:'underarm_pigmentation',label:'What are you experiencing under your arms?',type:'multi',allowSkip:true,options:[{id:'odour',label:'Underarm odour'},{id:'pigmentation',label:'Darker-looking underarms'}]},
+ {id:'underarm_irritation',concernId:'underarm_pigmentation',label:'Is the area irritated or broken, or have you reacted to underarm products before?',type:'single',allowSkip:true,options:[{id:'yes',label:'Yes'},{id:'no',label:'No'}]},
+ {id:'shared_pregnancy',concernId:'underarm_pigmentation',label:'Are you pregnant or breastfeeding?',type:'single',allowSkip:true,options:[{id:'yes',label:'Yes'},{id:'no',label:'No'}]},
+ {id:'sun_areas',concernId:'tanning_sun_damage',label:'Which areas are affected or exposed to the sun?',type:'multi',allowSkip:true,options:[{id:'face',label:'Face'},{id:'body',label:'Body'}]},
+ {id:'hair_concerns_new',concernId:'hair',label:'What are you experiencing?',type:'multi',allowSkip:true,options:[{id:'fall',label:'Hair fall or thinning'},{id:'flakes',label:'Dandruff or scalp flakes'},{id:'dry',label:'Dry, rough or frizzy hair'},{id:'damage',label:'Breakage or damaged lengths'}]},
+ {id:'hair_fall_details',concernId:'hair',label:'What have you noticed?',type:'multi',allowSkip:true,options:[{id:'shedding',label:'More hair shedding'},{id:'thinning',label:'A wider part or visibly thinner hair'},{id:'hairline',label:'Changes around the hairline'}]},
+ {id:'hair_age',concernId:'hair',label:'Are you 18 years or older?',type:'single',allowSkip:true,options:[{id:'yes',label:'Yes'},{id:'no',label:'No'}]},
+ {id:'hair_flake_details',concernId:'hair',label:'What are you experiencing on your scalp?',type:'multi',allowSkip:true,options:[{id:'flakes',label:'Visible scalp flakes'},{id:'itching',label:'Scalp itching'},{id:'irritated',label:'Scalp is sore, broken or irritated'}]},
+ {id:'hair_length_details',concernId:'hair',label:'What have you noticed about your hair lengths?',type:'multi',allowSkip:true,options:[{id:'dry',label:'Dry or rough lengths'},{id:'frizz',label:'Frizz or flyaways'},{id:'damage',label:'Damaged hair or breakage'}]}
+);

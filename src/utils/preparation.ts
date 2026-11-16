@@ -4,7 +4,7 @@ import { getPhotoAreas } from './photoAreas';
 import type { AssessmentSession } from '../app/session';
 import type { ConfirmedPhotoSelection } from '../app/analysisState';
 import type { RecommendationRequest } from '../shared/recommendations';
-export const PREPARATION_DURATION_MS=30_000;
+export const PREPARATION_DURATION_MS=15_000;
 export function timer(startedAt:number,now:number) {const elapsed=Math.max(0,now-startedAt);const remaining=Math.max(0,PREPARATION_DURATION_MS-elapsed);return {remaining,progress:Math.min(1,elapsed/PREPARATION_DURATION_MS),display:`${String(Math.floor(Math.ceil(remaining/1000)/60)).padStart(2,'0')}:${String(Math.ceil(remaining/1000)%60).padStart(2,'0')}`};}
 export function validStart(value:unknown,now:number):value is number {return typeof value==='number' && Number.isFinite(value) && value>0 && value<=now+1000;}
 export function requestFor(session:AssessmentSession,confirmed:ConfirmedPhotoSelection[]):RecommendationRequest {

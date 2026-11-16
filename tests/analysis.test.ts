@@ -10,7 +10,7 @@ function request(area='affected_body', bytes=jpeg, type='image/jpeg') {const f=n
 function provider(model:unknown,status=200):typeof fetch {return vi.fn(async()=>new Response(JSON.stringify({candidates:[{content:{parts:[{text:JSON.stringify(model)}]}}]}),{status,headers:{'Content-Type':'application/json'}})) as unknown as typeof fetch;}
 describe('visual validation',()=>{
  it('enforces area allowlists, uniqueness, schema and config',()=>{
-  expect(AREA_ALLOWED_OPTIONS.scalp_hair).toEqual(['visible_flakes']); expect(validateModel(valid,'affected_body')).toEqual(valid);
+  expect(AREA_ALLOWED_OPTIONS.scalp_hair).toEqual(['visible_flakes','visible_frizz']); expect(validateModel(valid,'affected_body')).toEqual(valid);
   expect(validateModel(valid,'scalp_hair')).toBeNull(); expect(validateModel({...valid,observations:[...valid.observations,...valid.observations]},'affected_body')).toBeNull();
   expect(validateModel({...valid,extra:true},'affected_body')).toBeNull(); expect(publicConfig({...env,GEMINI_DATA_MODE:'invalid'}).analysisAvailable).toBe(false); expect(publicConfig({...env,GEMINI_DATA_MODE:undefined}).analysisAvailable).toBe(false);
  });

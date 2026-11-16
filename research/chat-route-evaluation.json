@@ -1,0 +1,2148 @@
+{
+  "created_at": "2026-11-14T11:41:56.508Z",
+  "conditions": "Synthetic questions; provider disabled; same catalogue and starting context. New route calls legacy internally.",
+  "cases": [
+    {
+      "name": "Body wash for dry body skin",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I need a body wash for dry skin",
+              "status": "answered",
+              "response": "**5% Niacinamide Body Wash:** Glow & Pollution Protection\n\n**5% Niacinamide Body Wash - 700 ml:** Glow & Pollution Protection\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin",
+              "selected": [
+                "5-niacinamide-body-wash",
+                "niacinamide-body-wash-700",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "5% Niacinamide Body Wash",
+                  "url": "https://bebodywise.com/product/5-niacinamide-body-wash"
+                },
+                {
+                  "title": "5% Niacinamide Body Wash - 700 ml",
+                  "url": "https://bebodywise.com/product/niacinamide-body-wash-700"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "5-niacinamide-body-wash",
+                  "name": "5% Niacinamide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-niacinamide-body-wash.jpg"
+                },
+                {
+                  "id": "niacinamide-body-wash-700",
+                  "name": "5% Niacinamide Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/niacinamide-body-wash-700.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I need a body wash for dry skin",
+              "status": "answered",
+              "response": "**5% Niacinamide Body Wash:** Glow & Pollution Protection\n\n**5% Niacinamide Body Wash - 700 ml:** Glow & Pollution Protection\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin",
+              "selected": [
+                "5-niacinamide-body-wash",
+                "niacinamide-body-wash-700",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "5% Niacinamide Body Wash",
+                  "url": "https://bebodywise.com/product/5-niacinamide-body-wash"
+                },
+                {
+                  "title": "5% Niacinamide Body Wash - 700 ml",
+                  "url": "https://bebodywise.com/product/niacinamide-body-wash-700"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "5-niacinamide-body-wash",
+                  "name": "5% Niacinamide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-niacinamide-body-wash.jpg"
+                },
+                {
+                  "id": "niacinamide-body-wash-700",
+                  "name": "5% Niacinamide Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/niacinamide-body-wash-700.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "5-niacinamide-body-wash",
+                  "name": "5% Niacinamide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-niacinamide-body-wash.jpg",
+                  "url": "https://bebodywise.com/product/5-niacinamide-body-wash",
+                  "reason": "Glow & Pollution Protection"
+                },
+                {
+                  "id": "niacinamide-body-wash-700",
+                  "name": "5% Niacinamide Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/niacinamide-body-wash-700.jpg",
+                  "url": "https://bebodywise.com/product/niacinamide-body-wash-700",
+                  "reason": "Glow & Pollution Protection"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash",
+                  "reason": "For Body Acne and Dry Skin"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Explicit product format and fragrance exclusion",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I need a body wash for dry body skin without fragrance",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash - 375 mL:** FOR: Body Acne & Strawberry Skin\n\n**2.5% Benzoyl Peroxide Body wash:** FOR: Reducing Severe Back, Butt & Body Acne\n\n**1% Salicylic Acid Body Wash - 250 mL:** Controlling Body Acne & Bumps",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "2-5-benzoyl-peroxide-bodywash",
+                "1-salicylic-acid-body-wash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "2.5% Benzoyl Peroxide Body wash",
+                  "url": "https://bebodywise.com/product/2-5-benzoyl-peroxide-bodywash"
+                },
+                {
+                  "title": "1% Salicylic Acid Body Wash - 250 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "2-5-benzoyl-peroxide-bodywash",
+                  "name": "2.5% Benzoyl Peroxide Body wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg"
+                },
+                {
+                  "id": "1-salicylic-acid-body-wash",
+                  "name": "1% Salicylic Acid Body Wash - 250 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I need a body wash for dry body skin without fragrance",
+              "status": "no_information",
+              "response": "I couldn’t find an available product that meets those requirements.",
+              "selected": [],
+              "options": [],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Misspellings and merged words",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Pls sugest a bodywash for body acne",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                },
+                {
+                  "id": "2-5-benzoyl-peroxide-bodywash",
+                  "name": "2.5% Benzoyl Peroxide Body wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg"
+                },
+                {
+                  "id": "salicylic-acid-face-wash",
+                  "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "1-salicylic-acid-body-wash",
+                  "name": "1% Salicylic Acid Body Wash - 250 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg"
+                },
+                {
+                  "id": "niacinamide-body-lotion",
+                  "name": "10% Niacinamide Body Lotion",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/niacinamide-body-lotion.jpg"
+                },
+                {
+                  "id": "salicylic-acid-body-wash-700",
+                  "name": "1% Salicylic Acid Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-body-wash-700.jpg"
+                },
+                {
+                  "id": "face-and-body-acne-kit",
+                  "name": "Face & Body Acne Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/face-and-body-acne-kit.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Pls sugest a bodywash for body acne",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                },
+                {
+                  "id": "2-5-benzoyl-peroxide-bodywash",
+                  "name": "2.5% Benzoyl Peroxide Body wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg"
+                },
+                {
+                  "id": "salicylic-acid-face-wash",
+                  "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "1-salicylic-acid-body-wash",
+                  "name": "1% Salicylic Acid Body Wash - 250 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg"
+                },
+                {
+                  "id": "niacinamide-body-lotion",
+                  "name": "10% Niacinamide Body Lotion",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/niacinamide-body-lotion.jpg"
+                },
+                {
+                  "id": "salicylic-acid-body-wash-700",
+                  "name": "1% Salicylic Acid Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-body-wash-700.jpg"
+                },
+                {
+                  "id": "face-and-body-acne-kit",
+                  "name": "Face & Body Acne Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/face-and-body-acne-kit.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Misspelled hair loss",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "my hair is fallng a lot what shampoo should i use",
+              "status": "answered",
+              "response": "**Keratin Shampoo for Hair Fall:** Sulphate Free Shampoo for Hair Fall Clinically Tested\n\n**1% Ketoconazole Dandruff Shampoo:** Dandruff Control\n\n**1% Ketoconazole Anti-Dandruff Shampoo (250ml):** For Reducing Dandruff & Flakiness",
+              "selected": [
+                "hair-fall-control-shampoo",
+                "1-ketoconazole-dandruff-shampoo-150ml",
+                "1-ketoconazole-dandruff-shampoo-250ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "Keratin Shampoo for Hair Fall",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+                },
+                {
+                  "title": "1% Ketoconazole Dandruff Shampoo",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-150ml"
+                },
+                {
+                  "title": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-250ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-150ml",
+                  "name": "1% Ketoconazole Dandruff Shampoo",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-150ml.jpg"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-250ml",
+                  "name": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-250ml.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "my hair is fallng a lot what shampoo should i use",
+              "status": "answered",
+              "response": "**Keratin Shampoo for Hair Fall:** Sulphate Free Shampoo for Hair Fall Clinically Tested\n\n**1% Ketoconazole Dandruff Shampoo:** Dandruff Control\n\n**1% Ketoconazole Anti-Dandruff Shampoo (250ml):** For Reducing Dandruff & Flakiness",
+              "selected": [
+                "hair-fall-control-shampoo",
+                "1-ketoconazole-dandruff-shampoo-150ml",
+                "1-ketoconazole-dandruff-shampoo-250ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "Keratin Shampoo for Hair Fall",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+                },
+                {
+                  "title": "1% Ketoconazole Dandruff Shampoo",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-150ml"
+                },
+                {
+                  "title": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-250ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-150ml",
+                  "name": "1% Ketoconazole Dandruff Shampoo",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-150ml.jpg"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-250ml",
+                  "name": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-250ml.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo",
+                  "reason": "Sulphate Free Shampoo for Hair Fall Clinically Tested"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-150ml",
+                  "name": "1% Ketoconazole Dandruff Shampoo",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-150ml.jpg",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-150ml",
+                  "reason": "Dandruff Control"
+                },
+                {
+                  "id": "1-ketoconazole-dandruff-shampoo-250ml",
+                  "name": "1% Ketoconazole Anti-Dandruff Shampoo (250ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-ketoconazole-dandruff-shampoo-250ml.jpg",
+                  "url": "https://bebodywise.com/product/1-ketoconazole-dandruff-shampoo-250ml",
+                  "reason": "For Reducing Dandruff & Flakiness"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Face and body area distinction",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I have pimples on my back and chest, what should I use?",
+              "status": "answered",
+              "response": "Here are a few options for body acne and marks:\n\n1. **1% Salicylic Acid Body Wash**: Salicylic acid exfoliates and clears pores, making it useful for body acne and bumps.\n2. **1% Salicylic Ceramide Body Wash**: Salicylic acid exfoliates while ceramides support the skin barrier, making it useful for body acne and dry skin.\n\nDoes your body skin often feel dry?",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I have pimples on my back and chest, what should I use?",
+              "status": "answered",
+              "response": "Here are a few options for body acne and marks:\n\n1. **1% Salicylic Acid Body Wash**: Salicylic acid exfoliates and clears pores, making it useful for body acne and bumps.\n2. **1% Salicylic Ceramide Body Wash**: Salicylic acid exfoliates while ceramides support the skin barrier, making it useful for body acne and dry skin.\n\nDoes your body skin often feel dry?",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml",
+                  "reason": "FOR: Body Acne & Strawberry Skin"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash",
+                  "reason": "For Body Acne and Dry Skin"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Two product comparison and prices",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Compare these products and tell me both prices",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash:** MRP ₹489; current price ₹399.\n\n**1% Salicylic Ceramide Body Wash:** ₹549.",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Compare these products and tell me both prices",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash - 375 mL:** FOR: Body Acne & Strawberry Skin Catalogue price: ₹399.\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin Catalogue price: ₹549.",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml",
+                  "reason": "FOR: Body Acne & Strawberry Skin"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash",
+                  "reason": "For Body Acne and Dry Skin"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Comparison, usage and ingredients",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Compare both, what ingredients do they contain and how do I use them?",
+              "status": "answered",
+              "response": "1% Salicylic Acid Body Wash - 375 mL: FOR: Body Acne & Strawberry Skin 1% Salicylic Ceramide Body Wash: For Body Acne and Dry Skin What would you most like help with?",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Compare both, what ingredients do they contain and how do I use them?",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash - 375 mL:** FOR: Body Acne & Strawberry Skin Ingredients: 1% Salicylic Acid, Chamomile Extract, Pentavitin. Use: Daily; Step 1 : Take adequate amount of bodywash in your palms/loofah. Step 2 : Apply on wet skin in a gentle circular motion. Step 3 : Rinse thoroughly once you are done.; Rinse thoroughly.\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin Ingredients: not confirmed in the catalogue. Use: Step 1: Apply a generous amount of body wash to your palms or loofah. Massage onto wet skin in a circular motion. Step 2: Rinse thoroughly after cleansing. Remember to apply sun protection after exfoliating.; Rinse thoroughly.",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml",
+                  "reason": "FOR: Body Acne & Strawberry Skin"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash",
+                  "reason": "For Body Acne and Dry Skin"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Comparison and individual recommendation",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Compare these shampoos and tell me which is better for an oily scalp and the prices",
+              "status": "answered",
+              "response": "**1% ZPTO Anti-Dandruff Shampoo:** MRP ₹549; current price ₹499.\n\n**Keratin Shampoo for Hair Fall:** MRP ₹499; current price ₹449.",
+              "selected": [
+                "1-zpto-anti-dandruff-shampoo",
+                "hair-fall-control-shampoo"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+                  "url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+                },
+                {
+                  "title": "Keratin Shampoo for Hair Fall",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-zpto-anti-dandruff-shampoo",
+                  "name": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-zpto-anti-dandruff-shampoo.jpg"
+                },
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Compare these shampoos and tell me which is better for an oily scalp and the prices",
+              "status": "answered",
+              "response": "**1% ZPTO Anti-Dandruff Shampoo (200ml):** To control moderate dandruff without the dryness Catalogue price: ₹499.\n\n**Keratin Shampoo for Hair Fall:** Sulphate Free Shampoo for Hair Fall Clinically Tested Catalogue price: ₹449.\n\nThe available product information does not establish which is better for your individual needs.",
+              "selected": [
+                "1-zpto-anti-dandruff-shampoo",
+                "hair-fall-control-shampoo"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+                  "url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo"
+                },
+                {
+                  "title": "Keratin Shampoo for Hair Fall",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-zpto-anti-dandruff-shampoo",
+                  "name": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-zpto-anti-dandruff-shampoo.jpg"
+                },
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-zpto-anti-dandruff-shampoo",
+                  "name": "1% ZPTO Anti-Dandruff Shampoo (200ml)",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/1-zpto-anti-dandruff-shampoo.jpg",
+                  "url": "https://bebodywise.com/product/1-zpto-anti-dandruff-shampoo",
+                  "reason": "To control moderate dandruff without the dryness"
+                },
+                {
+                  "id": "hair-fall-control-shampoo",
+                  "name": "Keratin Shampoo for Hair Fall",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-fall-control-shampoo.jpg",
+                  "url": "https://bebodywise.com/product/hair-fall-control-shampoo",
+                  "reason": "Sulphate Free Shampoo for Hair Fall Clinically Tested"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Two exact named products in one question",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Compare 2% Salicylic Acid Face Wash and 2.5% Benzoyl Peroxide Facewash, what do they cost?",
+              "status": "answered",
+              "response": "**2% Salicylic Acid Face Wash:** MRP ₹299; current price ₹232.\n\n**2.5% Benzoyl Peroxide Facewash:** MRP ₹399; current price ₹199.",
+              "selected": [
+                "2-salicylic-acid-face-wash",
+                "benzoyl-peroxide-facewash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "2% Salicylic Acid Face Wash",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+                },
+                {
+                  "title": "2.5% Benzoyl Peroxide Facewash",
+                  "url": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "benzoyl-peroxide-facewash",
+                  "name": "2.5% Benzoyl Peroxide Facewash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/benzoyl-peroxide-facewash.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Compare 2% Salicylic Acid Face Wash and 2.5% Benzoyl Peroxide Facewash, what do they cost?",
+              "status": "answered",
+              "response": "**2% Salicylic Acid Face Wash:** For Mild Occasional Acne | Oily Skin Type | Suitable for 13+ yrs Catalogue price: ₹232.\n\n**2.5% Benzoyl Peroxide Facewash:** For Persistent Severe Acne | All Skin Types | Suitable for 13+ yrs Catalogue price: ₹199.",
+              "selected": [
+                "2-salicylic-acid-face-wash",
+                "benzoyl-peroxide-facewash"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "2% Salicylic Acid Face Wash",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+                },
+                {
+                  "title": "2.5% Benzoyl Peroxide Facewash",
+                  "url": "https://bebodywise.com/product/benzoyl-peroxide-facewash"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "benzoyl-peroxide-facewash",
+                  "name": "2.5% Benzoyl Peroxide Facewash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/benzoyl-peroxide-facewash.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash",
+                  "reason": "For Mild Occasional Acne | Oily Skin Type | Suitable for 13+ yrs"
+                },
+                {
+                  "id": "benzoyl-peroxide-facewash",
+                  "name": "2.5% Benzoyl Peroxide Facewash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/benzoyl-peroxide-facewash.jpg",
+                  "url": "https://bebodywise.com/product/benzoyl-peroxide-facewash",
+                  "reason": "For Persistent Severe Acne | All Skin Types | Suitable for 13+ yrs"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Single product multiple questions",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "What are its ingredients and price?",
+              "status": "answered",
+              "response": "Price: ₹399 (catalogue price).\n\nIngredients: The product page highlights 1% Salicylic Acid, Chamomile Extract, Pentavitin.",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "What are its ingredients and price?",
+              "status": "answered",
+              "response": "Price: ₹399 (catalogue price).\n\nIngredients: The product page highlights 1% Salicylic Acid, Chamomile Extract, Pentavitin.",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml",
+                  "reason": "FOR: Body Acne & Strawberry Skin"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ambiguous pronoun with two products",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "How often should I apply it?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "How often should I apply it?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash"
+              ],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pregnancy and ingredient constraint",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I am pregnant; recommend a body wash without salicylic acid",
+              "status": "no_information",
+              "response": "I can’t diagnose or offer personalised medical advice, but a qualified expert can guide you.",
+              "selected": [],
+              "options": [],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I am pregnant; recommend a body wash without salicylic acid",
+              "status": "no_information",
+              "response": "I can’t diagnose or offer personalised medical advice, but a qualified expert can guide you.",
+              "selected": [],
+              "options": [],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Unrelated question",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "Can you write a poem about the moon?",
+              "status": "answered",
+              "response": "I can help with Bodywise products, ingredients, skincare and hair care.",
+              "selected": [],
+              "options": [],
+              "sources": [],
+              "recommendations": [],
+              "cards": []
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "Can you write a poem about the moon?",
+              "status": "answered",
+              "response": "I can help with Bodywise products, ingredients, skincare and hair care.",
+              "selected": [],
+              "options": [],
+              "sources": [],
+              "recommendations": [],
+              "cards": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Noisy voice-like transcription",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "body smell armpit roll on no perfume please",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.\n\nWhich format would you prefer?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "body smell armpit roll on no perfume please",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.\n\nWhich format would you prefer?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml",
+                  "reason": "For Pigmentation Reduction & Odour Control "
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit",
+                  "reason": "For Underarm Odour and Severe Pigmentation"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Concern then area then product",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I have body odour",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.\n\nWhich format would you prefer?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            },
+            {
+              "question": "Underarms",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": []
+            },
+            {
+              "question": "How do I use it?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I have body odour",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.\n\nWhich format would you prefer?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml",
+                  "reason": "For Pigmentation Reduction & Odour Control "
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit",
+                  "reason": "For Underarm Odour and Severe Pigmentation"
+                }
+              ],
+              "follow_up": null
+            },
+            {
+              "question": "Underarms",
+              "status": "answered",
+              "response": "Here are a few options for body odour:\n\n1. **6% AHA BHA Underarm Roll On - 75ml - Flora**: Exfoliating acids remove dead skin, targeting underarm odour and pigmentation.\n2. **Advanced Underarm Pigmentation Kit**: The roll-on and cream work together as a routine for underarm odour and pigmentation.",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml",
+                  "reason": "For Pigmentation Reduction & Odour Control "
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit",
+                  "reason": "For Underarm Odour and Severe Pigmentation"
+                }
+              ]
+            },
+            {
+              "question": "How do I use it?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml",
+                "advanced-underarm-pigmentation-kit"
+              ],
+              "options": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "advanced-underarm-pigmentation-kit",
+                  "name": "Advanced Underarm Pigmentation Kit",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/advanced-underarm-pigmentation-kit.jpg"
+                }
+              ],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                },
+                {
+                  "title": "Advanced Underarm Pigmentation Kit",
+                  "url": "https://bebodywise.com/product/advanced-underarm-pigmentation-kit"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Product detail followed by yes",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "How do I use this product?",
+              "status": "answered",
+              "response": "Apply directly on the underarm skin Roll evenly on and allow the product to dry completely. Would you like a few tips for using it comfortably?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": "routine"
+            },
+            {
+              "question": "Yes",
+              "status": "answered",
+              "response": "Avoid applying it to irritated or freshly shaved skin. Follow the pack directions for how often to use it, and stop using it if it causes persistent irritation.",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "How do I use this product?",
+              "status": "answered",
+              "response": "Apply directly on the underarm skin Roll evenly on and allow the product to dry completely. Would you like a few tips for using it comfortably?",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml",
+                  "reason": "For Pigmentation Reduction & Odour Control "
+                }
+              ],
+              "follow_up": "routine"
+            },
+            {
+              "question": "Yes",
+              "status": "answered",
+              "response": "Avoid applying it to irritated or freshly shaved skin. Follow the pack directions for how often to use it, and stop using it if it causes persistent irritation.",
+              "selected": [
+                "6-aha-bha-underarm-roll-on-flora-75ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "url": "https://bebodywise.com/product/6-aha-bha-underarm-roll-on-flora-75ml"
+                }
+              ],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Switch from face to body",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "I have pimples on my face",
+              "status": "answered",
+              "response": "Here are a few options for face acne:\n\n1. **2% Salicylic Acid Face Wash**: Salicylic acid clears excess oil and unclogs pores, making it useful for oily skin and mild, occasional acne.\n2. **1% Salicylic Acid Face Wash (Foam-Based)**: Salicylic acid exfoliates and clears pores, making it useful for mild, occasional acne and dry or combination skin.\n3. **Hydrocolloid Acne Pimple Patch**: Hydrocolloid absorbs fluid from a surfaced spot, making it useful for individual pimples.\n\nWhich best describes your skin?",
+              "selected": [
+                "2-salicylic-acid-face-wash",
+                "acne-control-wash",
+                "hydrocolloid-acne-pimple-patch"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "2% Salicylic Acid Face Wash",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+                },
+                {
+                  "title": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "url": "https://bebodywise.com/product/acne-control-wash"
+                },
+                {
+                  "title": "Hydrocolloid Acne Pimple Patch",
+                  "url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "acne-control-wash",
+                  "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/acne-control-wash.jpg"
+                },
+                {
+                  "id": "hydrocolloid-acne-pimple-patch",
+                  "name": "Hydrocolloid Acne Pimple Patch",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/hydrocolloid-acne-pimple-patch.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            },
+            {
+              "question": "I also need something for pimples on my back",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "scalp-massager",
+                  "name": "Scalp Massager",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/scalp-massager.jpg"
+                },
+                {
+                  "id": "2-5-benzoyl-peroxide-bodywash",
+                  "name": "2.5% Benzoyl Peroxide Body wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            },
+            {
+              "question": "I need a body wash for that",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash - 375 mL:** FOR: Body Acne & Strawberry Skin\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin\n\n**5% AHA BHA Exfoliating Body Wash (700ml):** All in one body wash that exfoliates, detans and hydrates skin!",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash",
+                "5-aha-bha-bodywash-700ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                },
+                {
+                  "title": "5% AHA BHA Exfoliating Body Wash (700ml)",
+                  "url": "https://bebodywise.com/product/5-aha-bha-bodywash-700ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                },
+                {
+                  "id": "5-aha-bha-bodywash-700ml",
+                  "name": "5% AHA BHA Exfoliating Body Wash (700ml)",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-aha-bha-bodywash-700ml.jpg"
+                }
+              ],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "I have pimples on my face",
+              "status": "answered",
+              "response": "Here are a few options for face acne:\n\n1. **2% Salicylic Acid Face Wash**: Salicylic acid clears excess oil and unclogs pores, making it useful for oily skin and mild, occasional acne.\n2. **1% Salicylic Acid Face Wash (Foam-Based)**: Salicylic acid exfoliates and clears pores, making it useful for mild, occasional acne and dry or combination skin.\n3. **Hydrocolloid Acne Pimple Patch**: Hydrocolloid absorbs fluid from a surfaced spot, making it useful for individual pimples.\n\nWhich best describes your skin?",
+              "selected": [
+                "2-salicylic-acid-face-wash",
+                "acne-control-wash",
+                "hydrocolloid-acne-pimple-patch"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "2% Salicylic Acid Face Wash",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash"
+                },
+                {
+                  "title": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "url": "https://bebodywise.com/product/acne-control-wash"
+                },
+                {
+                  "title": "Hydrocolloid Acne Pimple Patch",
+                  "url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "acne-control-wash",
+                  "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/acne-control-wash.jpg"
+                },
+                {
+                  "id": "hydrocolloid-acne-pimple-patch",
+                  "name": "Hydrocolloid Acne Pimple Patch",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/hydrocolloid-acne-pimple-patch.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg",
+                  "url": "https://bebodywise.com/product/2-salicylic-acid-face-wash",
+                  "reason": "For Mild Occasional Acne | Oily Skin Type | Suitable for 13+ yrs"
+                },
+                {
+                  "id": "acne-control-wash",
+                  "name": "1% Salicylic Acid Face Wash (Foam-Based)",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/acne-control-wash.jpg",
+                  "url": "https://bebodywise.com/product/acne-control-wash",
+                  "reason": "For Mild Occasional Acne | Dry/Combination Skin Type | Suitable for 13+ yrs"
+                },
+                {
+                  "id": "hydrocolloid-acne-pimple-patch",
+                  "name": "Hydrocolloid Acne Pimple Patch",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/hydrocolloid-acne-pimple-patch.jpg",
+                  "url": "https://bebodywise.com/product/hydrocolloid-acne-pimple-patch",
+                  "reason": "Easy and effective way to reduce acne"
+                }
+              ],
+              "follow_up": null
+            },
+            {
+              "question": "I also need something for pimples on my back",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "scalp-massager",
+                  "name": "Scalp Massager",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/scalp-massager.jpg"
+                },
+                {
+                  "id": "2-5-benzoyl-peroxide-bodywash",
+                  "name": "2.5% Benzoyl Peroxide Body wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/2-5-benzoyl-peroxide-bodywash.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            },
+            {
+              "question": "I need a body wash for that",
+              "status": "answered",
+              "response": "**1% Salicylic Acid Body Wash - 375 mL:** FOR: Body Acne & Strawberry Skin\n\n**1% Salicylic Ceramide Body Wash:** For Body Acne and Dry Skin\n\n**5% AHA BHA Exfoliating Body Wash (700ml):** All in one body wash that exfoliates, detans and hydrates skin!",
+              "selected": [
+                "1-salicylic-acid-body-wash-350ml",
+                "salicylic-ceramide-bodywash",
+                "5-aha-bha-bodywash-700ml"
+              ],
+              "options": [],
+              "sources": [
+                {
+                  "title": "1% Salicylic Acid Body Wash - 375 mL",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml"
+                },
+                {
+                  "title": "1% Salicylic Ceramide Body Wash",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash"
+                },
+                {
+                  "title": "5% AHA BHA Exfoliating Body Wash (700ml)",
+                  "url": "https://bebodywise.com/product/5-aha-bha-bodywash-700ml"
+                }
+              ],
+              "recommendations": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg"
+                },
+                {
+                  "id": "5-aha-bha-bodywash-700ml",
+                  "name": "5% AHA BHA Exfoliating Body Wash (700ml)",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-aha-bha-bodywash-700ml.jpg"
+                }
+              ],
+              "cards": [
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg",
+                  "url": "https://bebodywise.com/product/1-salicylic-acid-body-wash-350ml",
+                  "reason": "FOR: Body Acne & Strawberry Skin"
+                },
+                {
+                  "id": "salicylic-ceramide-bodywash",
+                  "name": "1% Salicylic Ceramide Body Wash",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-ceramide-bodywash.jpg",
+                  "url": "https://bebodywise.com/product/salicylic-ceramide-bodywash",
+                  "reason": "For Body Acne and Dry Skin"
+                },
+                {
+                  "id": "5-aha-bha-bodywash-700ml",
+                  "name": "5% AHA BHA Exfoliating Body Wash (700ml)",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/5-aha-bha-bodywash-700ml.jpg",
+                  "url": "https://bebodywise.com/product/5-aha-bha-bodywash-700ml",
+                  "reason": "All in one body wash that exfoliates, detans and hydrates skin!"
+                }
+              ],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Irritation and product caution",
+      "runs": [
+        {
+          "route": "legacy",
+          "steps": [
+            {
+              "question": "My underarms are bleeding after using an acid roll on, should I use more?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash",
+                  "name": "1% Salicylic Acid Body Wash - 250 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg"
+                },
+                {
+                  "id": "salicylic-acid-body-wash-700",
+                  "name": "1% Salicylic Acid Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-body-wash-700.jpg"
+                },
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "4-aha-bha-underarm-rollon-frag-free-75",
+                  "name": "4% AHA BHA Underarm Roll On - Fragrance Free - 75 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/4-aha-bha-underarm-rollon-frag-free-75.jpg"
+                },
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "20-urea-roll-on-75ml",
+                  "name": "20% Urea Foot Roll On - 75 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/20-urea-roll-on-75ml.jpg"
+                },
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "hair-growth-serum-roll-on",
+                  "name": "Advanced Hair Growth Serum Roll-On — 25 mL",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-growth-serum-roll-on.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        },
+        {
+          "route": "new",
+          "steps": [
+            {
+              "question": "My underarms are bleeding after using an acid roll on, should I use more?",
+              "status": "clarify",
+              "response": "Which product do you mean?",
+              "selected": [],
+              "options": [
+                {
+                  "id": "1-salicylic-acid-body-wash",
+                  "name": "1% Salicylic Acid Body Wash - 250 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash.jpg"
+                },
+                {
+                  "id": "salicylic-acid-body-wash-700",
+                  "name": "1% Salicylic Acid Body Wash - 700 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/salicylic-acid-body-wash-700.jpg"
+                },
+                {
+                  "id": "1-salicylic-acid-body-wash-350ml",
+                  "name": "1% Salicylic Acid Body Wash - 375 mL",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/1-salicylic-acid-body-wash-350ml.jpg"
+                },
+                {
+                  "id": "4-aha-bha-underarm-rollon-frag-free-75",
+                  "name": "4% AHA BHA Underarm Roll On - Fragrance Free - 75 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/4-aha-bha-underarm-rollon-frag-free-75.jpg"
+                },
+                {
+                  "id": "6-aha-bha-underarm-roll-on-flora-75ml",
+                  "name": "6% AHA BHA Underarm Roll On - 75ml - Flora",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/6-aha-bha-underarm-roll-on-flora-75ml.jpg"
+                },
+                {
+                  "id": "20-urea-roll-on-75ml",
+                  "name": "20% Urea Foot Roll On - 75 ml",
+                  "category": "Body Care",
+                  "image_url": "/storefront/catalogue/20-urea-roll-on-75ml.jpg"
+                },
+                {
+                  "id": "2-salicylic-acid-face-wash",
+                  "name": "2% Salicylic Acid Face Wash",
+                  "category": "Face Care",
+                  "image_url": "/storefront/catalogue/2-salicylic-acid-face-wash.jpg"
+                },
+                {
+                  "id": "hair-growth-serum-roll-on",
+                  "name": "Advanced Hair Growth Serum Roll-On — 25 mL",
+                  "category": "Hair Care",
+                  "image_url": "/storefront/catalogue/hair-growth-serum-roll-on.jpg"
+                }
+              ],
+              "sources": [],
+              "recommendations": [],
+              "cards": [],
+              "follow_up": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

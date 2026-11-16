@@ -1,6 +1,6 @@
 export const concerns = [
   { id: 'body_acne_marks', label: 'Body Acne & Marks' },
-  { id: 'strawberry_bumpy_skin', label: 'Strawberry Legs or Bumpy Skin' },
+  { id: 'strawberry_bumpy_skin', label: 'Strawberry Legs' },
   { id: 'body_pigmentation', label: 'Pigmentation on Elbows/Knees/Neck' },
   { id: 'underarm_pigmentation', label: 'Underarm Pigmentation' },
   { id: 'body_odour', label: 'Body Odour' },

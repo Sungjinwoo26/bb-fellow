@@ -3,7 +3,9 @@
   "name": "find-my-routine",
   "main": "worker/index.ts",
   "compatibility_date": "2026-11-03",
+  "vars": { "V1_TYPED_AI": "true" },
   "assets": { "binding": "ASSETS", "not_found_handling": "single-page-application", "run_worker_first": ["/api", "/api/*"] },
+  "d1_databases": [{ "binding": "CHAT_REVIEW", "database_name": "bodywise-chat-review", "database_id": "34470a4a-f59e-416e-a06b-b241df3beb3f" }],
   "ratelimits": [
     { "name": "PHOTO_CLIENT_LIMIT", "namespace_id": "73420301", "simple": { "limit": 12, "period": 60 } },
     { "name": "PHOTO_LOCATION_LIMIT", "namespace_id": "73420302", "simple": { "limit": 60, "period": 60 } }

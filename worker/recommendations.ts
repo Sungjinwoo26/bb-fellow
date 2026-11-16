@@ -1,6 +1,9 @@
 import { z } from 'zod';
-import productsFile from './data/products.json';
+import source from '../src/data/productCatalogue.json';
+const productsFile=source.assessment;
 import rulesFile from './data/rules.json';
+import { storefrontProducts } from './catalogue';
+const storefrontPriceLinks=source.assessment_storefront_links;
 import { concerns, canonicalConcerns, type ConcernId } from '../src/data/concerns';
 import { questions } from '../src/data/questions';
 import { getPhotoAreas } from '../src/utils/photoAreas';
@@ -42,7 +45,7 @@ export function validateInput(raw:unknown): {value:RecommendationRequest|null;fi
  if(new Set(input.selectedConcerns).size!==input.selectedConcerns.length || input.selectedConcerns.some(id=>!concerns.some(c=>c.id===id))) fields.push('selectedConcerns');
  const selected=canonicalConcerns(input.selectedConcerns);
  for(const [id,value] of Object.entries(input.answers)) {
-  const q=questions.find(q=>q.id===id); if(!q || !selected.includes(q.concernId)){fields.push(`answers.${id}`);continue;}
+  const q=questions.find(q=>q.id===id); if(!q || !(selected.includes(q.concernId) || (q.id==='shared_pregnancy' && selected.some(c=>['tanning_sun_damage','hair'].includes(c))))){fields.push(`answers.${id}`);continue;}
   if(value===null)continue;
   if(q.type==='single' && (typeof value!=='string' || !q.options.some(o=>o.id===value)))fields.push(`answers.${id}`);
   if(q.type==='multi' && (!Array.isArray(value) || value.length===0 || new Set(value).size!==value.length || value.some(v=>typeof v!=='string' || !q.options.some(o=>o.id===v)))) fields.push(`answers.${id}`);
@@ -65,8 +68,8 @@ export function matches(p:Predicate, input:RecommendationRequest):boolean {
 export function generateRecommendations(input:RecommendationRequest,catalogue:Catalogue,rules:RuleSet):RecommendationResult {
  const items:RecommendationResult['items']=[],unmatchedConcernIds:ConcernId[]=[];
  const selected=input.selectedConcerns;
- const add=(id:string,concern:ConcernId,reason:string)=>{const permittedKits=['demo_body_acne_pack','demo_exfoliation_pigmentation_kit'];const product=catalogue.products.find(p=>p.id===id&&p.active&&(!p.preMadeKit||permittedKits.includes(p.id))&&!excludedProduct(p));if(!product)return false;const existing=items.find(i=>i.product.id===id);if(existing){if(!existing.matchedConcernIds.includes(concern))existing.matchedConcernIds.push(concern);if(!existing.reasons.includes(reason))existing.reasons.push(reason);}else items.push({product:publicProduct(product),quantity:1,matchedConcernIds:[concern],reasons:[reason]});return true;};
- const streamlined:ConcernId[]=['body_acne_marks','strawberry_bumpy_skin','body_pigmentation','body_odour','general_body_care','face'];
+ const add=(id:string,concern:ConcernId,reason:string)=>{const permittedKits=['demo_body_acne_pack','demo_exfoliation_pigmentation_kit','demo_underarm_kit','demo_sun_duo'];const product=catalogue.products.find(p=>p.id===id&&p.active&&(!p.preMadeKit||permittedKits.includes(p.id))&&!excludedProduct(p));if(!product)return false;const existing=items.find(i=>i.product.id===id);if(existing){if(!existing.matchedConcernIds.includes(concern))existing.matchedConcernIds.push(concern);if(!existing.reasons.includes(reason))existing.reasons.push(reason);}else items.push({product:publicProduct(product),quantity:1,matchedConcernIds:[concern],reasons:[reason]});return true;};
+ const streamlined:ConcernId[]=['body_acne_marks','strawberry_bumpy_skin','body_pigmentation','body_odour','general_body_care','face','underarm_pigmentation','tanning_sun_damage','hair'];
  const sameArea=selected.includes('body_pigmentation')&&selected.includes('strawberry_bumpy_skin')&&input.answers.bumpy_pigmentation_same_area==='yes';
  for(const concern of canonicalConcerns(input.selectedConcerns)){
   if(streamlined.includes(concern)){
@@ -83,7 +86,28 @@ export function generateRecommendations(input:RecommendationRequest,catalogue:Ca
     else if(selected.includes('body_acne_marks') && (input.answers.body_acne_goal==='active_bumps'||input.answers.body_acne_goal==='both')){const dry=input.answers.shared_body_skin==='dry';put(input.answers.body_acne_goal==='both'&&!dry?'demo_body_acne_pack':dry?'demo_ceramide_body_wash':'demo_sa_body_wash','The sample body wash also addresses your selected bumpy-skin concern.');}
     else put('demo_aha_scrub','A sample scrub for the bumpy skin you selected.');
    }
-   if(concern==='body_odour')put('demo_underarm_roll_on','A sample underarm option for body odour.');
+   if(concern==='body_odour'){
+    if(selected.includes('underarm_pigmentation')){const u=Array.isArray(input.answers.underarm_concerns)?input.answers.underarm_concerns:[]; if(u.includes('pigmentation')&&input.answers.underarm_irritation==='no'&&input.answers.shared_pregnancy==='no')put('demo_underarm_kit','The kit includes a roll-on for underarm odour.');else if(!u.includes('pigmentation')&&u.includes('odour'))put('demo_underarm_roll_on','An underarm option for odour.');}
+    else put('demo_underarm_roll_on','An underarm option for odour.');
+   }
+   if(concern==='underarm_pigmentation'){
+    const u=Array.isArray(input.answers.underarm_concerns)?input.answers.underarm_concerns:[];
+    if(u.includes('pigmentation')&&input.answers.underarm_irritation==='no'&&input.answers.shared_pregnancy==='no')put('demo_underarm_kit','For the underarm pigmentation you reported; includes a roll-on and cream.');
+    else if(u.includes('odour')&&!u.includes('pigmentation'))put('demo_underarm_roll_on','An underarm option for odour.');
+   }
+   if(concern==='tanning_sun_damage'){
+    const a=Array.isArray(input.answers.sun_areas)?input.answers.sun_areas:[];const pregnant=input.answers.shared_pregnancy;
+    if(a.includes('face')&&a.includes('body')&&pregnant==='no')put('demo_sun_duo','Face and body sun protection for the areas selected.');
+    else {if(a.includes('face')&&pregnant==='yes')put('demo_mineral_sunscreen','Mineral face sunscreen for the area selected.');else if(a.includes('face')&&pregnant==='no')put('demo_face_sunscreen','Face sun protection for the area selected.');if(a.includes('body')&&(!a.includes('face')||pregnant==='no'))put('demo_body_sunscreen','Body sun protection for the area selected.');}
+   }
+   if(concern==='hair'){
+    const goals=Array.isArray(input.answers.hair_concerns_new)?input.answers.hair_concerns_new:[];const fall=Array.isArray(input.answers.hair_fall_details)?input.answers.hair_fall_details:[];const flakes=Array.isArray(input.answers.hair_flake_details)?input.answers.hair_flake_details:[];const length=Array.isArray(input.answers.hair_length_details)?input.answers.hair_length_details:[];const sore=goals.includes('flakes')&&flakes.includes('irritated');
+    if(goals.includes('fall')&&fall.includes('shedding')&&!sore)put('demo_hair_fall_shampoo','For the hair shedding you reported.');
+    if(goals.includes('fall')&&(fall.includes('thinning')||fall.includes('hairline'))&&input.answers.hair_age==='yes'&&input.answers.shared_pregnancy==='no'&&!sore)put('demo_hair_growth_serum','For the thinning or hairline concern you reported.');
+    if(goals.includes('flakes')&&!sore&&(flakes.includes('flakes')||flakes.includes('itching')))put('demo_zpto_shampoo','For the scalp flakes or itching you reported.');
+    if((goals.includes('dry')||goals.includes('damage'))&&length.includes('dry'))put('demo_hair_conditioner','For dry or rough hair lengths.');
+    if((goals.includes('dry')||goals.includes('damage'))&&(length.includes('frizz')||length.includes('damage')))put('demo_frizz_serum','For frizz or damaged-looking hair lengths.');
+   }
    if(concern==='general_body_care'){
     const goals=Array.isArray(input.answers.body_care_goal)?input.answers.body_care_goal:[];
     if(goals.includes('very_dry'))put('demo_20_urea_lotion','A sample lotion for very dry skin.');else if(goals.includes('hydration'))put('demo_urea_body_lotion','A sample lotion for dry body skin.');
@@ -98,7 +122,7 @@ export function generateRecommendations(input:RecommendationRequest,catalogue:Ca
     }
     if(goals.includes('individual_spots'))put('demo_pimple_patch','A sample patch for individual spots.');
     if(goals.includes('dryness'))put('demo_face_moisturizer','A sample moisturizer for facial dryness.');
-    if(goals.includes('everyday_protection'))put('demo_face_sunscreen','A sample sunscreen for everyday face protection.');
+    if(goals.includes('everyday_protection')){const sun=Array.isArray(input.answers.sun_areas)?input.answers.sun_areas:[];const shared=selected.includes('tanning_sun_damage')&&sun.includes('face');if(shared&&input.answers.shared_pregnancy==='yes')put('demo_mineral_sunscreen','Face sun protection also supports your face-care selection.');else if(shared&&sun.includes('body')&&input.answers.shared_pregnancy==='no')put('demo_sun_duo','The duo also provides face sun protection.');else if(!shared||input.answers.shared_pregnancy==='no')put('demo_face_sunscreen','A sample sunscreen for everyday face protection.');}
    }
    if(!added)unmatchedConcernIds.push(concern);continue;
   }
@@ -110,7 +134,17 @@ export function generateRecommendations(input:RecommendationRequest,catalogue:Ca
  }
  return {catalogueVersion:catalogue.version,rulesVersion:rules.version,currency:'INR',items,unmatchedConcernIds};
 }
-export const configuredData=()=>validateData(productsFile,rulesFile);
+export const configuredData=()=>{
+ const links:Record<string,string>=storefrontPriceLinks;
+ const pricedProducts=productsFile.products.map(product=>{
+  const linkedId=links[product.id];if(!linkedId)return product;
+  const linked=storefrontProducts.find(item=>item.id===linkedId);
+  if(!linked || !/^₹[\d,]+$/.test(linked.price))return null;
+  return {...product,pricePaise:Number(linked.price.slice(1).replace(/,/g,''))*100};
+ });
+ if(pricedProducts.some(product=>!product))return null;
+ return validateData({...productsFile,products:pricedProducts},rulesFile);
+};
 function error(status:number,code:string,message:string,fields?:string[]){return Response.json({error:{code,message,...(fields?{fields}:{}),requestId:crypto.randomUUID()}},{status,headers:{'Cache-Control':'no-store'}});}
 export function catalogueRoute():Response {const data=configuredData();if(!data)return error(503,'CATALOGUE_UNAVAILABLE','Sample catalogue is unavailable.');return Response.json({version:data.catalogue.version,currency:'INR',products:data.catalogue.products.filter(p=>p.active && !p.preMadeKit).map(publicProduct)});}
 export async function recommendationsRoute(request:Request):Promise<Response>{
