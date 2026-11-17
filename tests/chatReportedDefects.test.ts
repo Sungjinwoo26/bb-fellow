@@ -3,11 +3,25 @@ import {answerChat} from '../worker/productChat';
 import {initialChatState} from '../src/shared/chatState';
 import {catalogueById} from '../worker/catalogue';
 import {bodyPolicy} from '../worker/bodyChat';
+import {normalizeSearch as normalizeTest} from '../worker/productMatcher';
 const env={OPENAI_API_KEY:'test',V1_TYPED_AI:'true'};
 const turn={action:'product_question',reference_scope:'ambiguous',referenced_products:[],product_types:[],concerns:[],body_areas:[],excluded_ingredients:[],intents:[],missing_information:[],confidence:'medium'};
 function mock(){vi.stubGlobal('fetch',vi.fn().mockImplementation(async()=>new Response(JSON.stringify({status:'completed',output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(turn)}]}]}))));}
 afterEach(()=>vi.unstubAllGlobals());
 describe('reported product and context defects',()=>{
+ it.each([
+  ['Which fragrance-free roll-on?', 'roll on','fragrance free',['4-aha-bha-underarm-rollon-frag-free-75','hair-fall-control-shampoo']],
+  ['Which keratin shampoo?', 'shampoo','keratin',['hair-fall-control-shampoo','4-aha-bha-underarm-rollon-frag-free-75']],
+ ])('limits AI-proposed clarification options for %s',async(message,format,descriptor,ids)=>{
+  const interpreted={...turn,referenced_products:ids,product_types:[format],product_descriptors:[descriptor]};
+  vi.stubGlobal('fetch',vi.fn().mockImplementation(async(_url,init)=>{const request=JSON.parse(init.body);const content=request.text.format.name==='chat_turn'?interpreted:{text:'Which product do you mean?'};return new Response(JSON.stringify({status:'completed',output:[{type:'message',content:[{type:'output_text',text:JSON.stringify(content)}]}]}));}));
+  const r=await answerChat({message,input_source:'typed'},env);
+  expect(r.status).toBe('clarify');
+  expect(r.product_options.map(p=>p.id)).toContain(ids[0]);
+  expect(r.product_options.map(p=>p.id)).not.toContain(ids[1]);
+  expect(r.product_options.every(p=>normalizeTest(p.name).includes(descriptor))).toBe(true);
+  if(descriptor==='fragrance free')expect(r.product_options.some(p=>/^6%/.test(p.name))).toBe(true);
+ });
  it('correctly classifies the foam face wash',()=>expect(catalogueById.get('salicylic-acid-face-wash')?.category).toBe('Face Care'));
  it('keeps the existing body acne question when the user specifies their back',()=>expect(bodyPolicy('on my back',turn,'What would you like to focus on for your body skin?')?.category).toBe('acne'));
  it('keeps the acne conversation after a body choice and a typed back detail',async()=>{
@@ -23,5 +37,6 @@ describe('reported product and context defects',()=>{
  it('resolves a named lotion instead of reusing the active product',async()=>{mock();const r=await answerChat({message:'how much is the niacinamide body lotion',input_source:'typed',conversation_state:{...initialChatState(),active_product_ids:['hair-fall-control-shampoo']}},env);expect(r.selected_product_ids).toEqual(['niacinamide-body-lotion']);});
  it('keeps both selected products in a comparison even if interpretation omits them',async()=>{mock();const ids=['10-urea-lotion-300ml','20-urea-lotion-xp'];const r=await answerChat({message:'compare these products',input_source:'typed',conversation_state:{...initialChatState(),active_product_ids:ids}},env);expect(r.selected_product_ids).toEqual(ids);for(const id of ids)expect(r.message).toContain(catalogueById.get(id)!.name);});
  it('compares both specifically requested urea lotions',async()=>{mock();const r=await answerChat({message:'compare 20% vs 10% urea lotion',input_source:'typed'},env);expect(r.selected_product_ids).toEqual(expect.arrayContaining(['10-urea-lotion-300ml','20-urea-lotion-xp']));expect(r.selected_product_ids).toHaveLength(2);});
+ it('does not replace explicitly compared lotions with unrelated active products',async()=>{mock();const state={...initialChatState(),active_product_ids:['1-salicylic-acid-body-wash-350ml','niacinamide-body-lotion']};const r=await answerChat({message:'10% urea vs 20% urea lotion. dry bumpy legs but sensitive skin. which one to buy?',input_source:'typed',conversation_state:state},env);expect(r.selected_product_ids).toEqual(expect.arrayContaining(['10-urea-lotion-300ml','20-urea-lotion-xp']));});
  it('makes the comparison picker explain that the first product is being chosen',async()=>{const r=await answerChat({message:'Compare products',input_source:'button'},env);expect(r.message).toMatch(/compare first/i);});
 });

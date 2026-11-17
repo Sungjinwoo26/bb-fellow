@@ -7,6 +7,13 @@ const reply=(x:unknown)=>new Response(JSON.stringify({status:'completed',output:
 function mock(){vi.stubGlobal('fetch',vi.fn().mockImplementation(async(_url,init)=>{const b=JSON.parse(init.body),input=JSON.parse(b.input);if(b.text.format.name==='chat_turn')return reply(model);if(b.text.format.name==='grounded_answer')return reply({claims:input.facts.filter((f:{missing?:boolean})=>!f.missing).map((f:{key:string;value:string})=>({text:f.value,fact_keys:[f.key],intent:'purpose'})),requested_fields:[]});return reply({text:input.reference});}));}
 afterEach(()=>vi.unstubAllGlobals());
 describe('category follow-up context',()=>{
+ it('addresses body acne and underarm odour stated together',async()=>{
+  mock();
+  const r=await answerChat({message:'I have back acne and smelly underarms',input_source:'typed'},env);
+  expect(r.status).toBe('answered');
+  expect(r.selected_product_ids.some(id=>/body.*wash|bodywash/i.test(id)),JSON.stringify(r.selected_product_ids)).toBe(true);
+  expect(r.selected_product_ids.some(id=>/underarm/i.test(id))).toBe(true);
+ });
  it('switches facial sunscreen to body sunscreen',async()=>{mock();const state={...initialChatState(),areas:['face'],requested_product_type:'sunscreen',active_product_ids:['ultra-light-sunscreen-spf50']};const r=await answerChat({message:'and for my body',input_source:'typed',conversation_state:state},env);expect(r.status).toBe('answered');expect(r.selected_product_ids.length).toBeGreaterThan(0);expect(r.selected_product_ids.every(id=>/body.*sunscreen|sunscreen.*body/i.test(id))).toBe(true);});
  it('keeps underarm context for a pigmentation follow-up',async()=>{mock();const state={...initialChatState(),areas:['underarm'],active_product_ids:['6-aha-bha-underarm-roll-on-flora-75ml']};const r=await answerChat({message:'and for pigmentation',input_source:'typed',conversation_state:state},env);expect(r.status).toBe('answered');expect(r.selected_product_ids.length).toBeGreaterThan(0);expect(r.selected_product_ids.every(id=>/underarm/i.test(id))).toBe(true);});
  it('does not suggest body lotion for an ambiguous facial marks follow-up',async()=>{mock();const state={...initialChatState(),areas:['face'],active_product_ids:['2-salicylic-acid-face-wash']};const r=await answerChat({message:'and for marks',input_source:'typed',conversation_state:state},env);expect(r.status).toBe('clarify');expect(r.message).toMatch(/marks.*pimples/i);const next=await answerChat({message:'Marks after pimples',input_source:'button',conversation_state:r.conversation_state},env);expect(next.message).toMatch(/can.t confirm.*facial/i);expect(next.selected_product_ids).toHaveLength(0);});

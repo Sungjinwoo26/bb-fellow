@@ -642,8 +642,28 @@ export async function answerChatLegacy(input:ChatRequest,env:ChatEnv,fetchAI=tru
  }
  return {...result,message:withoutQuestion||result.message,choices:[],follow_up:undefined};
 }
+function reportedSkinReaction(message:string){
+ const text=message.toLowerCase();
+ if(/\b(?:no|not|never|without|haven.t|have not|don.t have|do not have)\b.{0,24}\b(?:rash|rashes|redness|red|irritat)/i.test(text))return false;
+ const symptom='(?:rash(?:es)?|redness|red(?:dened)?|irritat(?:ed|ion))';
+ const report=new RegExp(`\\b(?:i (?:have|got|developed|experienced|noticed|get)|my (?:skin|face|body|scalp|underarms?) (?:is|was|became|got|turned|feels?|getting)|(?:it|this|the product|the wash|the cream|the serum) (?:gave|caused|made|is|became|turned|got))\\b[^.!?]{0,60}\\b${symptom}\\b|\\bi (?:used|applied|tried)\\b[^.!?]{0,60}\\b(?:and|then) (?:got|developed|noticed|experienced)\\b[^.!?]{0,30}\\b${symptom}\\b|\\b${symptom}\\b[^.!?]{0,50}\\b(?:after (?:using|applying)|from (?:using|applying))\\b`,'i');
+ return report.test(text);
+}
+function supplementDoseSafety(input:ChatRequest){
+ const text=input.message;
+ if(/\b(?:pregnan\w*|breast.?feed\w*)\b/i.test(text))return null;
+ const context=[text,...(input.history??[]).slice(-6).map(x=>x.text)].join(' ');
+ const supplement=/\b(?:gumm(?:y|ies)|supplements?|vitamins?|biotin|capsules?|tablets?)\b/i.test(context);
+ const dose=/\b(?:dos(?:e|age)|double|twice|two times|extra|more than|increase|exceed|overdos\w*|too many)\b/i.test(text);
+ const minor=/\b(?:i(?:'m| am)|aged?|age|my (?:son|daughter|child) (?:is|aged?))\s*(?:only\s*)?(?:[0-9]|1[0-7])\s*(?:years?(?:\s+old)?|yrs?(?:\s+old)?|y\/?o)?\b|\b(?:child|children|teen(?:ager)?|minor|under\s*18)\b/i.test(text);
+ if(!supplement||(!dose&&!minor))return null;
+ const already=/\b(?:already|accidentally|mistakenly)\b/i.test(text)&&/\b(?:took|taken|ate|swallowed|had|consumed)\b/i.test(text);
+ return already?'If someone may have taken too much of a supplement, seek urgent advice from a healthcare professional or poison service; have the product packaging available.':minor?`${dose?'Do not take more than the recommended dose. ':''}Supplement suitability and dosing for someone under 18 should be checked with a doctor or pharmacist and a parent or guardian.`:'Do not take more than the recommended dose. Check the product label and ask a doctor or pharmacist before changing the dose.';
+}
 async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinterpreted?:ChatTurn){
  const state=input.conversation_state??initialChatState();
+ const doseSafety=supplementDoseSafety(input);
+ if(doseSafety){const result=response(doseSafety,'no_information',[]);const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],conversation_state:updated.state};}
  if(/^(?:and |what about |also )?(?:hair fall|hair loss|hair thinning)\??$/i.test(input.message.trim())&&(input.selected_product_ids??state.active_product_ids).includes('dandruff-and-hairfall-kit')){
   const p=catalogueById.get('dandruff-and-hairfall-kit')!;const guided=guidedRecommendation([p.id]);const result={...guided,selected_product_ids:[p.id]};const nextTurn={...(preinterpreted??interpretTurn(input.message,input.history??[],state,products,[p.id])),action:'product_question' as const,reference_scope:'active_product' as const,referenced_products:[p.id],intents:['purpose']};const updated=advanceState(state,input.message,input.history??[],[p.id],result,products,nextTurn);return {...result,product_cards:cardsFor([p]),interpretation:nextTurn,conversation_state:updated.state};
  }
@@ -651,6 +671,10 @@ async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinte
  if(urgent.test(input.message)){
   const emergency=/\b(?:breath(?:ing)?\s+(?:difficulty|trouble)|trouble\s+breathing|swollen\s+(?:lips|tongue|throat))\b/i.test(input.message);
   const result=response(emergency?'Stop using the product and seek emergency medical help immediately.':'Stop using the product on the affected area and seek medical advice promptly. If symptoms are severe or worsening, seek urgent care.','no_information',[]);
+  const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};
+ }
+ if(reportedSkinReaction(input.message)){
+  const result={...response('For guidance about the skin concern you mentioned, please consult a qualified expert.','no_information',[]),expert_card:{title:'Consult an expert',description:'Get personalised guidance from an expert.',url:'https://bebodywise.com/concern/experts'}};
   const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};
  }
  // Send each typed message through AI understanding; urgent symptoms above
@@ -730,18 +754,21 @@ async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinte
   if(!flakesChoice&&expressed==='hair fall or thinning'&&!bothHairConcerns)return askHair(hairFlakesQuestion,['Yes','No','Not sure']);
   if(hairSearch&&!expressed&&!flakesChoice)return askHair(hairQuestion,hairChoices);
   if(env.V1_TYPED_AI==='true'){
-   const observed=new Set([...(state.hair_context?.observed??[]),...(hairTurn.hair_concerns??[])]);
+   // A new, explicitly stated hair search replaces the prior focus unless the
+   // customer asks to add it. Follow-up choices continue the existing focus.
+   const freshHairSearch=hairSearch&&!!expressed&&!/\b(?:also|both|as well|too)\b/i.test(input.message);
+   const observed=new Set([...(freshHairSearch?[]:state.hair_context?.observed??[]),...(hairTurn.hair_concerns??[])]);
    if(expressed==='dandruff or flakes'||bothHairConcerns||flakesChoice&&hairReply==='yes')observed.add('flakes');
    if(expressed==='dry or frizzy hair')observed.add('dry_lengths');
    if(expressed==='breakage or damaged lengths')observed.add('breakage');
    if(bothHairConcerns&&!observed.has('thinning')&&!observed.has('shedding'))observed.add('shedding');
    if(flakesChoice&&hairReply!=='yes')observed.delete('flakes');
    if(flakesChoice&&!observed.has('thinning')&&!observed.has('shedding')){const prior=[...(input.history??[])].reverse().find(item=>item.role==='user'&&/\bhair\b/i.test(item.text))?.text??'';if(/\b(?:thinn?ing|tinn?nging|tinning)\b/i.test(prior))observed.add('thinning');else if(/\b(?:fall|falling|shedding|loss)\b/i.test(prior))observed.add('shedding');}
-   const candidateState={...state,areas:['hair'],requested_product_type:hairFormat??null,excluded_ingredients:[...new Set([...(state.excluded_ingredients??[]),...turn.excluded_ingredients])],hair_context:{observed:[...observed],focus:state.hair_context?.focus??null,flakes:flakesChoice?(hairReply==='yes'?'yes' as const:hairReply==='no'?'no' as const:'unknown' as const):state.hair_context?.flakes??null}};
+   const candidateState={...state,areas:['hair'],requested_product_type:hairFormat??null,excluded_ingredients:[...new Set([...(state.excluded_ingredients??[]),...turn.excluded_ingredients])],hair_context:{observed:[...observed],focus:freshHairSearch?null:state.hair_context?.focus??null,flakes:flakesChoice?(hairReply==='yes'?'yes' as const:hairReply==='no'?'no' as const:'unknown' as const):freshHairSearch?null:state.hair_context?.flakes??null}};
    let chosen=hairChatCandidates(candidateState,{...hairTurn,hair_concerns:[]},2).map(item=>item.product);
    if(!chosen.length&&(expressed==='everyday hair care'||hairReply==='not sure')&&!hairFormat)chosen=selectProducts('hair scalp',{...candidateState,requested_product_type:'conditioner'}).eligible.filter(p=>matchesProductFormat(p,'conditioner')&&!!p.purpose).slice(0,1);
    const result=chosen.length?{...response(deterministicRecommendations(chosen),'answered',chosen),recommendations:chosen.map(option),answer_mode:'prepared_answer' as const}:response('I couldn’t confirm an available hair product that meets your requirements.','no_information',[]);
-   const updated=advanceState(state,input.message,input.history??[],chosen.map(p=>p.id),result,products,hairTurn);return {...result,product_cards:cardsFor(chosen),interpretation:hairTurn,conversation_state:updated.state};
+   const updated=advanceState(candidateState,input.message,input.history??[],chosen.map(p=>p.id),result,products,hairTurn);return {...result,product_cards:cardsFor(chosen),interpretation:hairTurn,conversation_state:updated.state};
   }
   let ids=bothHairConcerns?['dandruff-and-hairfall-kit']:flakesChoice?(hairReply==='yes'?['dandruff-and-hairfall-kit']:hairReply==='no'?['hair-growth-serum-roll-on']:['hair-fall-control-shampoo','1-zpto-anti-dandruff-shampoo']):expressed==='dandruff or flakes'?['1-zpto-anti-dandruff-shampoo']:expressed==='dry or frizzy hair'||expressed==='breakage or damaged lengths'?['anti-frizz-serum']:expressed==='everyday hair care'?['hair-fall-control-shampoo','deep-moisturizing-conditioner']:['hair-fall-control-shampoo','anti-frizz-serum'];
   if(hairFormat==='shampoo'&&(bothHairConcerns||flakesChoice)){ids=hairReply==='no'?['hair-fall-control-shampoo']:hairReply==='not sure'?['hair-fall-control-shampoo','1-zpto-anti-dandruff-shampoo']:['1-zpto-anti-dandruff-shampoo'];}
@@ -810,7 +837,18 @@ async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinte
  // Ask for confirmation if the model proposes an unanchored product reference.
  const unanchored=turn.referenced_products.filter(id=>!activeIds.includes(id)&&!fallbackTurn.referenced_products.includes(id));
  if(input.input_source==='typed'&&!input.history?.some(x=>x.role==='user')&&!activeIds.length&&!fallbackTurn.referenced_products.length&&/\bskin\b/i.test(input.message)&&/\b(?:bumpy|bumps?|rough|uneven)\b/i.test(input.message)&&!/\b(?:face|body|back|chest|legs?|arms?|underarms?)\b/i.test(input.message)){const result={...response('Where are you noticing the bumps or texture?','clarify',[]),choices:['Face','Body','Both']};const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};}
- if(unanchored.length){const options=distinctProductSizes([...unanchored.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<ReturnType<typeof catalogueById.get>>=>!!p),...searchProducts(input.message)]).slice(0,8);const result=response('Which product do you mean?','clarify',[],options);const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};}
+ if(unanchored.length&&turn.action!=='find_product'){
+  // The model supplies the constraints; search the whole catalogue instead of
+  // assuming its proposed IDs are an exhaustive list of matching variants.
+  const formats=turn.product_types.map(requestedProductFormat).filter((value):value is string=>!!value);
+  const descriptors=(turn.product_descriptors??[]).map(normalizeSearch).filter(Boolean);
+  const constrained=formats.length>0||descriptors.length>0;
+  const pool=constrained?catalogue:unanchored.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<ReturnType<typeof catalogueById.get>>=>!!p);
+  const areas=turn.body_areas.length===1?turn.body_areas:[];
+  const eligible=areas.length?new Set(selectProducts('',{...state,areas,requested_product_type:null}).eligible.map(p=>p.id)):null;
+  const options=pool.filter(p=>(!eligible||eligible.has(p.id))&&(!formats.length||formats.some(format=>matchesProductFormat(p,format)))&&descriptors.every(descriptor=>normalizeSearch(p.name).includes(descriptor))).slice(0,8);
+  const result=response(options.length?'Which product do you mean?':'Could you share the product name or its details?','clarify',[],options);const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};
+ }
  if(input.input_source==='typed'&&formatReference&&activeMatches.length===1&&fallbackTurn.reference_scope!=='new_product'&&/\b(?:how (?:do|should|can) i use|how to use|how often|apply)\b/i.test(input.message))turn={...turn,action:'product_question',reference_scope:'active_product',referenced_products:[activeMatches[0].id],intents:[...new Set([...turn.intents,'usage'])]};
  if(turn.reference_scope==='ambiguous' && /\b(?:first|second|third|1st|2nd|3rd)\b/i.test(input.message)) {
   const result=response('Which product do you mean?','clarify',[]);
@@ -897,8 +935,30 @@ async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinte
 }
 export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turnOverride?:ChatTurn):Promise<ChatAnswer>{
  const answerStarted=Date.now();
+ if(supplementDoseSafety(input))return answerChatBase(input,env,false);
  if(env.V1_TYPED_AI!=='true'||!fetchAI)return answerChatBase(input,env,fetchAI);
+ const clarification=input.conversation_state?.pending_clarification;
+ if(clarification){
+  const choice=clarification.choices.find(item=>normalizeSearch(item)===normalizeSearch(input.message));
+  const {pending_clarification:_,...remaining}=input.conversation_state!;
+  if(choice){
+   const history=input.history??[];
+   const hasQuestion=history.some(item=>item.role==='assistant'&&item.text===clarification.question);
+   input={...input,conversation_state:remaining,history:hasQuestion?history:[{role:'user' as const,text:clarification.original_message},{role:'assistant' as const,text:clarification.question},...history].slice(-40)};
+  }else input={...input,conversation_state:remaining};
+ }
  const retryTask=input.conversation_state?.pending_question;
+ const pendingNamed=retryTask&&!input.message.includes('?')?retryTask.product_ids.filter(id=>{const product=catalogueById.get(id);return product&&normalizeSearch(input.message)===normalizeSearch(product.name)}):[];
+ if(retryTask&&!input.selection_confirmed&&pendingNamed.length===1){
+  const {pending_question:_,...cleared}=input.conversation_state!;
+  return answerChat({...input,message:retryTask.message,input_source:'typed',selected_product_ids:pendingNamed,conversation_state:cleared},env,true);
+ }
+ // A selected clarification option resumes the original question with the
+ // selected product, rather than treating the selection as a new request.
+ if(retryTask&&input.selection_confirmed&&input.selected_product_ids?.length===1&&retryTask.product_ids.includes(input.selected_product_ids[0])){
+  const {pending_question:_,...cleared}=input.conversation_state!;
+  return answerChat({...input,message:retryTask.message,input_source:'typed',selection_confirmed:false,selected_product_ids:input.selected_product_ids,conversation_state:cleared},env,true);
+ }
  if(retryTask&&/^(?:try again|retry)[.!]?$/i.test(input.message.trim())){
   const {pending_question:_,...cleared}=input.conversation_state!;
   return answerChat({...input,message:retryTask.message,input_source:'typed',selected_product_ids:retryTask.product_ids,conversation_state:cleared},env,true);
@@ -923,26 +983,46 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  if(input.input_source==='button'||(!input.input_source&&input.selection_confirmed))return answerChatBase(input,env,false);
  // Urgent reactions must not wait for a language model.
  if(/\b(?:bleed(?:ing|s)?|severe(?:ly)?\s+(?:burn|swelling|pain)|blister(?:s|ing)?|open\s+wounds?|pus|breath(?:ing)?\s+(?:difficulty|trouble)|trouble\s+breathing|swollen\s+(?:lips|tongue|throat))\b/i.test(input.message))return answerChatBase(input,env,false);
+ if(reportedSkinReaction(input.message))return answerChatBase(input,env,false);
  const {pending_concern:_stalePending,...state}=input.conversation_state??initialChatState();
  const retry=()=>({...response('I couldn’t finish that answer right now. Please try again.','unavailable',[]),product_cards:[],conversation_state:{...state,pending_question:{message:input.message.slice(0,500),product_ids:(input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids).slice(0,4)}}});
  const interpreted=turnOverride??await interpretWithModel(input.message,{...state,active_product_ids:input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids},env);
  const pair=supportedPairRoutine(input.message,input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids.length?state.active_product_ids:state.recommended_product_ids,input.history??[]);
  if(pair&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive)\b/i.test(input.message)){
   const allowed=new Set(selectProducts('body',{...state,areas:['body'],requested_product_type:null,excluded_ingredients:[...new Set([...state.excluded_ingredients,...exclusions(input.message),...(interpreted?.excluded_ingredients??[])])]}).eligible.map(p=>p.id));
-  if(pair.products.every(p=>allowed.has(p.id))){const result={...response(pair.message,'answered',pair.products),sources:[...pair.products.map(source),{title:'Body Acne Pack directions',url:pair.source}],recommendations:pair.products.map(option),answer_mode:'verified_data_fallback' as const};const updated=advanceState(state,input.message,input.history??[],pair.products.map(p=>p.id),result,products,interpreted??undefined);return {...result,product_cards:cardsFor(pair.products),conversation_state:updated.state};}
+  if(pair.products.every(p=>allowed.has(p.id))){let message=pair.message;const pending=state.pending_question;const format=/\bi meant (?:the )?wash\b/i.test(input.message)?'wash':requestedProductFormat(input.message);if(pending&&format&&/\b(?:how often|how frequently|frequency|how many times|times (?:a|per) (?:day|week))\b/i.test(pending.message)){const matches=pair.products.filter(p=>pending.product_ids.includes(p.id)&&matchesProductFormat(p,format));if(matches.length===1){const p=matches[0];const reviewed=p.review_fields.some(f=>f==='usage'||f==='usage.frequency'||f==='usage_fields.frequency');const frequency=reviewed?null:p.usage_fields.frequency;message=`**${p.name}:** ${frequency?`The product directions list ${frequency.toLowerCase()} use.`:'This prototype does not have confirmed usage frequency for this product yet. Please check the product label.'}\n\n${message}`;}}const result={...response(message,'answered',pair.products),sources:[...pair.products.map(source),{title:'Body Acne Pack directions',url:pair.source}],recommendations:pair.products.map(option),answer_mode:'verified_data_fallback' as const};const updated=advanceState(state,input.message,input.history??[],pair.products.map(p=>p.id),result,products,interpreted??undefined);return {...result,product_cards:cardsFor(pair.products),conversation_state:updated.state};}
  }
- if(!pair&&/\b(?:together|same shower|combine|combining|layer|mix|with (?:it|that|this))\b/i.test(input.message)&&/\b(?:use|used|using|apply|combine|combining|layer|mix)\b/i.test(input.message)&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive|double|dose)\b/i.test(input.message)){
-  const result=response('I can’t confirm from the available product information whether those products should be used together. Please check both labels or ask a pharmacist or dermatologist.','no_information',[]);
-  return {...result,product_cards:[],conversation_state:{...state,pending_question:{message:input.message.slice(0,500),product_ids:state.active_product_ids.slice(0,4)}}};
+ if(!pair&&/\b(?:together|same shower|same day|combine|combining|layer|mix|with)\b/i.test(input.message)&&/\b(?:use|used|using|apply|combine|combining|layer|mix)\b/i.test(input.message)&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive|double|dose)\b/i.test(input.message)){
+  const active=state.active_product_ids.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p);
+  const named=mentionedProducts(input.message,products).map(p=>catalogueById.get(p.id)).filter((p):p is NonNullable<typeof p>=>!!p);const referenced=[...new Map([...active,...named].map(p=>[p.id,p])).values()].slice(0,2);
+  const productText=referenced.length?` for ${referenced.map(p=>`**${p.name}**`).join(' and ')}`:'';
+  const result={...response(`I can’t confirm from the prototype’s product information whether the products can be used together${productText}. Please check both labels or ask a pharmacist or dermatologist.`,'no_information',referenced),...(referenced.length?{recommendations:referenced.map(option)}:{})};
+  return {...result,product_cards:cardsFor(referenced),conversation_state:{...state,pending_question:{message:input.message.slice(0,500),product_ids:referenced.map(p=>p.id)}}};
  }
  const exactQuery=normalizeSearch(input.message.replace(/(\d)\s*(ml|gm|g)\b/gi,'$1 $2'));
  const exactProducts=catalogue.filter(p=>{const name=normalizeSearch(p.name.replace(/(\d)\s*(ml|gm|g)\b/gi,'$1 $2'));return name.length>=12&&(` ${exactQuery} `).includes(` ${name} `)});
+ // Exact product overviews can use the reviewed catalogue directly, even if
+ // the interpreter or wording provider is unavailable.
+ if(exactProducts.length===1&&/^(?:tell me about|what (?:is|does)|describe|explain)\b/i.test(input.message.trim())&&!/\b(?:pregnan\w*|breast.?feed\w*|allerg\w*|rash|irritat\w*|burn\w*|pain|bleed\w*|severe|safe|suitable|shav\w*|wax\w*|with|together|compare|ingredients?|dos(?:e|age)|use|apply|price|cost)\b/i.test(input.message)){
+  const p=exactProducts[0],purpose=p.review_fields.some(f=>f==='purpose'||f.startsWith('purpose.'))?null:p.purpose;
+  const result={...response(purpose?`**${p.name}:** ${purpose}`:`This prototype does not have verified purpose information for **${p.name}** yet.` ,purpose?'answered':'no_information',[p]),recommendations:[option(p)],answer_mode:'verified_data_fallback' as const};
+  const updated=advanceState(state,input.message,input.history??[],[p.id],result,products,interpreted??undefined);return {...result,product_cards:cardsFor([p]),conversation_state:updated.state};
+ }
+ // Do not silently replace an explicitly requested concentration and format
+ // with another concentration or a different type of product.
+ const specified=/\b(\d+(?:\.\d+)?)\s*(?:%|percent|per cent)\s+([a-z]+(?:\s+acid)?)\b/i.exec(input.message);
+ const specifiedFormat=requestedProductFormat(input.message);
+ if(specified&&specifiedFormat&&!/\b(?:compare|versus|vs|difference|pregnan\w*|breast.?feed\w*|allerg\w*|rash|irritat\w*|burn\w*|bleed\w*|dose|together|with)\b/i.test(input.message)){
+  const concentration=specified[1],ingredient=normalizeSearch(specified[2]);
+  const matches=catalogue.filter(p=>new RegExp(`\\b${concentration.replace('.', '\\.')}\\s*%`,'i').test(p.name)&&normalizeSearch(p.name).includes(ingredient)&&matchesProductFormat(p,specifiedFormat));
+  if(!matches.length){const result=response(`I can’t find a ${concentration}% ${specified[2]} ${specifiedFormat} in this prototype’s catalogue. Please check the product name or concentration.`,'no_information',[]);const updated=advanceState(state,input.message,input.history??[],[],result,products,interpreted??undefined);return {...result,product_cards:[],conversation_state:updated.state};}
+ }
  const pendingFrequency=state.pending_question&&/\b(?:how often|how frequently|frequency|how many times|times (?:a|per) (?:day|week))\b/i.test(state.pending_question.message)&&/\b(?:i mean|you (?:just )?(?:suggested|recommended))\b/i.test(input.message)&&state.pending_question.product_ids.length===1&&(!requestedProductFormat(input.message)||matchesProductFormat(catalogueById.get(state.pending_question.product_ids[0])??{name:''},requestedProductFormat(input.message)!));
  const frequency=(pendingFrequency||/\b(?:how often|how frequently|frequency|how many times(?: a| per)?|times (?:a|per) (?:day|week)|how often should i use)\b/i.test(input.message))&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive|double|dose)\b/i.test(input.message);
  if(frequency){
   const ids=exactProducts.length?exactProducts.map(p=>p.id):input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids.length?state.active_product_ids:state.recommended_product_ids.length<=2?state.recommended_product_ids:[];
   const selected=ids.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p);
-  if(selected.length===1){const product=selected[0],reviewed=product.review_fields.some(f=>f==='usage'||f==='usage.frequency'||f==='usage_fields.frequency');const value=reviewed?null:product.usage_fields.frequency;const message=value?`**${product.name}:** The product directions list ${value.toLowerCase()} use.`:`I can’t confirm how often to use **${product.name}** from the available directions. Please check the product label.`;const result={...response(message,value?'answered':'no_information',[product]),recommendations:[option(product)],answer_mode:'verified_data_fallback' as const};const updated=advanceState(state,input.message,input.history??[],[product.id],result,products,interpreted??undefined);return {...result,product_cards:cardsFor([product]),conversation_state:{...updated.state,...(!value?{pending_question:{message:state.pending_question?.message??input.message.slice(0,500),product_ids:[product.id]}}:{})}};}
+  if(selected.length===1){const product=selected[0],reviewed=product.review_fields.some(f=>f==='usage'||f==='usage.frequency'||f==='usage_fields.frequency');const value=reviewed?null:product.usage_fields.frequency;const message=value?`**${product.name}:** The product directions list ${value.toLowerCase()} use.`:`I can’t confirm how often to use **${product.name}**: this prototype does not have verified frequency information yet. Please check the product label.`;const result={...response(message,value?'answered':'no_information',[product]),recommendations:[option(product)],answer_mode:'verified_data_fallback' as const};const updated=advanceState(state,input.message,input.history??[],[product.id],result,products,interpreted??undefined);return {...result,product_cards:cardsFor([product]),conversation_state:{...updated.state,...(!value?{pending_question:{message:state.pending_question?.message??input.message.slice(0,500),product_ids:[product.id]}}:{})}};}
   if(selected.length>1){const result=response('Which of these products would you like the frequency for?','clarify',[],selected);const updated=advanceState(state,input.message,input.history??[],[],result,products,interpreted??undefined);return {...result,product_cards:[],conversation_state:{...updated.state,pending_question:{message:input.message.slice(0,500),product_ids:selected.map(p=>p.id)}}};}
  }
  // Resolve an exact name and size before generic catalogue browsing or
@@ -978,6 +1058,21 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   }
   aiEvent(env,'chat_response','interpretation_unavailable',answerStarted,1);return retry();
  }
+ // Separate explicitly stated cross-area concerns before ranking. A single
+ // global ranking can otherwise return products for only the last concern.
+ const clauses=input.message.split(/\s+(?:and|plus|as well as)\s+/i).map(x=>x.trim()).filter(Boolean);
+ const clauseArea=(text:string)=>/\b(?:underarms?|armpits?)\b/i.test(text)?'underarm':/\b(?:face|facial)\b/i.test(text)?'face':/\b(?:back|chest|body|legs?|arms?)\b/i.test(text)?'body':/\b(?:scalp|dandruff|hair\s*(?:fall|loss|thinning))\b/i.test(text)&&!/\bingrown\b/i.test(text)?'hair':null;
+ const clauseAreas=clauses.map(clauseArea);
+ if(clauses.length===2&&clauseAreas.every(Boolean)&&clauseAreas[0]!==clauseAreas[1]&&clauses.every(c=>/\b(?:acne|pimples?|breakouts?|dry(?:ness)?|dandruff|flakes?|odou?r|odor|smell|smelly)\b/i.test(c))&&/\b(?:recommend|suggest|help|routine|products?|what|need|have)\b/i.test(input.message)&&!/\b(?:compare|price|ingredient|how|use|apply|pregnan|breast|allerg|rash|irritat|pain|bleed|dose|safe|suitable|together|mix)\b/i.test(input.message)){
+  const chosen=clauses.map((clause,index)=>selectProducts(clause,{...state,areas:[clauseAreas[index]!],requested_product_type:null}).ranked.find(({product})=>!(clauseAreas[index]==='body'&&/\bface\b/i.test(product.name))&&!(/\b(?:acne|pimples?|breakouts?)\b/i.test(clause)&&!(/\b(?:marks?|scars?)\b/i.test(clause))&&/\b(?:marks?|scars?)\b/i.test(product.purpose??'')))?.product);
+  if(chosen.every((p):p is NonNullable<typeof p>=>!!p)&&chosen[0].id!==chosen[1].id){
+   const items=chosen as [NonNullable<typeof chosen[0]>,NonNullable<typeof chosen[0]>];
+   const result={...response(deterministicRecommendations(items),'answered',items),recommendations:items.map(option),answer_mode:'verified_data_fallback' as const};
+   const turn={...interpreted,action:'find_product' as const,concern_relation:'add' as const,body_areas:clauseAreas as string[]};
+   const updated=advanceState(state,input.message,input.history??[],items.map(p=>p.id),result,products,turn);
+   return {...result,product_cards:cardsFor(items),interpretation:turn,conversation_state:updated.state};
+  }
+ }
  const textureQuestion='Where are you noticing the bumps or texture?';
  if((lastAssistant===textureQuestion||state.asked_questions.at(-1)===textureQuestion)&&/^(?:(?:on|around|over)\s+)?(?:my\s+)?(?:back|body|chest|legs?|arms?|face|both)[.!]?$/i.test(input.message.trim())){
   const area=/\bface\b/i.test(input.message)?'face':/\bboth\b/i.test(input.message)?null:'body';
@@ -994,7 +1089,8 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   const named=mentionedProducts(input.message,products).map(p=>catalogueById.get(p.id)).filter((p):p is NonNullable<typeof p>=>!!p);
   let pair=named.length===2?named:active.length===2?active:[];
   const percentages=[...input.message.matchAll(/\b(\d+(?:\.\d+)?)\s*%/g)].map(m=>m[1]);
-  if(pair.length!==2&&percentages.length===2&&/\burea\b/i.test(input.message)){
+  if(named.length!==2&&percentages.length===2&&/\burea\b/i.test(input.message)){
+   pair=[];
    const format=requestedProductFormat(input.message);const alternatives=percentages.map(n=>distinctProductSizes(catalogue.filter(p=>new RegExp(`\\b${n}\\s*%`).test(p.name)&&/\burea\b/i.test(p.name)&&(!format||matchesProductFormat(p,format)))));
    if(alternatives.every(x=>x.length===1))pair=alternatives.map(x=>x[0]);
    else if(alternatives.some(x=>x.length>1)){const options=alternatives.flat().slice(0,8);const result=response('Which exact urea products would you like to compare?','clarify',[],options);const updated=advanceState(state,input.message,input.history??[],[],result,products,interpreted);return {...result,product_cards:[],conversation_state:updated.state,answer_mode:'verified_data_fallback' as const};}
@@ -1020,7 +1116,7 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  const newHair=[...new Set([...(interpreted.hair_concerns??[]),...interpreted.concerns.map(normalizeHairConcern).filter((x):x is HairConcern=>!!x),...(hairObservation?[hairObservation]:[])])].filter(x=>x!=='fine_hair');
  const explicitAdd=/\b(?:also|as well|both)\b/i.test(input.message)||/\btoo[.!?]?\s*$/i.test(input.message)||/^\s*and\b/i.test(input.message);
  const explicitSwitch=/\b(?:instead|only|just|rather|not .*anymore)\b/i.test(input.message);
- if(!turnOverride&&interpreted.concern_relation==='unclear'&&!explicitAdd&&!explicitSwitch&&state.concerns.length&&interpreted.concerns.some(c=>!state.concerns.some(old=>normalizeSearch(old)===normalizeSearch(c)))&&interpreted.action!=='product_question'&&!/\b(?:price|cost|how|use|ingredients?|compare|suitable|safe|pain|rash|irritat|pregnan)\b/i.test(input.message)){
+ if(!turnOverride&&interpreted.concern_relation==='unclear'&&!explicitAdd&&!explicitSwitch&&state.concerns.length&&interpreted.concerns.some(c=>!state.concerns.some(old=>normalizeSearch(old)===normalizeSearch(c)))&&interpreted.action!=='product_question'&&!/\b(?:need|looking for|suggest|recommend|price|cost|how|use|ingredients?|compare|suitable|safe|pain|rash|irritat|pregnan)\b/i.test(input.message)){
   const question='Would you like help with both concerns, or only the new concern?';const result={...response(question,'clarify',[]),choices:['Both concerns','Only the new concern']};
   const updated=advanceState(state,input.message,input.history??[],[],result,products,{...interpreted,action:'answer_follow_up',concerns:[],hair_concerns:[]});
   return {...result,product_cards:[],interpretation:interpreted,conversation_state:{...updated.state,pending_concern:{message:input.message.slice(0,500),concerns:interpreted.concerns,hair_concerns:interpreted.hair_concerns??[],body_areas:interpreted.body_areas,excluded_ingredients:interpreted.excluded_ingredients}},answer_mode:'ai' as const};
@@ -1082,7 +1178,17 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   return {...result,product_cards:[],conversation_state:updated.state,interpretation:interpreted,answer_mode:'ai' as const};
  }
  const base=usageYes&&selectedUsage.length===1?await answerChatBase({...input,message:'How do I use this product?',input_source:'typed',selected_product_ids:selectedUsage,follow_up:undefined},env,false,{...interpreted,action:'product_question',reference_scope:'active_product',referenced_products:selectedUsage,intents:['usage']}):await answerChatBase({...input,message:expandedMessage,input_source:'typed'},env,false,interpreted);
- if(base.status==='unavailable'){aiEvent(env,'chat_response','base_answer_unavailable',answerStarted,1);return retry();}
+ if(base.status==='unavailable'){
+  const topics=interpreted.intents.filter(x=>['usage','ingredients','timeline','purpose'].includes(x));
+  const ids=interpreted.referenced_products.length===1?interpreted.referenced_products:interpreted.reference_scope==='active_product'&&state.active_product_ids.length===1?state.active_product_ids:[];
+  const item=ids.length===1?catalogueById.get(ids[0]):undefined;
+  if(item&&topics.length&&topics.length===interpreted.intents.length&&!/\b(?:pregnan\w*|breast.?feed\w*|allerg\w*|rash|irritat\w*|pain|bleed\w*|severe|safe|suitable|shav\w*|wax\w*|with|together|combine|dose)\b/i.test(input.message)){
+   const lines=topics.map(topic=>{const underReview=item.review_fields.some(field=>field===topic||field.startsWith(topic+'.'));const fact=underReview?null:direct(item,topic,input.message);return `${topic[0].toUpperCase()+topic.slice(1)}: ${fact??'This prototype does not have verified information for this yet; please check the product label.'}`;});
+   const result={...response(`**${item.name}**\n\n${lines.join('\n\n')}`,'answered',[item]),recommendations:[option(item)],answer_mode:'verified_data_fallback' as const};
+   const updated=advanceState(state,input.message,input.history??[],[item.id],result,products,interpreted);return {...result,product_cards:cardsFor([item]),conversation_state:updated.state};
+  }
+  aiEvent(env,'chat_response','base_answer_unavailable',answerStarted,1);return retry();
+ }
  console.info('chat_route_decision',{action:interpreted.action,status:base.status,product_count:base.selected_product_ids.length,reason:base.status==='clarify'?'needs_clarification':base.status==='no_information'?'catalogue_information_missing':base.selected_product_ids.length?'catalogue_selection':'no_product_selected'});
  let written:string|null=null;let omitUnexplainedSuggestions=false;
  if(base.status==='clarify'&&base.message.includes('I couldn’t confirm a heel cream. Would you like to see heel roll-ons instead?'))written=base.message;
@@ -1106,8 +1212,20 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
   console.warn('v1_chat_fallback',{reason:'contextual_followup_writer_unavailable'});
   return {...base,answer_mode:'verified_data_fallback' as const};
  }
+ // A catalogue-backed search result has already been selected and filtered;
+ // a failed wording call must not turn that verified result into an error.
+ if(!written&&base.status==='answered'&&base.answer_mode==='prepared_answer'&&interpreted.action==='find_product'&&base.selected_product_ids.length&& !/\b(?:pregnan\w*|breast.?feed\w*|allerg\w*|rash|irritat\w*|pain|bleed\w*|severe|safe|suitable|dose)\b/i.test(input.message)){
+  aiEvent(env,'chat_response','prepared_search_fallback',answerStarted,1);
+  return {...base,answer_mode:'verified_data_fallback' as const};
+ }
  if(!written&&base.status==='clarify'&&/\?\s*$/.test(base.message)){
   console.warn('v1_chat_fallback',{reason:'validated_clarification_writer_unavailable'});
+  return {...base,answer_mode:'verified_data_fallback' as const};
+ }
+ // A vetted deterministic answer remains useful when the wording provider
+ // fails. Do not apply this to unverified or incomplete AI answers.
+ if(!written&&base.status==='no_information'){
+  aiEvent(env,'chat_response','deterministic_answer_fallback',answerStarted,1);
   return {...base,answer_mode:'verified_data_fallback' as const};
  }
  if(!written){aiEvent(env,'chat_response',base.status==='clarify'?'clarification_unavailable':base.selected_product_ids.length?'grounded_answer_unavailable':'reference_answer_unavailable',answerStarted,1);return retry();}
@@ -1137,6 +1255,16 @@ export async function chatRoute(request:Request,env:ChatEnv,ctx?:{waitUntil(prom
  if(!data||typeof data!=='object'||(data.conversation_state!==undefined&&(!chatStateSchema.safeParse(data.conversation_state).success||[...data.conversation_state.active_product_ids,...data.conversation_state.recommended_product_ids,...data.conversation_state.rejected_product_ids,...(data.conversation_state.pending_question?.product_ids??[])].some(id=>!catalogueById.has(id))))||typeof data.message!=='string'||!data.message.trim()||data.message.length>1000||!Array.isArray(data.selected_product_ids??[])||(data.selected_product_ids??[]).length>4||(data.selected_product_ids??[]).some(id=>typeof id!=='string'||!products.some(p=>p.id===id))||(data.follow_up!==undefined&&!['usage','timeline','routine'].includes(data.follow_up))||(data.pending_ingredient!==undefined&&typeof data.pending_ingredient!=='boolean')||(data.selection_confirmed!==undefined&&typeof data.selection_confirmed!=='boolean')||(data.input_source!==undefined&&!['typed','button'].includes(data.input_source))||(data.conversation_id!==undefined&&(typeof data.conversation_id!=='string'||!/^[0-9a-f-]{36}$/i.test(data.conversation_id)))||(data.turn_index!==undefined&&(!Number.isInteger(data.turn_index)||data.turn_index<1||data.turn_index>10000))||(data.history!==undefined&&(!Array.isArray(data.history)||data.history.length>40||data.history.some(item=>!item||!['user','assistant'].includes(item.role)||typeof item.text!=='string'||item.text.length>3000))))return bad('invalid_request');
  try{
   const answer=await answerChat(data,requestEnv);
+  // Product disambiguation must retain the original task until the customer
+  // picks an option; catalogue browsing is not a clarification.
+  if(answer.status==='clarify'&&answer.product_options.length>0){
+   const checked=chatStateSchema.safeParse(answer.conversation_state??data.conversation_state??initialChatState());
+   if(checked.success)answer.conversation_state={...checked.data,pending_question:{message:data.message.slice(0,500),product_ids:answer.product_options.map(p=>p.id).slice(0,8)}};
+  }
+  if(answer.status==='clarify'&&Array.isArray(answer.choices)&&answer.choices.length>=2&&answer.choices.every((choice:unknown)=>typeof choice==='string'&&choice.length<=500)){
+   const checked=chatStateSchema.safeParse(answer.conversation_state??data.conversation_state??initialChatState());
+   if(checked.success&&!checked.data.pending_concern)answer.conversation_state={...checked.data,pending_clarification:{original_message:data.message.slice(0,500),question:answer.message.slice(0,500),choices:answer.choices.slice(0,12)}};
+  }
   const mentioned=('recommendations' in answer&&Array.isArray(answer.recommendations)?answer.recommendations:[]).map((p:{id:string})=>catalogueById.get(p.id)).filter((p:ReturnType<typeof catalogueById.get>):p is NonNullable<typeof p>=>!!p);
   answer.message=addConcentrationContext(answer.message,mentioned);
   const save=saveChatReview(env.CHAT_REVIEW,data,answer,requestId).catch(()=>aiEvent(requestEnv,'review_storage','storage_error',started,1));if(ctx)ctx.waitUntil(save);else await save;

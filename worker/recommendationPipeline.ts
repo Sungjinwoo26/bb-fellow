@@ -21,6 +21,7 @@ function wantedArea(message:string,state:ChatState):string|null {
  const s=norm(message);
  if(/\b(underarm|underarms|armpit|armpits)\b/.test(s))return 'underarm';
  if(/\b(face|facial|cheek|forehead)\b/.test(s)&&!/\b(?:no|not|without|exclude)\s+(?:the\s+)?(?:face|facial)\b/.test(s))return 'face';
+ if(/\b(?:ingrown|razor bumps?)\b/.test(s)&&/\b(?:body|back|chest|legs?|arms?)\b/.test(s))return 'body';
  if(/\b(scalp|hair)\b/.test(s))return 'hair';
  if(/\b(body|back|chest|legs|arms)\b/.test(s))return 'body';
  const areas=state.areas;return areas.length===1?({scalp:'hair',underarms:'underarm'} as Record<string,string>)[areas[0]]??areas[0]:null;
@@ -39,6 +40,7 @@ export function selectProducts(message:string,state:ChatState):Decision {
   if(area==='hair'&&!/\b(hair|scalp)\b/.test(`${category} ${name} ${usage}`))reasons.push('area');
   if(area==='underarm'&&!/\b(underarm|armpit)\b/.test(`${name} ${usage}`))reasons.push('area');
   if(area==='body'&&/\bface\b/.test(category)&&!/\bbody\b/.test(`${name} ${usage}`))reasons.push('area');
+  if(area==='body'&&/\b(?:hair|scalp)\b/.test(category)&&!/\bbody\b/.test(`${name} ${usage}`))reasons.push('area');
   const productPregnancy=/\b(post pregnancy|postpartum|pregnan|breastfeeding)\b/.test(name);
   if(productPregnancy&&!pregnancy)reasons.push('pregnancy_context');
   // Individual product suitability in pregnancy cannot be inferred from a name.

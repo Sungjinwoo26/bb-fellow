@@ -14,6 +14,18 @@
 /* Make the assessment entry stand out in the brand’s primary blue. */
 .store-desktop-nav .desktop-assessment{border:2px solid #0098ff;border-radius:999px;padding:8px 15px;color:#002c54;min-height:42px}.store-desktop-nav .desktop-assessment:hover{background:#d7f5ff}.drawer-assessment{border-radius:999px!important;border:2px solid #0098ff!important;margin:8px 14px;width:calc(100% - 28px)!important}.mobile-assessment:focus-visible,.desktop-assessment:focus-visible,.drawer-assessment:focus-visible{outline:3px solid #002c54;outline-offset:3px}@media(max-width:850px){.mobile-assessment{width:max-content;max-width:calc(100% - 32px);min-height:42px;margin:4px auto 10px;padding:7px 20px;border:2px solid #0098ff;border-radius:999px;background:#d7f5ff;color:#002c54}.mobile-assessment:hover{background:#80d2ff}}
 
+/* The primary kit action: a quiet entrance and occasional light sweep. */
+.store-header .mobile-assessment,.store-desktop-nav .desktop-assessment{position:relative;overflow:hidden;isolation:isolate;border:1px solid #064274;border-radius:999px;background:#003562;color:#fff;font-weight:700;box-shadow:0 5px 18px #0068a83d;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;animation:kit-action-enter .6s cubic-bezier(.2,.75,.25,1) backwards}
+.store-desktop-nav button.desktop-assessment:first-child{color:#fff}
+.store-header .mobile-assessment:hover,.store-desktop-nav .desktop-assessment:hover{background:#064b80;color:#fff;box-shadow:0 7px 22px #0068a84d}
+.store-header .mobile-assessment:active,.store-desktop-nav .desktop-assessment:active{transform:scale(.97)}
+.store-header .mobile-assessment span,.store-desktop-nav .desktop-assessment span{display:inline-block;margin-left:7px;transition:transform .18s ease}
+.store-header .mobile-assessment:active span,.store-desktop-nav .desktop-assessment:active span{transform:translateX(3px)}
+.store-header .mobile-assessment::after,.store-desktop-nav .desktop-assessment::after{content:"";position:absolute;inset:-40% auto -40% -45%;width:30%;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent,#ffffff38,transparent);transform:skewX(-20deg) translateX(0);animation:kit-action-shimmer 6s ease-in-out 2s infinite}
+@keyframes kit-action-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes kit-action-shimmer{0%,70%{transform:skewX(-20deg) translateX(0)}90%,100%{transform:skewX(-20deg) translateX(550%)}}
+@media(prefers-reduced-motion:reduce){.store-header .mobile-assessment,.store-desktop-nav .desktop-assessment{animation:none;transition:none}.store-header .mobile-assessment::after,.store-desktop-nav .desktop-assessment::after{animation:none;display:none}.store-header .mobile-assessment span,.store-desktop-nav .desktop-assessment span{transition:none}}
+
 .expert-kicker{color:#0063bc;font-size:12px;font-weight:700;letter-spacing:.12em}.expert-options{display:grid;gap:12px;margin:22px 0}.expert-options article{padding:16px;border:1px solid #d4e9f4;background:#f2faff;border-radius:14px}.expert-options article p{margin:8px 0 0}.expert-demo-note{color:#526e7e;font-size:13px}
 
 .expert-page-overlay{position:fixed;inset:0;z-index:120;background:#f3faff;overflow-y:auto;display:flex;justify-content:center}.expert-page-overlay .expert-page{position:relative;width:min(100%,680px);min-height:100%;max-height:none;margin:0;padding:56px 24px;background:#fff;box-shadow:none}.expert-page h2{font-size:clamp(32px,6vw,46px);color:#002c54}.expert-page>p{line-height:1.5}.expert-page .store-cart-action{margin-top:16px}

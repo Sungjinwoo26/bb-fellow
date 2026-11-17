@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "find-my-routine",
+  "name": "demo",
   "main": "worker/index.ts",
   "compatibility_date": "2026-11-03",
   "vars": { "V1_TYPED_AI": "true" },

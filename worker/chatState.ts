@@ -27,7 +27,7 @@ export function advanceState(previous:ChatState|undefined,message:string,history
  const question=result.message.match(/([^.!?\n]*\?)\s*$/)?.[1]?.trim();
  const last=history.at(-1);const answered=last?.role==='assistant'&&last.text.includes('?')&&!message.includes('?')&&message.trim().split(/\s+/).length<=8?{question:last.text.slice(0,500),answer:message.slice(0,500)}:null;
  const recommendations=(result.recommendations??[]).map(x=>x.id);
- const active=result.selected_product_ids.length?result.selected_product_ids:turn.referenced_products.length?turn.referenced_products:recommendations.length===1?recommendations:newSearch?[]:old.active_product_ids;
+ const active=result.selected_product_ids.length?result.selected_product_ids:recommendations.length===1?recommendations:newSearch?[]:turn.referenced_products.length?turn.referenced_products:old.active_product_ids;
  const pregnancy=/\bpost[ -]?partum|after (?:giving birth|childbirth)\b/i.test(message)?'postpartum':/\bbreast[ -]?feed(?:ing)?\b/i.test(message)?'breastfeeding':/\bpregnan(?:t|cy)\b/i.test(message)?'pregnant':old.pregnancy_context;
  const skin=(/\b(oily|dry|combination|sensitive)\s+(?:skin|scalp|hair)\b/i.exec(message)?.[1]??(/^(oily|dry|combination|sensitive)$/i.test(message.trim())?message.trim():undefined))?.toLowerCase()??old.skin_hair_type;
  const priorQuestions=newSearch?[]:old.asked_questions;

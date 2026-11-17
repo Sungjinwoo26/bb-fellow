@@ -11,11 +11,15 @@ export function supportedPairRoutine(message:string,activeIds:string[],history:{
  // Avoid interpreting adverse reactions, pregnancy or requests for individual
  // medical compatibility as approval of a routine.
  if(/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|sensitive|freshly shaved|same shower|benzoyl|peroxide)\b/i.test(message))return null;
- const text=normalizeSearch(`${past} ${message}`);
+ // A newly named product replaces an earlier pair; past mentions must not
+ // silently turn an underarm or face routine into the body-acne pack.
+ if(/\b(?:underarm|armpit|face\s*wash|roll[\s-]*on|serum|sunscreen|cream)\b/i.test(message))return null;
+ const text=normalizeSearch(/\b(?:it|them|those|these|both|pair|which first|what order)\b/i.test(message)?`${past} ${message}`:message);
  const washNamed=/\b1 percent\b/.test(text)&&/\bsalicylic\b/.test(text)&&/\bbody wash\b/.test(text);
  const lotionNamed=/\b(?:10 percent\s+)?niacinamide\s+(?:body\s+)?lotion\b/.test(text);
  const knownWash=activeIds.find(id=>id==='1-salicylic-acid-body-wash'||id==='1-salicylic-acid-body-wash-350ml');
  const knownLotion=activeIds.includes('niacinamide-body-lotion');
+ if(activeIds.length&&activeIds.some(id=>!['1-salicylic-acid-body-wash','1-salicylic-acid-body-wash-350ml','niacinamide-body-lotion'].includes(id)))return null;
  if(!(washNamed||knownWash)||!(lotionNamed||knownLotion))return null;
  const explicit375=/\b(?:375|350)\s*(?:ml)?\b/.test(q);const explicit250=/\b250\s*(?:ml)?\b/.test(q);
  const wash=explicit375?'1-salicylic-acid-body-wash-350ml':explicit250?'1-salicylic-acid-body-wash':knownWash??'1-salicylic-acid-body-wash';

@@ -6,6 +6,7 @@ import { join, relative, resolve } from 'node:path';
 const output = resolve('dist');
 if (process.argv.includes('--clean')) {
   await rm(join(output, 'find_my_routine', '.dev.vars'), { force: true });
+  await rm(join(output, 'demo', '.dev.vars'), { force: true });
 }
 async function inspect(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
