@@ -28,7 +28,7 @@ export function getActiveQuestions(selected: ConcernId[], answers: Record<string
   }
   if(!streamlined.includes(id))return true;
   if(id==='body_acne_marks')return q.id==='body_acne_goal'||q.id==='shared_body_skin';
-  if(id==='strawberry_bumpy_skin')return q.id==='bumpy_pigmentation_same_area' && active.includes('body_pigmentation');
+  if(id==='strawberry_bumpy_skin')return q.id==='bumpy_dryness'||(q.id==='bumpy_pigmentation_same_area' && active.includes('body_pigmentation'));
   if(id==='general_body_care')return q.id==='body_care_goal';
   return false;
  }));
@@ -46,7 +46,7 @@ export function nextQuestion(selected: ConcernId[], id: string, answers: Record<
 // answers that reveal them are known. No question count is presented to users.
 const progressSlots: Record<ConcernId,string[]> = {
  body_acne_marks:['body_acne_goal','shared_body_skin'],
- strawberry_bumpy_skin:['bumpy_pigmentation_same_area'],
+ strawberry_bumpy_skin:['bumpy_dryness','bumpy_pigmentation_same_area'],
  body_pigmentation:[], underarm_pigmentation:['underarm_concerns','underarm_irritation'],
  body_odour:[], tanning_sun_damage:['sun_areas'], general_body_care:['body_care_goal'],
  face:['face_goal','face_breakout_pattern','face_skin_type'],

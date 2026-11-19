@@ -84,6 +84,7 @@ export function generateRecommendations(input:RecommendationRequest,catalogue:Ca
    if(concern==='strawberry_bumpy_skin'){
     if(sameArea)put('demo_exfoliation_pigmentation_kit','A sample option for bumps and pigmentation in the same area.');
     else if(selected.includes('body_acne_marks') && (input.answers.body_acne_goal==='active_bumps'||input.answers.body_acne_goal==='both')){const dry=input.answers.shared_body_skin==='dry';put(input.answers.body_acne_goal==='both'&&!dry?'demo_body_acne_pack':dry?'demo_ceramide_body_wash':'demo_sa_body_wash','The sample body wash also addresses your selected bumpy-skin concern.');}
+    else if(input.answers.bumpy_dryness==='yes')put('demo_lactic_body_lotion','A sample moisturising lotion for the bumpy, dry skin you described.');
     else put('demo_aha_scrub','A sample scrub for the bumpy skin you selected.');
    }
    if(concern==='body_odour'){

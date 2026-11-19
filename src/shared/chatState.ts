@@ -4,6 +4,7 @@ const short=z.string().max(500);
 export const chatStateSchema=z.object({
  version:z.literal(1), stage:z.enum(['discovering_concern','narrowing_products','recommendation_ready','recommended','answering_product_question','comparing_products']),
  active_product_ids:z.array(short).max(4), recommended_product_ids:z.array(short).max(20), rejected_product_ids:z.array(short).max(20),
+ current_product_id:short.nullable().optional(), previous_product_ids:z.array(short).max(20).optional(),
  concerns:z.array(short).max(12), areas:z.array(short).max(8), excluded_ingredients:z.array(short).max(12).default([]), requested_product_type:short.nullable(), skin_hair_type:short.nullable(),
  observed_concerns:z.array(short).max(20).optional(),
  pending_concern:z.object({message:short,concerns:z.array(short).max(12),hair_concerns:z.array(hairConcernSchema).max(6),body_areas:z.array(short).max(8),excluded_ingredients:z.array(short).max(12)}).strict().optional(),

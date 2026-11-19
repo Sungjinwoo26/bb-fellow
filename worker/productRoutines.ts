@@ -19,7 +19,8 @@ export function supportedPairRoutine(message:string,activeIds:string[],history:{
  const lotionNamed=/\b(?:10 percent\s+)?niacinamide\s+(?:body\s+)?lotion\b/.test(text);
  const knownWash=activeIds.find(id=>id==='1-salicylic-acid-body-wash'||id==='1-salicylic-acid-body-wash-350ml');
  const knownLotion=activeIds.includes('niacinamide-body-lotion');
- if(activeIds.length&&activeIds.some(id=>!['1-salicylic-acid-body-wash','1-salicylic-acid-body-wash-350ml','niacinamide-body-lotion'].includes(id)))return null;
+ const explicitPair=/\b1 percent\b/.test(q)&&/\bsalicylic\b/.test(q)&&/\bbody wash\b/.test(q)&&/\b(?:10 percent\s+)?niacinamide\s+(?:body\s+)?lotion\b/.test(q);
+ if(!explicitPair&&activeIds.length&&activeIds.some(id=>!['1-salicylic-acid-body-wash','1-salicylic-acid-body-wash-350ml','niacinamide-body-lotion'].includes(id)))return null;
  if(!(washNamed||knownWash)||!(lotionNamed||knownLotion))return null;
  const explicit375=/\b(?:375|350)\s*(?:ml)?\b/.test(q);const explicit250=/\b250\s*(?:ml)?\b/.test(q);
  const wash=explicit375?'1-salicylic-acid-body-wash-350ml':explicit250?'1-salicylic-acid-body-wash':knownWash??'1-salicylic-acid-body-wash';

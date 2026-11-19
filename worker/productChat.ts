@@ -835,7 +835,8 @@ async function answerChatBase(input:ChatRequest,env:ChatEnv,fetchAI=true,preinte
  if(fallbackTurn.reference_scope==='new_product'&&fallbackTurn.referenced_products.length===1&&fallbackTurn.action!=='compare')turn={...turn,reference_scope:'new_product',referenced_products:fallbackTurn.referenced_products};
  // Catalogue membership alone is not proof that the customer named a product.
  // Ask for confirmation if the model proposes an unanchored product reference.
- const unanchored=turn.referenced_products.filter(id=>!activeIds.includes(id)&&!fallbackTurn.referenced_products.includes(id));
+ const knownPrevious=new Set(state.previous_product_ids??[]);
+ const unanchored=turn.referenced_products.filter(id=>!activeIds.includes(id)&&!fallbackTurn.referenced_products.includes(id)&&!(turn.confidence!=='low'&&knownPrevious.has(id)));
  if(input.input_source==='typed'&&!input.history?.some(x=>x.role==='user')&&!activeIds.length&&!fallbackTurn.referenced_products.length&&/\bskin\b/i.test(input.message)&&/\b(?:bumpy|bumps?|rough|uneven)\b/i.test(input.message)&&!/\b(?:face|body|back|chest|legs?|arms?|underarms?)\b/i.test(input.message)){const result={...response('Where are you noticing the bumps or texture?','clarify',[]),choices:['Face','Body','Both']};const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,product_cards:[],interpretation:updated.turn,conversation_state:updated.state};}
  if(unanchored.length&&turn.action!=='find_product'){
   // The model supplies the constraints; search the whole catalogue instead of
@@ -987,6 +988,14 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  const {pending_concern:_stalePending,...state}=input.conversation_state??initialChatState();
  const retry=()=>({...response('I couldn’t finish that answer right now. Please try again.','unavailable',[]),product_cards:[],conversation_state:{...state,pending_question:{message:input.message.slice(0,500),product_ids:(input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids).slice(0,4)}}});
  const interpreted=turnOverride??await interpretWithModel(input.message,{...state,active_product_ids:input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids},env);
+ // The ingredient picker has a sourced answer independent of provider wording.
+ // Always attempt interpretation first for typed input, then use only an exact
+ // prepared ingredient entry when the customer is answering that picker.
+ if(!input.selection_confirmed){
+  const ingredient=normalizeSearch(input.message).replace(/\bredensil\b/g,'redensyl').replace(/^(?:what (?:is|does)|tell me about|how does)\s+/,'').replace(/\s+(?:do|work)$/,'');
+  const match=preparedIngredients.find(a=>a.status==='source_based'&&normalizeSearch(a.ingredient??'')===ingredient);
+  if(match){const result=cachedIngredientResponse(match);const written=interpreted?await writeV1Reference(input.message,result.message,'reference',env):null;const updated=advanceState(state,input.message,input.history??[],[],result,products);return {...result,message:written??result.message,conversation_state:updated.state,answer_mode:written?'ai' as const:'verified_data_fallback' as const};}
+ }
  const pair=supportedPairRoutine(input.message,input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids.length?state.active_product_ids:state.recommended_product_ids,input.history??[]);
  if(pair&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive)\b/i.test(input.message)){
   const allowed=new Set(selectProducts('body',{...state,areas:['body'],requested_product_type:null,excluded_ingredients:[...new Set([...state.excluded_ingredients,...exclusions(input.message),...(interpreted?.excluded_ingredients??[])])]}).eligible.map(p=>p.id));
@@ -994,7 +1003,7 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  }
  if(!pair&&/\b(?:together|same shower|same day|combine|combining|layer|mix|with)\b/i.test(input.message)&&/\b(?:use|used|using|apply|combine|combining|layer|mix)\b/i.test(input.message)&&!/\b(?:pregnan\w*|breast.?feed\w*|rash|irritat\w*|allerg\w*|burn\w*|bleed\w*|severe|sensitive|double|dose)\b/i.test(input.message)){
   const active=state.active_product_ids.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p);
-  const named=mentionedProducts(input.message,products).map(p=>catalogueById.get(p.id)).filter((p):p is NonNullable<typeof p>=>!!p);const referenced=[...new Map([...active,...named].map(p=>[p.id,p])).values()].slice(0,2);
+  const named=mentionedProducts(input.message,products).map(p=>catalogueById.get(p.id)).filter((p):p is NonNullable<typeof p>=>!!p);const explicitPair=named.length>=2;const anaphoric=/\b(?:it|them|those|these|both|that|this)\b/i.test(input.message);const referenced=[...new Map((explicitPair?named:named.length&&anaphoric?[...named,...active]:named.length?named:anaphoric?active:[]).map(p=>[p.id,p])).values()].slice(0,2);
   const productText=referenced.length?` for ${referenced.map(p=>`**${p.name}**`).join(' and ')}`:'';
   const result={...response(`I can’t confirm from the prototype’s product information whether the products can be used together${productText}. Please check both labels or ask a pharmacist or dermatologist.`,'no_information',referenced),...(referenced.length?{recommendations:referenced.map(option)}:{})};
   return {...result,product_cards:cardsFor(referenced),conversation_state:{...state,pending_question:{message:input.message.slice(0,500),product_ids:referenced.map(p=>p.id)}}};
@@ -1036,7 +1045,9 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  if(priceOnly){
   const q=normalizeSearch(input.message);
   const named=catalogue.filter(p=>{const key=normalizeSearch(p.name).replace(/^\d+(?: \d+)? percent\s+/,'').replace(/\b\d+\s*(?:ml|g|gm)\b.*$/,'').trim();return key.length>=10&&(` ${q} `).includes(` ${key} `)});
-  const referenced=distinctProductSizes(named.length?named:(input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids).map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p));
+  const knownIds=new Set([...state.active_product_ids,...(state.previous_product_ids??[])]);
+  const interpretedIds=interpreted?.confidence!=='low'&&interpreted?.referenced_products.length&&interpreted.referenced_products.every(id=>knownIds.has(id))?interpreted.referenced_products:[];
+  const referenced=distinctProductSizes(named.length?named:(interpretedIds.length?interpretedIds:input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids).map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p));
   const cheaper=/\b(?:cheaper|lowest|less expensive)\b/i.test(input.message);
   if(referenced.length&&(cheaper?referenced.length===2:referenced.length===1)){
    const values=referenced.map(p=>{const prices=[...new Set(p.price_options.map(x=>x.price).filter(x=>/^₹\s*[\d,]+(?:\.\d{1,2})?$/.test(x)))];return prices.length===1?prices[0]:null});
@@ -1087,7 +1098,9 @@ export async function answerChat(input:ChatRequest,env:ChatEnv,fetchAI=true,turn
  if(/\b(?:compare|comparison|versus|vs|difference)\b/i.test(input.message)){
   const active=(input.selected_product_ids?.length?input.selected_product_ids:state.active_product_ids).map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p);
   const named=mentionedProducts(input.message,products).map(p=>catalogueById.get(p.id)).filter((p):p is NonNullable<typeof p>=>!!p);
-  let pair=named.length===2?named:active.length===2?active:[];
+  const knownIds=new Set([...state.active_product_ids,...(state.previous_product_ids??[])]);
+  const aiPair=interpreted.confidence!=='low'&&interpreted.referenced_products.length===2&&interpreted.referenced_products.every(id=>knownIds.has(id))?interpreted.referenced_products.map(id=>catalogueById.get(id)).filter((p):p is NonNullable<typeof p>=>!!p):[];
+  let pair=named.length===2?named:named.length===0?(aiPair.length===2?aiPair:active.length===2?active:[]):[];
   const percentages=[...input.message.matchAll(/\b(\d+(?:\.\d+)?)\s*%/g)].map(m=>m[1]);
   if(named.length!==2&&percentages.length===2&&/\burea\b/i.test(input.message)){
    pair=[];
@@ -1252,6 +1265,7 @@ export async function chatRoute(request:Request,env:ChatEnv,ctx?:{waitUntil(prom
   const raw=await request.text();if(raw.length>32768)return bad('request_too_large',413);
   data=JSON.parse(raw) as ChatRequest;
  }catch{return bad('malformed_request');}
+ if(data?.conversation_state){const checked=chatStateSchema.safeParse(data.conversation_state);if(checked.success&&[...(checked.data.previous_product_ids??[]),...(checked.data.current_product_id?[checked.data.current_product_id]:[])].some(id=>!catalogueById.has(id)))return bad('invalid_request');}
  if(!data||typeof data!=='object'||(data.conversation_state!==undefined&&(!chatStateSchema.safeParse(data.conversation_state).success||[...data.conversation_state.active_product_ids,...data.conversation_state.recommended_product_ids,...data.conversation_state.rejected_product_ids,...(data.conversation_state.pending_question?.product_ids??[])].some(id=>!catalogueById.has(id))))||typeof data.message!=='string'||!data.message.trim()||data.message.length>1000||!Array.isArray(data.selected_product_ids??[])||(data.selected_product_ids??[]).length>4||(data.selected_product_ids??[]).some(id=>typeof id!=='string'||!products.some(p=>p.id===id))||(data.follow_up!==undefined&&!['usage','timeline','routine'].includes(data.follow_up))||(data.pending_ingredient!==undefined&&typeof data.pending_ingredient!=='boolean')||(data.selection_confirmed!==undefined&&typeof data.selection_confirmed!=='boolean')||(data.input_source!==undefined&&!['typed','button'].includes(data.input_source))||(data.conversation_id!==undefined&&(typeof data.conversation_id!=='string'||!/^[0-9a-f-]{36}$/i.test(data.conversation_id)))||(data.turn_index!==undefined&&(!Number.isInteger(data.turn_index)||data.turn_index<1||data.turn_index>10000))||(data.history!==undefined&&(!Array.isArray(data.history)||data.history.length>40||data.history.some(item=>!item||!['user','assistant'].includes(item.role)||typeof item.text!=='string'||item.text.length>3000))))return bad('invalid_request');
  try{
   const answer=await answerChat(data,requestEnv);
